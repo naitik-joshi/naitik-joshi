@@ -71,14 +71,11 @@ Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
   <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=naitik-joshi&theme=tokyonight" />
 </p>
 
-<p align="center">
-  <img height="165" src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=naitik-joshi&theme=tokyonight" />
-  <img height="165" src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=naitik-joshi&theme=tokyonight" />
-</p>
 
 <p align="center">
   <img src="https://streak-stats.demolab.com?user=naitik-joshi&theme=tokyonight&hide_border=true" />
 </p>
+
 
 ---
 
