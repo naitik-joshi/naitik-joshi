@@ -5,9 +5,15 @@
 </p>
 
 <p align="center">
-  <a href="mailto:naitikjoshi888@gmail.com">Email</a> •
-  <a href="https://www.linkedin.com/in/naitik-joshi-075a45255/">LinkedIn</a> •
-  <a href="https://github.com/naitik-joshi">GitHub</a>
+  <a href="mailto:naitikjoshi888@gmail.com">
+    <img src="https://img.shields.io/badge/Email-naitikjoshi888%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+  <a href="https://www.linkedin.com/in/naitik-joshi-075a45255/">
+    <img src="https://img.shields.io/badge/LinkedIn-Naitik_Joshi-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+  <a href="https://github.com/naitik-joshi">
+    <img src="https://img.shields.io/badge/GitHub-naitik--joshi-181717?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
 </p>
 
 ---
@@ -54,24 +60,24 @@ Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
 
 | Project | Type | Focus |
 |---|---|---|
+| **ProdTag** | Ongoing Tool | Desktop audio cues after terminal commands |
+| **Tab-Unloader** | Personal Tool | Chrome extension for unloading inactive tabs |
 | **EduStand** | Academic / Java LMS | Roles, auth, resources, assignments, analytics |
+| **ADS_DiwaliSales_L2AI1** | Academic / Data Science | Python notebook, pandas, NumPy, visualizations |
 | **CENAS CMS Website** | Client / Production | PHP/MySQL CMS, admin panel, dashboard, deployment |
 | **Nepal Polymer Institute Websites** | Client / Production | Responsive public websites, PHP components |
-| **ADS_DiwaliSales_L2AI1** | Academic / Data Science | Python notebook, pandas, NumPy, visualizations |
-| **Tab-Unloader** | Personal Tool | Chrome extension for unloading inactive tabs |
-| **ProdTag** | Ongoing Tool | Desktop audio cues after terminal commands |
 
 ---
 
 ## GitHub Analytics
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=naitik-joshi&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" />
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=naitik-joshi&layout=compact&theme=tokyonight&hide_border=true" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=naitik-joshi&show_icons=true&theme=tokyonight&hide_border=true" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=naitik-joshi&layout=compact&theme=tokyonight&hide_border=true&langs_count=8" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=naitik-joshi&theme=tokyonight&hide_border=true" />
+  <img src="https://streak-stats.demolab.com?user=naitik-joshi&theme=tokyonight&hide_border=true" />
 </p>
 
 ---
@@ -80,18 +86,5 @@ Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
 
 - Improving production-quality READMEs and demos for my best projects.
 - Building stronger AI automation examples.
-- Continuing development on **ProdTag**.
+- Continuing development on personal tools like **ProdTag** and **Tab-Unloader**.
 - Preparing research/project evidence for internship applications.
-
----
-
-## Contact
-
-<p align="center">
-  <a href="mailto:naitikjoshi888@gmail.com">
-    <img src="https://img.shields.io/badge/Email-naitikjoshi888%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
-  </a>
-  <a href="https://www.linkedin.com/in/naitik-joshi-075a45255/">
-    <img src="https://img.shields.io/badge/LinkedIn-Naitik_Joshi-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
-  </a>
-</p>
