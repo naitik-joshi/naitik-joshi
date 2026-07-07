@@ -1,13 +1,13 @@
 <h1 align="center">Hi, I'm Naitik Joshi</h1>
 
 <p align="center">
-  Computing with AI student focused on full-stack web systems, dashboards, automation workflows, and applied AI tools.
+  <b>Computing with AI student</b> building full-stack web systems, dashboards, automation tools, and applied AI workflows.
 </p>
 
 <p align="center">
-  <a href="https://github.com/naitik-joshi">GitHub</a> •
+  <a href="mailto:naitikjoshi888@gmail.com">Email</a> •
   <a href="https://www.linkedin.com/in/naitik-joshi-075a45255/">LinkedIn</a> •
-  <a href="mailto:naitikjoshi888@gmail.com">Email</a>
+  <a href="https://github.com/naitik-joshi">GitHub</a>
 </p>
 
 ---
@@ -15,61 +15,83 @@
 ## About Me
 
 - Studying **BSc (Hons) Computing with Artificial Intelligence** at Islington College.
-- Building practical web systems using **HTML, CSS, Bootstrap, PHP, MySQL, Java, JSP, and Servlets**.
-- Experienced with client-facing websites, CMS/admin panels, dashboards, CRUD workflows, deployment, and maintenance.
-- Interested in **AI automation**, API integrations, data workflows, and productivity-focused developer tools.
-- Co-founder and technical lead at **Nepal Solution Hub Pvt. Ltd.**, working on selected client web projects and technical delivery.
-
----
-
-## Focus Areas
-
-- Full-stack web development
-- Admin panels, dashboards, and CMS systems
-- AI-assisted development workflows
-- API integration and automation tools
-- Java academic systems and data analysis projects
+- Co-founder and technical lead at **Nepal Solution Hub Pvt. Ltd.**
+- Building practical systems with **PHP, MySQL, Bootstrap, Java, JSP, Servlets, and Python**.
+- Interested in **AI automation**, API integrations, dashboard systems, and productivity tools.
+- I use AI-assisted development seriously: for faster iteration, debugging, documentation, and implementation review.
 
 ---
 
 ## Tech Stack
 
-**Languages:**  
-HTML, CSS, JavaScript basics, PHP, Java, Python, Shell scripting
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=html,css,bootstrap,php,java,python,js,mysql,mongodb,flutter,git,github,vscode,postman,linux" />
+</p>
 
-**Frameworks & Libraries:**  
-Bootstrap 5, Flutter, JSP, Java Servlets, Chart.js, SweetAlert2, Toastify, LangChain basics
-
-**Databases & Backend:**  
-MySQL, MongoDB basics, XAMPP, Apache/Tomcat, cPanel hosting
-
-**AI & Developer Tools:**  
-OpenAI API, Groq API, Git, GitHub, VS Code, Postman, npm, Codex, Gemini, GitHub Copilot, ngrok, Linux/VPS basics
-
----
-
-## Selected Projects
-
-- **EduStand** - Full-stack Java LMS with role-based dashboards, authentication, resource management, assignments, and analytics.
-- **ADS_DiwaliSales_L2AI1** - Applied data science coursework using Python, pandas, NumPy, and visualizations.
-- **AutoVault-System** - Java academic project focused on OOP, MVC structure, and DSA-oriented application logic.
-- **Tab-Unloader** - Chrome/Chromium extension for unloading inactive tabs and managing browser memory.
-- **ProdTag** - Ongoing desktop developer tool for audio notifications after terminal commands complete.
-- **Surv-Earn** - Collaborative survey platform where I contributed frontend admin/user panel pages.
+<p align="center">
+  <img src="https://img.shields.io/badge/OpenAI_API-412991?style=for-the-badge&logo=openai&logoColor=white" />
+  <img src="https://img.shields.io/badge/Groq_API-F55036?style=for-the-badge&logoColor=white" />
+  <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" />
+  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" />
+  <img src="https://img.shields.io/badge/cPanel-FF6C2C?style=for-the-badge&logo=cpanel&logoColor=white" />
+</p>
 
 ---
 
-## Currently Improving
+## What I Build
 
-- Building stronger public READMEs and demos for my main projects.
-- Preparing more AI automation examples.
-- Continuing development on ProdTag.
-- Organizing proof links, certificates, and project evidence for internship applications.
+```text
+Full-stack systems     PHP, MySQL, Bootstrap, Java/JSP, Servlets
+Dashboards & CMS       Admin panels, CRUD flows, charts, user management
+AI automation          OpenAI/Groq APIs, prompt workflows, LangChain basics
+Developer tools        Extensions, desktop utilities, terminal productivity
+Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
+```
+
+---
+
+## Selected Work
+
+| Project | Type | Focus |
+|---|---|---|
+| **EduStand** | Academic / Java LMS | Roles, auth, resources, assignments, analytics |
+| **CENAS CMS Website** | Client / Production | PHP/MySQL CMS, admin panel, dashboard, deployment |
+| **Nepal Polymer Institute Websites** | Client / Production | Responsive public websites, PHP components |
+| **ADS_DiwaliSales_L2AI1** | Academic / Data Science | Python notebook, pandas, NumPy, visualizations |
+| **Tab-Unloader** | Personal Tool | Chrome extension for unloading inactive tabs |
+| **ProdTag** | Ongoing Tool | Desktop audio cues after terminal commands |
+
+---
+
+## GitHub Analytics
+
+<p align="center">
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=naitik-joshi&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=naitik-joshi&layout=compact&theme=tokyonight&hide_border=true" />
+</p>
+
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=naitik-joshi&theme=tokyonight&hide_border=true" />
+</p>
+
+---
+
+## Current Focus
+
+- Improving production-quality READMEs and demos for my best projects.
+- Building stronger AI automation examples.
+- Continuing development on **ProdTag**.
+- Preparing research/project evidence for internship applications.
 
 ---
 
 ## Contact
 
-- Email: **naitikjoshi888@gmail.com**
-- LinkedIn: **linkedin.com/in/naitik-joshi-075a45255**
-- Location: **Kathmandu, Nepal**
+<p align="center">
+  <a href="mailto:naitikjoshi888@gmail.com">
+    <img src="https://img.shields.io/badge/Email-naitikjoshi888%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
+  </a>
+  <a href="https://www.linkedin.com/in/naitik-joshi-075a45255/">
+    <img src="https://img.shields.io/badge/LinkedIn-Naitik_Joshi-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" />
+  </a>
+</p>
