@@ -1,77 +1,75 @@
-<h1 align="center">👋 Hi, I'm Naitik Joshi (Nick-Zoc)</h1>
+<h1 align="center">Hi, I'm Naitik Joshi</h1>
 
 <p align="center">
-  🎓 IT Student at Islington College, Kathmandu, Nepal <br>
-  💻 Passionate about Software Development, Robotics & AI <br>
+  Computing with AI student focused on full-stack web systems, dashboards, automation workflows, and applied AI tools.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Code-Python-blue?style=for-the-badge&logo=python" />
-  <img src="https://img.shields.io/badge/Code-Java-red?style=for-the-badge&logo=java" />
-  <img src="https://img.shields.io/badge/Web-HTML5-orange?style=for-the-badge&logo=html5" />
-  <img src="https://img.shields.io/badge/Style-CSS-orange?style=for-the-badge&logo=bootstrap" />
-  <img src="https://img.shields.io/badge/Mobile-Flutter-02569B?style=for-the-badge&logo=flutter" />
-  <img src="https://img.shields.io/badge/Microcontroller-ESp32 | Arduino UNO-00979D?style=for-the-badge&logo=arduino" />
+  <a href="https://github.com/naitik-joshi">GitHub</a> •
+  <a href="https://www.linkedin.com/in/naitik-joshi-075a45255/">LinkedIn</a> •
+  <a href="mailto:naitikjoshi888@gmail.com">Email</a>
 </p>
 
 ---
 
-## 🚀 About Me
+## About Me
 
-- 💡 Started with frontend web dev using **HTML**, **CSS**, **Bootstrap**
-- 📱 Designing mobile app interfaces with **Flutter**
-- 🐍 Built a CLI-based Inventory Management System in **Python** using **OOP**, **functions**, and **modularity** *(see repo)*
-- ☕ Developed a Java GUI Gym Management app using **Swing** + **event handling** *(see repo)*
-- 🔐 Used **PHP APIs** for login/auth interfaces
-- 🤖 Currently working on DIY robotics projects using microcontrollers + AI
-
----
-
-## 🛠️ Tech Stack
-**Languages & Frameworks:**
-<p> 
-  <img src="https://img.shields.io/badge/HTML-E34F26?style=flat&logo=html5&logoColor=white" />
-  <img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css&logoColor=white" />
-  <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=flat&logo=bootstrap&logoColor=white" />
-  <img src="https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white" />
-  <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/Java-007396?style=flat&logo=java&logoColor=white" />
-  <img src="https://img.shields.io/badge/Arduino-00979D?style=flat&logo=arduino&logoColor=white" />
-  
-</p>
-
-**Tools & Platforms:** 
-<p>
-  <img src="https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white" />
-  <img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white" />
-  <img src="https://img.shields.io/badge/Arch-1793D1?style=flat&logo=archlinux&logoColor=white" />
-  <img src="https://img.shields.io/badge/Ubuntu-E95420?style=flat&logo=ubuntu&logoColor=white" />
-  <img src="https://img.shields.io/badge/VS_Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white" alt="VS Code Badge" />
-  <img src="https://img.shields.io/badge/Arduino_IDE-00979D?style=flat&logo=arduino&logoColor=white" alt="Arduino IDE Badge" />
-  <img src="https://img.shields.io/badge/ESP32-3C3C3C?style=flat&logo=espressif&logoColor=white" />
-
-</p>
+- Studying **BSc (Hons) Computing with Artificial Intelligence** at Islington College.
+- Building practical web systems using **HTML, CSS, Bootstrap, PHP, MySQL, Java, JSP, and Servlets**.
+- Experienced with client-facing websites, CMS/admin panels, dashboards, CRUD workflows, deployment, and maintenance.
+- Interested in **AI automation**, API integrations, data workflows, and productivity-focused developer tools.
+- Co-founder and technical lead at **Nepal Solution Hub Pvt. Ltd.**, working on selected client web projects and technical delivery.
 
 ---
 
-## 📊 GitHub Analytics
+## Focus Areas
 
-<table>
-  <tr>
-    <td><img src="https://github-readme-stats.vercel.app/api?username=Nick-Zoc&show_icons=true&theme=tokyonight&count_private=true&hide_border=true" alt="GitHub Stats" height="165"/></td>
-    <td><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Nick-Zoc&layout=compact&theme=tokyonight&hide_border=true" alt="Top Languages" height="165"/></td>
-  </tr>
-</table>
-
----
-
-## 📫 Contact Me
-
-- 📧 **naitikjoshi888@gmail.com**  
-- 📍 Kathmandu, Nepal  
+- Full-stack web development
+- Admin panels, dashboards, and CMS systems
+- AI-assisted development workflows
+- API integration and automation tools
+- Java academic systems and data analysis projects
 
 ---
 
-### ⚡ Fun Fact
+## Tech Stack
 
-> I love building smart robotic systems using low-cost hardware and AI tools — from ESP32 microcontrollers to real-time voice-controlled bots using LLMs!
+**Languages:**  
+HTML, CSS, JavaScript basics, PHP, Java, Python, Shell scripting
+
+**Frameworks & Libraries:**  
+Bootstrap 5, Flutter, JSP, Java Servlets, Chart.js, SweetAlert2, Toastify, LangChain basics
+
+**Databases & Backend:**  
+MySQL, MongoDB basics, XAMPP, Apache/Tomcat, cPanel hosting
+
+**AI & Developer Tools:**  
+OpenAI API, Groq API, Git, GitHub, VS Code, Postman, npm, Codex, Gemini, GitHub Copilot, ngrok, Linux/VPS basics
+
+---
+
+## Selected Projects
+
+- **EduStand** - Full-stack Java LMS with role-based dashboards, authentication, resource management, assignments, and analytics.
+- **ADS_DiwaliSales_L2AI1** - Applied data science coursework using Python, pandas, NumPy, and visualizations.
+- **AutoVault-System** - Java academic project focused on OOP, MVC structure, and DSA-oriented application logic.
+- **Tab-Unloader** - Chrome/Chromium extension for unloading inactive tabs and managing browser memory.
+- **ProdTag** - Ongoing desktop developer tool for audio notifications after terminal commands complete.
+- **Surv-Earn** - Collaborative survey platform where I contributed frontend admin/user panel pages.
+
+---
+
+## Currently Improving
+
+- Building stronger public READMEs and demos for my main projects.
+- Preparing more AI automation examples.
+- Continuing development on ProdTag.
+- Organizing proof links, certificates, and project evidence for internship applications.
+
+---
+
+## Contact
+
+- Email: **naitikjoshi888@gmail.com**
+- LinkedIn: **linkedin.com/in/naitik-joshi-075a45255**
+- Location: **Kathmandu, Nepal**
