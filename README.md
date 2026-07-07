@@ -12,7 +12,7 @@
   </a>
 </p>
 
----
+
 
 ## About Me
 
@@ -22,7 +22,7 @@
 - Interested in **AI automation**, API integrations, dashboard systems, and productivity tools.
 - I use AI-assisted development seriously: for faster iteration, debugging, documentation, and implementation review.
 
----
+
 
 ## Tech Stack
 
@@ -38,7 +38,7 @@
   <img src="https://img.shields.io/badge/cPanel-FF6C2C?style=for-the-badge&logo=cpanel&logoColor=white" />
 </p>
 
----
+
 
 ## What I Build
 
@@ -50,7 +50,7 @@ Developer tools        Extensions, desktop utilities, terminal productivity
 Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
 ```
 
----
+
 
 ## Selected Work
 
@@ -63,7 +63,7 @@ Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
 | **CENAS CMS Website** | Client / Production | PHP/MySQL CMS, admin panel, dashboard, deployment |
 | **Nepal Polymer Institute Websites** | Client / Production | Responsive public websites, PHP components |
 
----
+
 
 ## GitHub Analytics
 
@@ -77,7 +77,7 @@ Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
 </p>
 
 
----
+
 
 ## Current Focus
 
