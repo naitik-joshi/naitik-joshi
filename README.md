@@ -27,14 +27,13 @@
 ## Tech Stack
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,bootstrap,php,java,python,js,mysql,mongodb,flutter,git,github,vscode,postman,linux" />
+  <img src="https://skillicons.dev/icons?i=bootstrap,js,php,java,python,mysql,flutter,git,github,vscode,postman,linux" />
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/OpenAI_API-412991?style=for-the-badge&logo=openai&logoColor=white" />
   <img src="https://img.shields.io/badge/Groq_API-F55036?style=for-the-badge&logoColor=white" />
   <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" />
-  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" />
   <img src="https://img.shields.io/badge/cPanel-FF6C2C?style=for-the-badge&logo=cpanel&logoColor=white" />
 </p>
 
