@@ -75,13 +75,3 @@ Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
 <p align="center">
   <img src="https://streak-stats.demolab.com?user=naitik-joshi&theme=tokyonight&hide_border=true" />
 </p>
-
-
-
-
-## Current Focus
-
-- Improving production-quality READMEs and demos for my best projects.
-- Building stronger AI automation examples.
-- Continuing development on personal tools like **ProdTag** and **Tab-Unloader**.
-- Preparing research/project evidence for internship applications.
