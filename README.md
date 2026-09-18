@@ -1,76 +1,17 @@
-<h1 align="center">Hi, I'm Naitik Joshi</h1>
+<div align="center">
 
-<p align="center">
-  <a href="mailto:naitikjoshi888@gmail.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=flat-square&logo=gmail&logoColor=white" />
-  </a>
-  <a href="https://www.linkedin.com/in/naitik-joshi-075a45255/">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" />
-  </a>
-  <a href="https://github.com/naitik-joshi">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" />
-  </a>
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="./assets/profile-dark-mobile.svg">
+  <source media="(prefers-color-scheme: light) and (max-width: 600px)" srcset="./assets/profile-light-mobile.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/profile-light.svg">
+  <img alt="Naitik Joshi - Kathmandu Network Node developer profile" src="./assets/profile-dark.svg" width="100%">
+</picture>
 
+<br>
 
+[`PORTFOLIO`](https://naitikjoshi.com.np/) · [`LINKEDIN`](https://www.linkedin.com/in/naitik-joshi-075a45255/) · [`EMAIL`](mailto:naitikjoshi888@gmail.com) · [`CURRENT BUILD`](https://github.com/naitik-joshi/ProdTag)
 
-## About Me
+<sub>Generated from authored project metadata and public GitHub signals. Pinned repositories continue the story below.</sub>
 
-- Studying **BSc (Hons) Computing with Artificial Intelligence** at Islington College.
-- Co-founder and technical lead at **Nepal Solution Hub Pvt. Ltd.**
-- Building practical systems with **PHP, MySQL, Bootstrap, Java, JSP, Servlets, and Python**.
-- Interested in **AI automation**, API integrations, dashboard systems, and productivity tools.
-- I use AI-assisted development seriously: for faster iteration, debugging, documentation, and implementation review.
-
-
-
-## Tech Stack
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=bootstrap,js,php,java,python,mysql,flutter,git,github,vscode,postman,linux" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/OpenAI_API-412991?style=for-the-badge&logo=openai&logoColor=white" />
-  <img src="https://img.shields.io/badge/Groq_API-F55036?style=for-the-badge&logoColor=white" />
-  <img src="https://img.shields.io/badge/LangChain-1C3C3C?style=for-the-badge&logo=langchain&logoColor=white" />
-  <img src="https://img.shields.io/badge/cPanel-FF6C2C?style=for-the-badge&logo=cpanel&logoColor=white" />
-</p>
-
-
-
-## What I Build
-
-```text
-Full-stack systems     PHP, MySQL, Bootstrap, Java/JSP, Servlets
-Dashboards & CMS       Admin panels, CRUD flows, charts, user management
-AI automation          OpenAI/Groq APIs, prompt workflows, LangChain basics
-Developer tools        Extensions, desktop utilities, terminal productivity
-Data projects          Python, pandas, NumPy, Jupyter notebooks, visualizations
-```
-
-
-
-## Selected Work
-
-| Project | Type | Focus |
-|---|---|---|
-| **ProdTag** | Ongoing Tool | Desktop audio cues after terminal commands |
-| **Tab-Unloader** | Personal Tool | Chrome extension for unloading inactive tabs |
-| **EduStand** | Academic / Java LMS | Roles, auth, resources, assignments, analytics |
-| **ADS_DiwaliSales_L2AI1** | Academic / Data Science | Python notebook, pandas, NumPy, visualizations |
-| **CENAS CMS Website** | Client / Production | PHP/MySQL CMS, admin panel, dashboard, deployment |
-| **Nepal Polymer Institute Websites** | Client / Production | Responsive public websites, PHP components |
-
-
-
-## GitHub Analytics
-
-<p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=naitik-joshi&theme=tokyonight" />
-</p>
-
-
-<p align="center">
-  <img src="https://streak-stats.demolab.com?user=naitik-joshi&theme=tokyonight&hide_border=true" />
-</p>
+</div>
