@@ -1,0 +1,42 @@
+name: Compile KTM Nightshift
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "game/map.txt"
+      - "scripts/generate_nightshift.py"
+      - "tests/test_nightshift.py"
+      - ".github/workflows/nightshift.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Compile all playable states
+        run: python3 scripts/generate_nightshift.py
+
+      - name: Verify level and navigation graph
+        run: python3 -m unittest discover -s tests -p "test_nightshift.py" -v
+
+      - name: Commit changed game states
+        run: |
+          if git diff --quiet -- game/; then
+            echo "KTM Nightshift is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add game/README.md game/manifest.json game/frames game/play
+          git commit -m "chore: recompile KTM Nightshift [skip ci]"
+          git push

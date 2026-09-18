@@ -1,0 +1,3 @@
+assets/*.svg linguist-generated=true
+game/frames/*.svg linguist-generated=true
+game/play/*.md linguist-generated=true
