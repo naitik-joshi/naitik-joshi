@@ -47,13 +47,13 @@ text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 <path class="mountain-far" d="M18 530 L84 458 L124 491 L183 421 L237 480 L304 404 L368 480 L432 432 L493 486 L553 408 L615 478 L680 428 L744 488 L814 405 L873 469 L934 427 L998 484 L1063 415 L1122 476 L1182 433 L1182 634 L18 634 Z"/>
 <path class="mountain-near" d="M18 569 L96 510 L148 552 L220 479 L286 555 L351 508 L425 563 L509 489 L582 557 L653 515 L726 566 L805 488 L877 552 L945 506 L1014 563 L1090 499 L1182 556 L1182 634 L18 634 Z"/>
 <g class="routes">
-<path id="route-1" d="M 600 350 C 495 350, 495 235, 390 235" class="route"/>
+<path id="route-1" d="M 600 350 C 548 350, 548 235, 497 235" class="route"/>
 <circle r="4" class="packet packet-1"><animateMotion dur="6.5s" begin="0.00s" repeatCount="indefinite"><mpath href="#route-1"/></animateMotion></circle>
-<path id="route-2" d="M 600 350 C 495 350, 495 455, 390 455" class="route"/>
+<path id="route-2" d="M 600 350 C 548 350, 548 455, 497 455" class="route"/>
 <circle r="4" class="packet packet-2"><animateMotion dur="7.2s" begin="0.65s" repeatCount="indefinite"><mpath href="#route-2"/></animateMotion></circle>
-<path id="route-3" d="M 600 350 C 705 350, 705 235, 810 235" class="route"/>
+<path id="route-3" d="M 600 350 C 651 350, 651 235, 703 235" class="route"/>
 <circle r="4" class="packet packet-3"><animateMotion dur="7.9s" begin="1.30s" repeatCount="indefinite"><mpath href="#route-3"/></animateMotion></circle>
-<path id="route-4" d="M 600 350 C 705 350, 705 455, 810 455" class="route"/>
+<path id="route-4" d="M 600 350 C 651 350, 651 455, 703 455" class="route"/>
 <circle r="4" class="packet packet-4"><animateMotion dur="8.6s" begin="1.95s" repeatCount="indefinite"><mpath href="#route-4"/></animateMotion></circle>
 </g>
 <g class="central-node">

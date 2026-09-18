@@ -109,7 +109,12 @@ def fetch_telemetry(config: dict[str, Any], offline: bool = False) -> dict[str, 
         return fallback
 
     owned = [repo for repo in repos if not repo.get("fork")]
-    latest = owned[0] if owned else {}
+    project_repos = [
+        repo
+        for repo in owned
+        if str(repo.get("name", "")).lower() != username.lower()
+    ]
+    latest = project_repos[0] if project_repos else {}
     repo_index = {str(repo.get("name", "")).lower(): repo for repo in owned}
     project_signals: dict[str, dict[str, Any]] = {}
 
@@ -254,13 +259,15 @@ def render_connections(
     projects: list[dict[str, Any]],
     positions: dict[str, tuple[int, int]],
     central: tuple[int, int],
+    node_width: int = 214,
 ) -> str:
     cx, cy = central
     parts = ['<g class="routes">']
     for index, project in enumerate(projects, start=1):
         x, y = positions[project["position"]]
-        mid_x = int((cx + x) / 2)
-        path = f"M {cx} {cy} C {mid_x} {cy}, {mid_x} {y}, {x} {y}"
+        edge_x = x + (node_width // 2) if x < cx else x - (node_width // 2)
+        mid_x = int((cx + edge_x) / 2)
+        path = f"M {cx} {cy} C {mid_x} {cy}, {mid_x} {y}, {edge_x} {y}"
         parts.append(f'<path id="route-{index}" d="{path}" class="route"/>')
         parts.append(
             f'<circle r="4" class="packet packet-{index}">'
@@ -452,7 +459,9 @@ def render_mobile_svg(
         svg_text(678, 133, "PUBLIC SIGNAL", "label", "end"),
         svg_text(678, 161, f"{telemetry['public_repos']} REPOS / {telemetry['stars']} STARS / {telemetry['followers']} FOLLOWERS", "body", "end"),
         render_mobile_landscape(),
-        render_connections(config["projects"], MOBILE_POSITIONS, (360, 423)),
+        render_connections(
+            config["projects"], MOBILE_POSITIONS, (360, 423), node_width=258
+        ),
         render_central_node(360, 423, .84),
     ]
     parts.extend(
