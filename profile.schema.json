@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/naitik-joshi/naitik-joshi/blob/main/profile.schema.json",
+  "title": "KTM Project Broadcast profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["username", "identity", "current_build", "projects", "fallback_telemetry"],
+  "properties": {
+    "username": { "type": "string", "minLength": 1 },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "role", "location", "timezone", "node", "tagline"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "role": { "type": "string", "minLength": 1 },
+        "location": { "type": "string", "minLength": 1 },
+        "timezone": { "type": "string", "minLength": 1 },
+        "node": { "type": "string", "minLength": 1 },
+        "tagline": { "type": "string", "minLength": 1 }
+      }
+    },
+    "current_build": { "type": "string", "minLength": 1 },
+    "projects": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "repo", "status", "stack", "summary", "position", "accent"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 28 },
+          "repo": { "type": "string", "minLength": 1 },
+          "status": { "type": "string", "minLength": 1, "maxLength": 30 },
+          "stack": { "type": "string", "minLength": 1, "maxLength": 34 },
+          "summary": { "type": "string", "minLength": 1, "maxLength": 180 },
+          "position": {
+            "enum": ["northwest", "southwest", "northeast", "southeast"]
+          },
+          "accent": {
+            "enum": ["red", "blue", "yellow", "mint", "amber", "cyan"]
+          }
+        }
+      }
+    },
+    "fallback_telemetry": {
+      "type": "object",
+      "required": ["public_repos", "followers", "stars", "latest_repo", "latest_repo_date", "projects"],
+      "properties": {
+        "public_repos": { "type": "integer", "minimum": 0 },
+        "followers": { "type": "integer", "minimum": 0 },
+        "stars": { "type": "integer", "minimum": 0 },
+        "latest_repo": { "type": "string" },
+        "latest_repo_date": { "type": "string" },
+        "projects": { "type": "object" }
+      }
+    }
+  }
+}

@@ -10,7 +10,10 @@ on:
     paths:
       - "profile.json"
       - "scripts/generate_profile.py"
+      - "scripts/profile_core.py"
       - "scripts/profile_renderer.py"
+      - "profile.schema.json"
+      - "action.yml"
       - ".github/workflows/profile.yml"
 
 permissions:
@@ -26,10 +29,13 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Generate light and dark assets
+      - name: Generate responsive profile assets
+        uses: ./
+        with:
+          config: profile.json
+          output: assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python scripts/generate_profile.py
 
       - name: Run generator tests
         run: python -m unittest discover -s tests -v

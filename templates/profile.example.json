@@ -1,0 +1,58 @@
+{
+  "username": "your-github-username",
+  "identity": {
+    "name": "Your Name",
+    "role": "DEVELOPER / BUILDER / DESIGNER",
+    "location": "Your City",
+    "timezone": "UTC",
+    "node": "NODE-0001",
+    "tagline": "a short statement about what you build"
+  },
+  "current_build": "Project One",
+  "projects": [
+    {
+      "name": "Project One",
+      "repo": "project-one",
+      "status": "ACTIVE DEVELOPMENT",
+      "stack": "PYTHON + SVG",
+      "summary": "A concise description of the problem, the product, and its practical value.",
+      "position": "northwest",
+      "accent": "mint"
+    },
+    {
+      "name": "Project Two",
+      "repo": "project-two",
+      "status": "SHIPPED",
+      "stack": "TYPESCRIPT",
+      "summary": "A second selected project described in one direct and specific sentence.",
+      "position": "southwest",
+      "accent": "yellow"
+    },
+    {
+      "name": "Project Three",
+      "repo": "project-three",
+      "status": "TEAM PROJECT",
+      "stack": "FASTAPI + DOCKER",
+      "summary": "A team build that demonstrates architecture, delivery, or collaboration.",
+      "position": "northeast",
+      "accent": "blue"
+    },
+    {
+      "name": "Project Four",
+      "repo": "project-four",
+      "status": "STABLE",
+      "stack": "JAVASCRIPT",
+      "summary": "A compact final project that rounds out the selected work collection.",
+      "position": "southeast",
+      "accent": "red"
+    }
+  ],
+  "fallback_telemetry": {
+    "public_repos": 0,
+    "followers": 0,
+    "stars": 0,
+    "latest_repo": "project-one",
+    "latest_repo_date": "2026-01-01",
+    "projects": {}
+  }
+}

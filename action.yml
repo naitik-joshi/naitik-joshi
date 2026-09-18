@@ -1,0 +1,33 @@
+name: KTM Project Broadcast
+description: Generate responsive light and dark GitHub profile SVGs from a JSON configuration.
+author: Naitik Joshi
+
+branding:
+  icon: radio
+  color: blue
+
+inputs:
+  config:
+    description: Path to the profile configuration file.
+    required: false
+    default: profile.json
+  output:
+    description: Directory for generated SVG and JSON assets.
+    required: false
+    default: assets
+  offline:
+    description: Use fallback telemetry without calling the GitHub API.
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Generate profile artwork
+      shell: bash
+      run: |
+        args=(--config "${{ inputs.config }}" --output "${{ inputs.output }}")
+        if [[ "${{ inputs.offline }}" == "true" ]]; then
+          args+=(--offline)
+        fi
+        python3 "$GITHUB_ACTION_PATH/scripts/generate_profile.py" "${args[@]}"

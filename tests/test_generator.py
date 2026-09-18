@@ -17,6 +17,18 @@ SPEC.loader.exec_module(GENERATOR)
 
 
 class ProfileGeneratorTests(unittest.TestCase):
+    def test_public_schema_describes_profile_contract(self):
+        schema = json.loads(
+            (ROOT / "profile.schema.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(schema["properties"]["projects"]["minItems"], 4)
+        self.assertIn("summary", schema["properties"]["projects"]["items"]["required"])
+
+    def test_composite_action_uses_generator(self):
+        action = (ROOT / "action.yml").read_text(encoding="utf-8")
+        self.assertIn("using: composite", action)
+        self.assertIn("scripts/generate_profile.py", action)
+
     def test_config_has_four_positioned_projects(self):
         config = GENERATOR.load_config(ROOT / "profile.json")
         self.assertEqual(len(config["projects"]), 4)
