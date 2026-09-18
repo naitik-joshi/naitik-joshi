@@ -1,41 +1,114 @@
 {
-  "current_build": "ProdTag",
-  "projects": {
-    "ProdTag": {
-      "forks": 0,
-      "language": "Go",
-      "open_issues": 0,
-      "pushed_date": "2026-08-27",
-      "stars": 0
-    },
-    "Tab-Unloader": {
-      "forks": 0,
-      "language": "JavaScript",
-      "open_issues": 0,
-      "pushed_date": "2026-05-22",
-      "stars": 0
-    },
-    "api-escape-platform": {
-      "forks": 0,
-      "language": "Python",
-      "open_issues": 0,
-      "pushed_date": "2026-08-24",
-      "stars": 0
-    },
-    "hackathon-neutron": {
-      "forks": 0,
-      "language": "TypeScript",
-      "open_issues": 0,
-      "pushed_date": "2026-09-13",
-      "stars": 0
-    }
+  "identity": {
+    "name": "Naitik Joshi",
+    "role": "DEVELOPER / BUILDER / AI STUDENT",
+    "location": "Kathmandu, Nepal",
+    "timezone": "Asia/Kathmandu",
+    "node": "KTM-NP-0545",
+    "tagline": "building useful and unusual software"
   },
+  "current_build": "ProdTag",
   "public": {
+    "public_repos": 17,
     "followers": 6,
+    "stars": 2,
     "latest_repo": "hackathon-neutron",
     "latest_repo_date": "2026-09-13",
-    "public_repos": 17,
-    "stars": 2
+    "projects": {
+      "ProdTag": {
+        "language": "Go",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-08-27"
+      },
+      "hackathon-neutron": {
+        "language": "TypeScript",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-09-13"
+      },
+      "api-escape-platform": {
+        "language": "Python",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-08-24"
+      },
+      "Tab-Unloader": {
+        "language": "JavaScript",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-05-22"
+      }
+    }
   },
-  "username": "naitik-joshi"
+  "projects": [
+    {
+      "name": "ProdTag",
+      "repo": "ProdTag",
+      "status": "ACTIVE DEVELOPMENT",
+      "stack": "GO + WAILS",
+      "summary": "Desktop audio cues for terminal commands, designed to make long-running development work easier to follow.",
+      "position": "northwest",
+      "accent": "mint",
+      "signal": {
+        "language": "Go",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-08-27"
+      }
+    },
+    {
+      "name": "Research Hub",
+      "repo": "hackathon-neutron",
+      "status": "HACKATHON PROTOTYPE",
+      "stack": "NEXT + SUPABASE",
+      "summary": "An AI-assisted research workspace built for the Islington Hackathon, with researcher tools and a focused CMS.",
+      "position": "southwest",
+      "accent": "amber",
+      "signal": {
+        "language": "TypeScript",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-09-13"
+      }
+    },
+    {
+      "name": "API Escape",
+      "repo": "api-escape-platform",
+      "status": "COMPLETED TEAM PROJECT",
+      "stack": "FASTAPI + DOCKER",
+      "summary": "A containerized API learning platform with Groq-assisted workflows, built and presented as a summer team project.",
+      "position": "northeast",
+      "accent": "cyan",
+      "signal": {
+        "language": "Python",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-08-24"
+      }
+    },
+    {
+      "name": "Tab Unloader",
+      "repo": "Tab-Unloader",
+      "status": "STABLE",
+      "stack": "CHROMIUM EXTENSION",
+      "summary": "A focused browser utility for unloading inactive tabs and reclaiming memory without losing the session.",
+      "position": "southeast",
+      "accent": "mint",
+      "signal": {
+        "language": "JavaScript",
+        "stars": 0,
+        "forks": 0,
+        "open_issues": 0,
+        "pushed_date": "2026-05-22"
+      }
+    }
+  ]
 }

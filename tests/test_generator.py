@@ -52,13 +52,14 @@ class ProfileGeneratorTests(unittest.TestCase):
                     continue
                 root = ET.parse(path).getroot()
                 expected_viewbox = (
-                    "0 0 720 960" if "mobile" in path.name else "0 0 1200 720"
+                    "0 0 720 960" if "mobile" in path.name else "0 0 1200 640"
                 )
                 self.assertEqual(root.attrib["viewBox"], expected_viewbox)
                 content = path.read_text(encoding="utf-8")
                 self.assertIn("KTM-NP-0545", content)
                 self.assertIn("prefers-reduced-motion", content)
                 self.assertIn("UPDATED", content)
+                self.assertIn("PROJECT TRANSMISSION", content)
                 self.assertNotIn("None", content)
 
     def test_offline_generation_is_deterministic(self):

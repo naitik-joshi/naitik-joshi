@@ -1,183 +1,190 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
-<title id="title">Naitik Joshi - Kathmandu Network Node</title>
-<desc id="desc">Four software projects with public repository signals connect to a Kathmandu network node above a city and mountain skyline.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+<title id="title">Naitik Joshi - KTM Project Broadcast</title>
+<desc id="desc">Animated profile poster broadcasting four selected software projects from Kathmandu.</desc>
+<defs>
+  <pattern id="micro-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+    <path d="M26 0H0V26" fill="none" stroke="#111318" stroke-width="1" opacity=".055"/>
+  </pattern>
+  <clipPath id="stage-clip"><rect x="486" y="103" width="674" height="418"/></clipPath>
+  <clipPath id="stage-clip-mobile"><rect x="34" y="267" width="652" height="438"/></clipPath>
+</defs>
 <style>
-text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
-.outer{fill:#EDF4F1;stroke:#789995;stroke-width:1.5}
-.grid-line{fill:none;stroke:#D3E1DD;stroke-width:1}
-.panel{fill:#F8FBF9;stroke:#789995;stroke-width:1.25}
-.rule{stroke:#789995;stroke-width:1}
-.label{fill:#087D70;font-size:13px;font-weight:700;letter-spacing:1px}
-.identity{fill:#142426;font-size:31px;font-weight:800}
-.identity-role{fill:#536B6D;font-size:14px}
-.header-signal{fill:#142426;font-size:13px;font-weight:700}
-.header-muted{fill:#536B6D;font-size:12px}
-.body{fill:#142426;font-size:14px}.body-strong{fill:#142426;font-size:16px;font-weight:700}
-.body-muted{fill:#536B6D;font-size:12px}.signal{fill:#087D70;font-size:12px;font-weight:700}
-.route{fill:none;stroke:#0B748B;stroke-width:1.5;stroke-dasharray:5 7;opacity:.7}
-.packet{fill:#087D70;filter:url(#glow)}
-.node-box{fill:#F8FBF9;stroke-width:1.5}.node-machine{fill:#E1ECE8;stroke:#789995}
-.node-title{fill:#142426;font-size:15px;font-weight:700}.node-status{font-size:9px;font-weight:700}
-.node-stack{fill:#536B6D;font-size:10px}
-.mint-stroke{stroke:#087D70;fill:none}.cyan-stroke{stroke:#0B748B;fill:none}.amber-stroke{stroke:#9B6200;fill:none}
-.mint-fill{fill:#087D70}.cyan-fill{fill:#0B748B}.amber-fill{fill:#9B6200}
-.mint-text{fill:#087D70}.cyan-text{fill:#0B748B}.amber-text{fill:#9B6200}
-.node-halo{fill:#F8FBF9;stroke:#0B748B;opacity:.94}.node-core{fill:#E1ECE8;stroke:#087D70;stroke-width:2}
-.tower{fill:#EDF4F1;stroke:#789995}.tower-line{stroke:#9B6200;stroke-width:2}
-.beacon{fill:#B33E3B}.beacon-ring{fill:none;stroke:#B33E3B}
-.central-title{fill:#0B748B;font-size:15px;font-weight:800}.central-subtitle{fill:#536B6D;font-size:10px;letter-spacing:1px}
-.mountain-far{fill:#D5E3DF}.mountain-near{fill:#C3D6D1}
-.city{fill:#AFC4BF}.city-line{stroke:#AFC4BF;stroke-width:3}.city-line.thin{stroke-width:1.5}
-.window{fill:#9B6200;opacity:.85}.beacon-static{fill:#B33E3B}
-.terminal{fill:#F8FBF9;stroke:#789995}.prompt{fill:#087D70;font-size:14px;font-weight:700}
-.command{fill:#142426;font-size:14px}.cursor{fill:#0B748B;animation:blink 1.1s steps(1) infinite}
-.pulse{animation:pulse 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
-.pulse-ring{animation:ring 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
-@keyframes blink{50%{opacity:0}}@keyframes pulse{50%{transform:scale(1.35);opacity:.65}}
-@keyframes ring{0%{transform:scale(.45);opacity:.9}100%{transform:scale(1.75);opacity:0}}
-@media(prefers-reduced-motion:reduce){.packet{display:none}.pulse,.pulse-ring,.cursor{animation:none!important}}
+text{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-serif;letter-spacing:0}
+.mono{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace}
+.paper{fill:#F5F0E7}.paper-alt{fill:#FFFCF6}
+.ink{fill:#111318}.muted{fill:#5E6066}.line{stroke:#111318}
+.outline{fill:#FFFCF6;stroke:#111318;stroke-width:3}
+.shadow{fill:#111318}.red{fill:#E84A50}.blue{fill:#2456E8}
+.yellow{fill:#F3BF25}.mint{fill:#26B892}.skyline{fill:#D7D0C5}
+.display{fill:#111318;font-size:66px;font-weight:950}
+.display-small{fill:#111318;font-size:52px;font-weight:950}
+.role{fill:#111318;font-size:17px;font-weight:800}
+.eyebrow{fill:#5E6066;font-size:13px;font-weight:800}
+.label{fill:#111318;font-size:14px;font-weight:900}
+.project-name{fill:#111318;font-size:47px;font-weight:950}
+.project-name-mobile{fill:#111318;font-size:38px;font-weight:950}
+.project-copy{fill:#111318;font-size:18px;font-weight:650}
+.project-copy-mobile{fill:#111318;font-size:16px;font-weight:650}
+.meta{fill:#5E6066;font-size:13px;font-weight:800}
+.status{fill:#F5F0E7;font-size:12px;font-weight:950}
+.number{fill:#111318;font-size:112px;font-weight:950;opacity:.08}
+.stat{fill:#111318;font-size:17px;font-weight:900}
+.tiny{fill:#5E6066;font-size:11px;font-weight:800}
+.feature{opacity:0;visibility:hidden;animation:featureCycle 16s infinite}
+.indicator{opacity:.25;animation:indicatorCycle 16s infinite}
+.scene-2,.indicator-2{animation-delay:4s}.scene-3,.indicator-3{animation-delay:8s}
+.scene-4,.indicator-4{animation-delay:12s}
+.scan{transform-origin:center;animation:scan 5s linear infinite}
+.dash{stroke-dasharray:9 11;animation:dash 6s linear infinite}
+.pulse{transform-origin:center;animation:pulse 2.4s ease-out infinite}
+.cursor{animation:blink 1s steps(1) infinite}
+@keyframes featureCycle{0%,22%{opacity:1;visibility:visible;transform:translateY(0)}24%,98%{opacity:0;visibility:hidden;transform:translateY(10px)}99%,100%{opacity:0;visibility:hidden}}
+@keyframes indicatorCycle{0%,22%{opacity:1}24%,100%{opacity:.25}}
+@keyframes scan{to{transform:rotate(360deg)}}@keyframes dash{to{stroke-dashoffset:-80}}
+@keyframes pulse{0%{transform:scale(.55);opacity:.9}100%{transform:scale(1.55);opacity:0}}
+@keyframes blink{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.feature,.indicator,.scan,.dash,.pulse,.cursor{animation:none!important}.feature{opacity:0;visibility:hidden}.scene-1{opacity:1;visibility:visible}.indicator{opacity:.25}.indicator-1{opacity:1}}
 </style>
-<rect x="12" y="12" width="1176" height="696" rx="4" class="outer"/>
-<defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M 28 0 L 0 0 0 28" class="grid-line"/></pattern></defs><rect width="1200" height="720" fill="url(#grid)" opacity=".28"/>
-<line x1="24" y1="86" x2="1176" y2="86" class="rule"/>
-<text x="36" y="50" class="identity" text-anchor="start">Naitik Joshi</text>
-<text x="38" y="72" class="identity-role" text-anchor="start">DEVELOPER / BUILDER / AI STUDENT</text>
-<text x="1164" y="42" class="header-signal" text-anchor="end">KTM-NP-0545</text>
-<text x="1164" y="62" class="header-muted" text-anchor="end">NPT +05:45 / PUBLIC API / WEEKLY</text>
-<path class="mountain-far" d="M18 530 L84 458 L124 491 L183 421 L237 480 L304 404 L368 480 L432 432 L493 486 L553 408 L615 478 L680 428 L744 488 L814 405 L873 469 L934 427 L998 484 L1063 415 L1122 476 L1182 433 L1182 634 L18 634 Z"/>
-<path class="mountain-near" d="M18 569 L96 510 L148 552 L220 479 L286 555 L351 508 L425 563 L509 489 L582 557 L653 515 L726 566 L805 488 L877 552 L945 506 L1014 563 L1090 499 L1182 556 L1182 634 L18 634 Z"/>
-<g class="routes">
-<path id="route-1" d="M 600 350 C 548 350, 548 235, 497 235" class="route"/>
-<circle r="4" class="packet packet-1"><animateMotion dur="6.5s" begin="0.00s" repeatCount="indefinite"><mpath href="#route-1"/></animateMotion></circle>
-<path id="route-2" d="M 600 350 C 548 350, 548 455, 497 455" class="route"/>
-<circle r="4" class="packet packet-2"><animateMotion dur="7.2s" begin="0.65s" repeatCount="indefinite"><mpath href="#route-2"/></animateMotion></circle>
-<path id="route-3" d="M 600 350 C 651 350, 651 235, 703 235" class="route"/>
-<circle r="4" class="packet packet-3"><animateMotion dur="7.9s" begin="1.30s" repeatCount="indefinite"><mpath href="#route-3"/></animateMotion></circle>
-<path id="route-4" d="M 600 350 C 651 350, 651 455, 703 455" class="route"/>
-<circle r="4" class="packet packet-4"><animateMotion dur="8.6s" begin="1.95s" repeatCount="indefinite"><mpath href="#route-4"/></animateMotion></circle>
+<rect width="1200" height="640" class="paper"/><rect width="1200" height="640" fill="url(#micro-grid)"/>
+<rect x="18" y="18" width="1164" height="604" fill="none" class="line" stroke-width="3"/>
+<rect x="30" y="29" width="1140" height="46" class="paper-alt line" stroke-width="2"/>
+<rect x="30" y="29" width="248" height="46" class="red"/>
+<text x="49" y="59" class="label mono" text-anchor="start">LIVE FROM KATHMANDU</text>
+<text x="301" y="59" class="label mono" text-anchor="start">KTM-NP-0545</text>
+<text x="1148" y="59" class="label mono" text-anchor="end">17 REPOS  /  2 STARS  /  6 FOLLOWERS</text>
+<g class="skyline" opacity=".9">
+<rect x="0" y="552" width="58" height="45"/>
+<rect x="66" y="521" width="58" height="76"/>
+<rect x="78" y="537" width="7" height="7" class="yellow"/>
+<rect x="132" y="545" width="58" height="52"/>
+<rect x="198" y="505" width="58" height="92"/>
+<rect x="264" y="533" width="58" height="64"/>
+<rect x="276" y="549" width="7" height="7" class="yellow"/>
+<rect x="330" y="489" width="58" height="108"/>
+<rect x="396" y="538" width="58" height="59"/>
+<rect x="462" y="515" width="58" height="82"/>
+<rect x="474" y="531" width="7" height="7" class="yellow"/>
+<rect x="528" y="549" width="58" height="48"/>
+<rect x="594" y="501" width="58" height="96"/>
+<rect x="660" y="528" width="58" height="69"/>
+<rect x="672" y="544" width="7" height="7" class="yellow"/>
+<rect x="726" y="484" width="58" height="113"/>
+<rect x="792" y="539" width="58" height="58"/>
+<rect x="858" y="509" width="58" height="88"/>
+<rect x="870" y="525" width="7" height="7" class="yellow"/>
+<rect x="924" y="546" width="58" height="51"/>
+<rect x="990" y="494" width="58" height="103"/>
+<rect x="1056" y="529" width="58" height="68"/>
+<rect x="1068" y="545" width="7" height="7" class="yellow"/>
+<rect x="1122" y="506" width="58" height="91"/>
+<path d="M170 597V519L226 476L282 519V597Z"/>
+<path d="M185 504L226 469L267 504Z"/>
+<line x1="226" y1="469" x2="226" y2="452" class="line" stroke-width="5"/>
+<path d="M915 597Q974 509 1033 597Z"/>
+<rect x="970" y="491" width="8" height="28"/>
+<circle cx="974" cy="485" r="6" class="red"/>
 </g>
-<g class="central-node">
-<circle cx="600" cy="350" r="72" class="node-halo"/>
-<circle cx="600" cy="350" r="55" class="node-core"/>
-<rect x="573" y="326" width="54" height="48" rx="3" class="tower"/>
-<line x1="585" y1="339" x2="615" y2="339" class="mint-stroke"/>
-<line x1="585" y1="351" x2="615" y2="351" class="cyan-stroke"/>
-<line x1="585" y1="363" x2="605" y2="363" class="amber-stroke"/>
-<line x1="600" y1="326" x2="600" y2="302" class="tower-line"/>
-<circle cx="600" cy="297" r="5" class="beacon pulse"/>
-<circle cx="600" cy="297" r="12" class="beacon-ring pulse-ring"/>
-<text x="600" y="392" class="central-title" text-anchor="middle">KTM-NP-0545</text>
-<text x="600" y="411" class="central-subtitle" text-anchor="middle">NETWORK NODE</text>
+<text x="48" y="142" class="display" text-anchor="start">NAITIK</text>
+<text x="48" y="207" class="display" text-anchor="start">JOSHI</text>
+<rect x="51" y="223" width="309" height="8" class="blue"/>
+<text x="49" y="265" class="role" text-anchor="start">DEVELOPER / BUILDER / AI STUDENT</text>
+<text x="49" y="294" class="eyebrow mono" text-anchor="start">BUILDING USEFUL AND UNUSUAL SOFTWARE</text>
+<text x="49" y="317" class="tiny mono" text-anchor="start">SELECTED WORK / AUTO-CYCLING</text>
+<rect x="48" y="324" width="318" height="38" class="paper-alt line" stroke-width="2"/>
+<rect x="48" y="324" width="8" height="38" class="mint indicator indicator-1"/>
+<text x="70" y="348" class="label mono" text-anchor="start">01</text>
+<text x="113" y="348" class="label" text-anchor="start">ProdTag</text>
+<rect x="340" y="338" width="8" height="8" class="mint indicator indicator-1"/>
+<rect x="48" y="370" width="318" height="38" class="paper-alt line" stroke-width="2"/>
+<rect x="48" y="370" width="8" height="38" class="yellow indicator indicator-2"/>
+<text x="70" y="394" class="label mono" text-anchor="start">02</text>
+<text x="113" y="394" class="label" text-anchor="start">Research Hub</text>
+<rect x="340" y="384" width="8" height="8" class="yellow indicator indicator-2"/>
+<rect x="48" y="416" width="318" height="38" class="paper-alt line" stroke-width="2"/>
+<rect x="48" y="416" width="8" height="38" class="blue indicator indicator-3"/>
+<text x="70" y="440" class="label mono" text-anchor="start">03</text>
+<text x="113" y="440" class="label" text-anchor="start">API Escape</text>
+<rect x="340" y="430" width="8" height="8" class="blue indicator indicator-3"/>
+<rect x="48" y="462" width="318" height="38" class="paper-alt line" stroke-width="2"/>
+<rect x="48" y="462" width="8" height="38" class="mint indicator indicator-4"/>
+<text x="70" y="486" class="label mono" text-anchor="start">04</text>
+<text x="113" y="486" class="label" text-anchor="start">Tab Unloader</text>
+<rect x="340" y="476" width="8" height="8" class="mint indicator indicator-4"/>
+<rect x="498" y="115" width="674" height="418" class="shadow"/>
+<rect x="486" y="103" width="674" height="418" class="outline"/>
+<g clip-path="url(#stage-clip)">
+  <rect x="486" y="103" width="674" height="48" class="blue"/>
+  <text x="510" y="134" class="status mono" text-anchor="start">PROJECT TRANSMISSION</text>
+  <text x="1136" y="134" class="status mono" text-anchor="end">AUTO / 16 SEC LOOP</text>
+  <path d="M511 286H897" class="line dash" stroke-width="3" opacity=".16"/>
+  <g class="feature scene-1">
+  <text x="1106" y="230" class="number" text-anchor="end">01</text>
+  <text x="526" y="205" class="project-name" text-anchor="start">ProdTag</text>
+  <rect x="526" y="231" width="170" height="27" class="mint"/>
+  <text x="538" y="250" class="status" text-anchor="start">ACTIVE DEVELOPMENT</text>
+  <text x="526" y="318" class="project-copy" text-anchor="start">Desktop audio cues for terminal</text>
+<text x="526" y="345" class="project-copy" text-anchor="start">commands, designed to make</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">long-running development work</text>
+  <text x="526" y="472" class="meta mono" text-anchor="start">GO + WAILS  /  Go</text>
+  <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 08-27</text>
+  <g><rect x="940" y="385" width="10" height="26" class="mint" opacity="0.35"/><rect x="958" y="363" width="10" height="48" class="mint" opacity="0.40"/><rect x="976" y="341" width="10" height="70" class="mint" opacity="0.46"/><rect x="994" y="317" width="10" height="94" class="mint" opacity="0.52"/><rect x="1012" y="357" width="10" height="54" class="mint" opacity="0.57"/><rect x="1030" y="378" width="10" height="33" class="mint" opacity="0.62"/><rect x="1048" y="333" width="10" height="78" class="mint" opacity="0.68"/><rect x="1066" y="309" width="10" height="102" class="mint" opacity="0.73"/><rect x="1084" y="347" width="10" height="64" class="mint" opacity="0.79"/><path d="M938 423H1118" class="line" stroke-width="3"/></g>
 </g>
-<g class="project-node" aria-label="ProdTag">
-<rect x="283" y="189" width="214" height="92" rx="3" class="node-box mint-stroke"/>
-<rect x="297" y="203" width="28" height="32" rx="2" class="node-machine"/>
-<line x1="303" y1="212" x2="319" y2="212" class="mint-stroke"/>
-<line x1="303" y1="221" x2="319" y2="221" class="mint-stroke"/>
-<circle cx="305" cy="230" r="2" class="mint-fill"/>
-<text x="335" y="215" class="node-title" text-anchor="start">ProdTag</text>
-<text x="335" y="236" class="node-status mint-text" text-anchor="start">ACTIVE DEVELOPMENT</text>
-<text x="297" y="263" class="node-stack" text-anchor="start">GO + WAILS / UPDATED 08-27</text>
+<g class="feature scene-2">
+  <text x="1106" y="230" class="number" text-anchor="end">02</text>
+  <text x="526" y="205" class="project-name" text-anchor="start">Research Hub</text>
+  <rect x="526" y="231" width="178" height="27" class="yellow"/>
+  <text x="538" y="250" class="status" text-anchor="start">HACKATHON PROTOTYPE</text>
+  <text x="526" y="318" class="project-copy" text-anchor="start">An AI-assisted research workspace</text>
+<text x="526" y="345" class="project-copy" text-anchor="start">built for the Islington Hackathon,</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">with researcher tools and a</text>
+  <text x="526" y="472" class="meta mono" text-anchor="start">NEXT + SUPABASE  /  TypeScript</text>
+  <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 09-13</text>
+  <g fill="none" class="line" stroke-width="3">
+  <path d="M946 325L1018 361L970 423L1072 407L1100 339L1018 361"/>
+  <circle cx="946" cy="325" r="12" class="yellow" stroke="none"/><circle cx="1018" cy="361" r="17" class="blue" stroke="none"/>
+  <circle cx="970" cy="423" r="10" class="mint" stroke="none"/><circle cx="1072" cy="407" r="13" class="red" stroke="none"/>
+  <circle cx="1100" cy="339" r="9" class="yellow" stroke="none"/>
 </g>
-<g class="project-node" aria-label="Research Hub">
-<rect x="283" y="409" width="214" height="92" rx="3" class="node-box amber-stroke"/>
-<rect x="297" y="423" width="28" height="32" rx="2" class="node-machine"/>
-<line x1="303" y1="432" x2="319" y2="432" class="amber-stroke"/>
-<line x1="303" y1="441" x2="319" y2="441" class="amber-stroke"/>
-<circle cx="305" cy="450" r="2" class="amber-fill"/>
-<text x="335" y="435" class="node-title" text-anchor="start">Research Hub</text>
-<text x="335" y="456" class="node-status amber-text" text-anchor="start">HACKATHON PROTOTYPE</text>
-<text x="297" y="483" class="node-stack" text-anchor="start">NEXT + SUPABASE / UPDATED 09-13</text>
 </g>
-<g class="project-node" aria-label="API Escape">
-<rect x="703" y="189" width="214" height="92" rx="3" class="node-box cyan-stroke"/>
-<rect x="717" y="203" width="28" height="32" rx="2" class="node-machine"/>
-<line x1="723" y1="212" x2="739" y2="212" class="cyan-stroke"/>
-<line x1="723" y1="221" x2="739" y2="221" class="cyan-stroke"/>
-<circle cx="725" cy="230" r="2" class="cyan-fill"/>
-<text x="755" y="215" class="node-title" text-anchor="start">API Escape</text>
-<text x="755" y="236" class="node-status cyan-text" text-anchor="start">COMPLETED TEAM PROJECT</text>
-<text x="717" y="263" class="node-stack" text-anchor="start">FASTAPI + DOCKER / UPDATED 08-24</text>
+<g class="feature scene-3">
+  <text x="1106" y="230" class="number" text-anchor="end">03</text>
+  <text x="526" y="205" class="project-name" text-anchor="start">API Escape</text>
+  <rect x="526" y="231" width="202" height="27" class="blue"/>
+  <text x="538" y="250" class="status" text-anchor="start">COMPLETED TEAM PROJECT</text>
+  <text x="526" y="318" class="project-copy" text-anchor="start">A containerized API learning</text>
+<text x="526" y="345" class="project-copy" text-anchor="start">platform with Groq-assisted</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">workflows, built and presented as</text>
+  <text x="526" y="472" class="meta mono" text-anchor="start">FASTAPI + DOCKER  /  Python</text>
+  <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 08-24</text>
+  <g fill="none" class="line" stroke-width="4">
+  <rect x="943" y="320" width="58" height="44"/><rect x="1041" y="391" width="58" height="44"/>
+  <path d="M1001 342H1060V1022"/><path d="M1041 413H982V995"/>
+  <path d="M1048 383L1060 391L1072 383"/><path d="M994 372L982 364L970 372"/>
+  <circle cx="1060" cy="342" r="10" class="blue" stroke="none"/><circle cx="982" cy="413" r="10" class="red" stroke="none"/>
 </g>
-<g class="project-node" aria-label="Tab Unloader">
-<rect x="703" y="409" width="214" height="92" rx="3" class="node-box mint-stroke"/>
-<rect x="717" y="423" width="28" height="32" rx="2" class="node-machine"/>
-<line x1="723" y1="432" x2="739" y2="432" class="mint-stroke"/>
-<line x1="723" y1="441" x2="739" y2="441" class="mint-stroke"/>
-<circle cx="725" cy="450" r="2" class="mint-fill"/>
-<text x="755" y="435" class="node-title" text-anchor="start">Tab Unloader</text>
-<text x="755" y="456" class="node-status mint-text" text-anchor="start">STABLE</text>
-<text x="717" y="483" class="node-stack" text-anchor="start">CHROMIUM EXTENSION / UPDATED 05-22</text>
 </g>
-<rect x="34" y="108" width="1132" height="62" rx="3" class="panel"/>
-<line x1="390" y1="108" x2="390" y2="170" class="rule"/>
-<line x1="810" y1="108" x2="810" y2="170" class="rule"/>
-<text x="52" y="132" class="label" text-anchor="start">CURRENT BUILD</text>
-<text x="52" y="158" class="body-strong" text-anchor="start">ProdTag</text>
-<text x="142" y="158" class="signal" text-anchor="start">ACTIVE</text>
-<text x="410" y="132" class="label" text-anchor="start">LATEST PUSH</text>
-<text x="410" y="158" class="body-strong" text-anchor="start">hackathon-neutron</text>
-<text x="782" y="158" class="body-muted" text-anchor="end">2026-09-13</text>
-<text x="830" y="132" class="label" text-anchor="start">PUBLIC GITHUB</text>
-<text x="830" y="158" class="body" text-anchor="start">17 REPOS / 2 STARS / 6 FOLLOWERS</text>
-<g class="city">
-<rect x="22" y="579" width="54" height="55"/>
-<rect x="32" y="593" width="5" height="5" class="window"/>
-<rect x="48" y="607" width="5" height="5" class="window"/>
-<rect x="82" y="552" width="45" height="82"/>
-<rect x="134" y="589" width="64" height="45"/>
-<rect x="144" y="603" width="5" height="5" class="window"/>
-<rect x="160" y="617" width="5" height="5" class="window"/>
-<rect x="205" y="560" width="52" height="74"/>
-<rect x="215" y="574" width="5" height="5" class="window"/>
-<rect x="231" y="588" width="5" height="5" class="window"/>
-<rect x="264" y="583" width="67" height="51"/>
-<rect x="338" y="545" width="54" height="89"/>
-<rect x="348" y="559" width="5" height="5" class="window"/>
-<rect x="364" y="573" width="5" height="5" class="window"/>
-<rect x="399" y="572" width="70" height="62"/>
-<rect x="409" y="586" width="5" height="5" class="window"/>
-<rect x="425" y="600" width="5" height="5" class="window"/>
-<rect x="477" y="554" width="42" height="80"/>
-<rect x="527" y="585" width="58" height="49"/>
-<rect x="537" y="599" width="5" height="5" class="window"/>
-<rect x="553" y="613" width="5" height="5" class="window"/>
-<rect x="594" y="556" width="62" height="78"/>
-<rect x="604" y="570" width="5" height="5" class="window"/>
-<rect x="620" y="584" width="5" height="5" class="window"/>
-<rect x="664" y="578" width="70" height="56"/>
-<rect x="742" y="547" width="48" height="87"/>
-<rect x="752" y="561" width="5" height="5" class="window"/>
-<rect x="768" y="575" width="5" height="5" class="window"/>
-<rect x="798" y="572" width="69" height="62"/>
-<rect x="808" y="586" width="5" height="5" class="window"/>
-<rect x="824" y="600" width="5" height="5" class="window"/>
-<rect x="875" y="555" width="58" height="79"/>
-<rect x="941" y="584" width="65" height="50"/>
-<rect x="951" y="598" width="5" height="5" class="window"/>
-<rect x="967" y="612" width="5" height="5" class="window"/>
-<rect x="1014" y="552" width="51" height="82"/>
-<rect x="1024" y="566" width="5" height="5" class="window"/>
-<rect x="1040" y="580" width="5" height="5" class="window"/>
-<rect x="1072" y="579" width="52" height="55"/>
-<rect x="1131" y="561" width="47" height="73"/>
-<rect x="1141" y="575" width="5" height="5" class="window"/>
-<rect x="1157" y="589" width="5" height="5" class="window"/>
-<rect x="173" y="531" width="88" height="103"/>
-<polygon points="160,551 217,515 274,551"/>
-<polygon points="174,525 217,495 260,525"/>
-<line x1="217" y1="495" x2="217" y2="476" class="city-line"/>
-<rect x="354" y="529" width="22" height="15" rx="2"/>
-<line x1="358" y1="529" x2="358" y2="522" class="city-line thin"/>
-<line x1="372" y1="529" x2="372" y2="522" class="city-line thin"/>
-<rect x="914" y="580" width="124" height="54"/>
-<path d="M930 580 Q976 520 1022 580 Z"/>
-<rect x="972" y="531" width="8" height="39"/>
-<circle cx="976" cy="523" r="5" class="beacon-static"/>
+<g class="feature scene-4">
+  <text x="1106" y="230" class="number" text-anchor="end">04</text>
+  <text x="526" y="205" class="project-name" text-anchor="start">Tab Unloader</text>
+  <rect x="526" y="231" width="74" height="27" class="mint"/>
+  <text x="538" y="250" class="status" text-anchor="start">STABLE</text>
+  <text x="526" y="318" class="project-copy" text-anchor="start">A focused browser utility for</text>
+<text x="526" y="345" class="project-copy" text-anchor="start">unloading inactive tabs and</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">reclaiming memory without losing</text>
+  <text x="526" y="472" class="meta mono" text-anchor="start">CHROMIUM EXTENSION  /  JavaScript</text>
+  <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 05-22</text>
+  <g>
+  <rect x="938" y="317" width="170" height="122" class="outline"/>
+  <rect x="938" y="317" width="170" height="25" class="mint"/>
+  <circle cx="954" cy="330" r="4" class="paper"/><circle cx="968" cy="330" r="4" class="paper"/>
+  <path d="M963 367H1082M963 388H1058M963 409H1071" class="line" stroke-width="5"/>
+  <path d="M1074 412l20 20m0-20l-20 20" class="red" stroke="currentColor" stroke-width="6"/>
 </g>
-<rect x="24" y="650" width="1152" height="43" rx="2" class="terminal"/>
-<text x="42" y="677" class="prompt" text-anchor="start">naitik@ktm:~$</text>
-<text x="177" y="677" class="command" text-anchor="start">building useful and unusual software</text>
-<rect x="500" y="663" width="8" height="18" class="cursor"/>
-<text x="1158" y="677" class="body-muted" text-anchor="end">PYTHON / SVG / GITHUB ACTIONS</text>
+</g>
+</g>
+<rect x="30" y="552" width="1140" height="49" class="paper-alt line" stroke-width="2"/>
+<text x="52" y="583" class="label mono" text-anchor="start">naitik@ktm:~$</text>
+<text x="218" y="583" class="role mono" text-anchor="start">broadcast --selected-work</text>
+<rect x="450" y="567" width="10" height="19" class="mint cursor"/>
+<text x="1148" y="583" class="label mono" text-anchor="end">LATEST / hackathon-neutron / 2026-09-13</text>
 </svg>

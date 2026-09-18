@@ -1,489 +1,338 @@
 #!/usr/bin/env python3
-"""Render deterministic desktop and mobile Kathmandu profile artwork."""
+"""Render the KTM Project Broadcast profile artwork."""
 
 from __future__ import annotations
 
-import json
-import os
-import subprocess
-import sys
-import urllib.error
-import urllib.request
-from copy import deepcopy
-from html import escape
 from pathlib import Path
 from typing import Any
 
-
-THEMES = {
-    "dark": {
-        "bg": "#071419", "panel": "#0D2026", "panel_alt": "#102A31",
-        "border": "#315D66", "mountain_far": "#102A32",
-        "mountain_near": "#17363D", "city": "#091217",
-        "window": "#F0B84B", "mint": "#72E2C4", "cyan": "#59C3DA",
-        "amber": "#F0B84B", "red": "#DB5A57", "text": "#EAF3F2",
-        "muted": "#8DA9AD", "grid": "#173139",
-    },
-    "light": {
-        "bg": "#EDF4F1", "panel": "#F8FBF9", "panel_alt": "#E1ECE8",
-        "border": "#789995", "mountain_far": "#D5E3DF",
-        "mountain_near": "#C3D6D1", "city": "#AFC4BF",
-        "window": "#9B6200", "mint": "#087D70", "cyan": "#0B748B",
-        "amber": "#9B6200", "red": "#B33E3B", "text": "#142426",
-        "muted": "#536B6D", "grid": "#D3E1DD",
-    },
-}
-
-DESKTOP_POSITIONS = {
-    "northwest": (390, 235), "southwest": (390, 455),
-    "northeast": (810, 235), "southeast": (810, 455),
-}
-MOBILE_POSITIONS = {
-    "northwest": (190, 300), "southwest": (190, 548),
-    "northeast": (530, 300), "southeast": (530, 548),
-}
-PROJECT_POSITIONS = DESKTOP_POSITIONS
+from profile_core import (
+    THEMES,
+    fetch_telemetry,
+    load_config,
+    safe,
+    short_date,
+    svg_text,
+    write_profile_data,
+)
 
 
-def load_config(path: Path) -> dict[str, Any]:
-    config = json.loads(path.read_text(encoding="utf-8"))
-    if len(config.get("projects", [])) != 4:
-        raise ValueError("The network layout requires exactly four projects")
-    positions = {project["position"] for project in config["projects"]}
-    if positions != set(DESKTOP_POSITIONS):
-        raise ValueError("Each project position must be used exactly once")
-    return config
+ACCENT_MAP = {"amber": "yellow", "cyan": "blue"}
 
 
-def github_json(url: str, token: str | None = None) -> Any:
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "User-Agent": "naitik-profile-generator",
-        "X-GitHub-Api-Version": "2022-11-28",
-    }
-    if token:
-        headers["Authorization"] = f"Bearer {token}"
-    request = urllib.request.Request(url, headers=headers)
-    try:
-        with urllib.request.urlopen(request, timeout=15) as response:
-            return json.load(response)
-    except urllib.error.URLError:
-        result = subprocess.run(
-            [
-                "curl", "--fail", "--silent", "--show-error",
-                "--max-time", "15",
-                "--header", f"Accept: {headers['Accept']}",
-                "--header", f"User-Agent: {headers['User-Agent']}",
-                "--header", f"X-GitHub-Api-Version: {headers['X-GitHub-Api-Version']}",
-                url,
-            ],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        return json.loads(result.stdout)
+def _accent(project: dict[str, Any]) -> str:
+    return ACCENT_MAP.get(project["accent"], project["accent"])
 
 
-def fetch_telemetry(config: dict[str, Any], offline: bool = False) -> dict[str, Any]:
-    fallback = deepcopy(config["fallback_telemetry"])
-    if offline:
-        return fallback
-
-    username = config["username"]
-    token = os.environ.get("GITHUB_TOKEN")
-    try:
-        user = github_json(f"https://api.github.com/users/{username}", token)
-        repos = github_json(
-            f"https://api.github.com/users/{username}/repos"
-            "?per_page=100&sort=pushed&type=owner",
-            token,
-        )
-    except (
-        urllib.error.URLError,
-        subprocess.SubprocessError,
-        TimeoutError,
-        ValueError,
-        OSError,
-    ) as exc:
-        print(f"[profile] GitHub telemetry unavailable: {exc}", file=sys.stderr)
-        return fallback
-
-    owned = [repo for repo in repos if not repo.get("fork")]
-    project_repos = [
-        repo
-        for repo in owned
-        if str(repo.get("name", "")).lower() != username.lower()
-    ]
-    latest = project_repos[0] if project_repos else {}
-    repo_index = {str(repo.get("name", "")).lower(): repo for repo in owned}
-    project_signals: dict[str, dict[str, Any]] = {}
-
-    for project in config["projects"]:
-        repo_name = project["repo"]
-        repo = repo_index.get(repo_name.lower())
-        saved = fallback.get("projects", {}).get(repo_name, {})
-        if repo is None:
-            project_signals[repo_name] = saved
-            continue
-        project_signals[repo_name] = {
-            "language": repo.get("language") or saved.get("language", "Mixed"),
-            "stars": int(repo.get("stargazers_count", saved.get("stars", 0))),
-            "forks": int(repo.get("forks_count", saved.get("forks", 0))),
-            "open_issues": int(
-                repo.get("open_issues_count", saved.get("open_issues", 0))
-            ),
-            "pushed_date": str(
-                repo.get("pushed_at", saved.get("pushed_date", "unknown"))
-            )[:10],
-        }
-
-    return {
-        "public_repos": user.get("public_repos", fallback["public_repos"]),
-        "followers": user.get("followers", fallback["followers"]),
-        "stars": sum(int(repo.get("stargazers_count", 0)) for repo in owned),
-        "latest_repo": latest.get("name", fallback["latest_repo"]),
-        "latest_repo_date": str(
-            latest.get("pushed_at", fallback["latest_repo_date"])
-        )[:10],
-        "projects": project_signals,
-    }
+def _wrap_words(value: str, max_chars: int) -> list[str]:
+    words = value.split()
+    lines: list[str] = []
+    current = ""
+    for word in words:
+        candidate = f"{current} {word}".strip()
+        if current and len(candidate) > max_chars:
+            lines.append(current)
+            current = word
+        else:
+            current = candidate
+    if current:
+        lines.append(current)
+    return lines
 
 
-def safe(value: Any) -> str:
-    return escape(str(value), quote=True)
-
-
-def svg_text(
-    x: int | float,
-    y: int | float,
-    value: Any,
-    css_class: str,
-    anchor: str = "start",
-) -> str:
-    return (
-        f'<text x="{x}" y="{y}" class="{css_class}" '
-        f'text-anchor="{anchor}">{safe(value)}</text>'
-    )
-
-
-def panel(x: int, y: int, width: int, height: int, label: str) -> str:
-    return "\n".join([
-        f'<rect x="{x}" y="{y}" width="{width}" height="{height}" rx="3" class="panel"/>',
-        svg_text(x + 16, y + 25, label, "label"),
-        f'<line x1="{x + 14}" y1="{y + 36}" x2="{x + width - 14}" y2="{y + 36}" class="rule"/>',
-    ])
-
-
-def telemetry_line(signal: dict[str, Any]) -> str:
-    pushed = str(signal.get("pushed_date", "unknown"))
-    if len(pushed) == 10:
-        pushed = pushed[5:]
-    return f"UPDATED {pushed}"
-
-
-def render_grid(width: int, height: int) -> str:
-    return (
-        '<defs>'
-        '<filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/>'
-        '<feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/>'
-        '</feMerge></filter>'
-        '<pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">'
-        '<path d="M 28 0 L 0 0 0 28" class="grid-line"/>'
-        '</pattern></defs>'
-        f'<rect width="{width}" height="{height}" fill="url(#grid)" opacity=".28"/>'
-    )
-
-
-def render_desktop_mountains() -> str:
-    return """
-<path class="mountain-far" d="M18 530 L84 458 L124 491 L183 421 L237 480 L304 404 L368 480 L432 432 L493 486 L553 408 L615 478 L680 428 L744 488 L814 405 L873 469 L934 427 L998 484 L1063 415 L1122 476 L1182 433 L1182 634 L18 634 Z"/>
-<path class="mountain-near" d="M18 569 L96 510 L148 552 L220 479 L286 555 L351 508 L425 563 L509 489 L582 557 L653 515 L726 566 L805 488 L877 552 L945 506 L1014 563 L1090 499 L1182 556 L1182 634 L18 634 Z"/>
-""".strip()
-
-
-def render_desktop_skyline() -> str:
-    buildings = [
-        (22, 579, 54, 55), (82, 552, 45, 82), (134, 589, 64, 45),
-        (205, 560, 52, 74), (264, 583, 67, 51), (338, 545, 54, 89),
-        (399, 572, 70, 62), (477, 554, 42, 80), (527, 585, 58, 49),
-        (594, 556, 62, 78), (664, 578, 70, 56), (742, 547, 48, 87),
-        (798, 572, 69, 62), (875, 555, 58, 79), (941, 584, 65, 50),
-        (1014, 552, 51, 82), (1072, 579, 52, 55), (1131, 561, 47, 73),
-    ]
-    parts = ['<g class="city">']
-    for index, (x, y, width, height) in enumerate(buildings):
-        parts.append(f'<rect x="{x}" y="{y}" width="{width}" height="{height}"/>')
-        if index % 3 != 1:
-            parts.append(f'<rect x="{x + 10}" y="{y + 14}" width="5" height="5" class="window"/>')
-            parts.append(f'<rect x="{x + 26}" y="{y + 28}" width="5" height="5" class="window"/>')
-    parts.extend([
-        '<rect x="173" y="531" width="88" height="103"/>',
-        '<polygon points="160,551 217,515 274,551"/>',
-        '<polygon points="174,525 217,495 260,525"/>',
-        '<line x1="217" y1="495" x2="217" y2="476" class="city-line"/>',
-        '<rect x="354" y="529" width="22" height="15" rx="2"/>',
-        '<line x1="358" y1="529" x2="358" y2="522" class="city-line thin"/>',
-        '<line x1="372" y1="529" x2="372" y2="522" class="city-line thin"/>',
-        '<rect x="914" y="580" width="124" height="54"/>',
-        '<path d="M930 580 Q976 520 1022 580 Z"/>',
-        '<rect x="972" y="531" width="8" height="39"/>',
-        '<circle cx="976" cy="523" r="5" class="beacon-static"/>',
-        '</g>',
-    ])
-    return "\n".join(parts)
-
-
-def render_mobile_landscape() -> str:
-    return """
-<path class="mountain-far" d="M12 731 L69 670 L113 705 L172 635 L231 706 L293 646 L354 709 L416 628 L478 702 L542 646 L604 707 L662 659 L708 698 L708 895 L12 895 Z"/>
-<path class="mountain-near" d="M12 778 L82 719 L143 766 L215 699 L282 770 L355 712 L428 772 L506 695 L577 766 L644 718 L708 762 L708 895 L12 895 Z"/>
-<g class="city">
-  <rect x="14" y="828" width="51" height="67"/><rect x="72" y="802" width="48" height="93"/>
-  <rect x="128" y="839" width="64" height="56"/><rect x="201" y="790" width="58" height="105"/>
-  <rect x="267" y="823" width="56" height="72"/><rect x="331" y="805" width="66" height="90"/>
-  <rect x="405" y="836" width="58" height="59"/><rect x="471" y="797" width="51" height="98"/>
-  <rect x="530" y="829" width="67" height="66"/><rect x="605" y="808" width="43" height="87"/>
-  <rect x="656" y="835" width="50" height="60"/>
-  <rect x="166" y="778" width="84" height="117"/><polygon points="151,798 208,762 265,798"/>
-  <polygon points="168,769 208,741 248,769"/><line x1="208" y1="741" x2="208" y2="724" class="city-line"/>
-  <rect x="520" y="823" width="112" height="72"/><path d="M532 823 Q576 766 620 823 Z"/>
-  <rect x="572" y="774" width="8" height="39"/><circle cx="576" cy="766" r="5" class="beacon-static"/>
-  <rect x="91" y="816" width="22" height="15" rx="2"/>
-  <rect x="223" y="810" width="5" height="5" class="window"/><rect x="346" y="825" width="5" height="5" class="window"/>
-  <rect x="486" y="815" width="5" height="5" class="window"/><rect x="670" y="849" width="5" height="5" class="window"/>
-</g>
-""".strip()
-
-
-def render_connections(
-    projects: list[dict[str, Any]],
-    positions: dict[str, tuple[int, int]],
-    central: tuple[int, int],
-    node_width: int = 214,
-) -> str:
-    cx, cy = central
-    parts = ['<g class="routes">']
-    for index, project in enumerate(projects, start=1):
-        x, y = positions[project["position"]]
-        edge_x = x + (node_width // 2) if x < cx else x - (node_width // 2)
-        mid_x = int((cx + edge_x) / 2)
-        path = f"M {cx} {cy} C {mid_x} {cy}, {mid_x} {y}, {edge_x} {y}"
-        parts.append(f'<path id="route-{index}" d="{path}" class="route"/>')
-        parts.append(
-            f'<circle r="4" class="packet packet-{index}">'
-            f'<animateMotion dur="{5.8 + (index * .7):.1f}s" '
-            f'begin="{(index - 1) * .65:.2f}s" repeatCount="indefinite">'
-            f'<mpath href="#route-{index}"/>'
-            '</animateMotion></circle>'
-        )
-    parts.append('</g>')
-    return "\n".join(parts)
-
-
-def render_project_node(
-    project: dict[str, Any],
-    telemetry: dict[str, Any],
-    positions: dict[str, tuple[int, int]],
-    mobile: bool = False,
-) -> str:
-    x, y = positions[project["position"]]
-    accent = project.get("accent", "cyan")
-    signal = telemetry.get("projects", {}).get(project["repo"], {})
-    width = 258 if mobile else 214
-    height = 92
-    box_x, box_y = x - width // 2, y - height // 2
-    icon_x = box_x + 14
-    text_x = box_x + 52
-    return "\n".join([
-        f'<g class="project-node" aria-label="{safe(project["name"])}">',
-        f'<rect x="{box_x}" y="{box_y}" width="{width}" height="{height}" rx="3" class="node-box {accent}-stroke"/>',
-        f'<rect x="{icon_x}" y="{box_y + 14}" width="28" height="32" rx="2" class="node-machine"/>',
-        f'<line x1="{icon_x + 6}" y1="{box_y + 23}" x2="{icon_x + 22}" y2="{box_y + 23}" class="{accent}-stroke"/>',
-        f'<line x1="{icon_x + 6}" y1="{box_y + 32}" x2="{icon_x + 22}" y2="{box_y + 32}" class="{accent}-stroke"/>',
-        f'<circle cx="{icon_x + 8}" cy="{box_y + 41}" r="2" class="{accent}-fill"/>',
-        svg_text(text_x, box_y + 26, project["name"], "node-title"),
-        svg_text(text_x, box_y + 47, project["status"], f"node-status {accent}-text"),
-        svg_text(
-            box_x + 14,
-            box_y + 74,
-            f"{project['stack']} / {telemetry_line(signal)}",
-            "node-stack",
-        ),
-        '</g>',
-    ])
-
-
-def render_central_node(x: int, y: int, scale: float = 1.0) -> str:
-    outer, core = int(72 * scale), int(55 * scale)
-    tower_w, tower_h = int(54 * scale), int(48 * scale)
-    tx, ty = x - tower_w // 2, y - tower_h // 2
-    antenna_top = ty - int(29 * scale)
-    return "\n".join([
-        '<g class="central-node">',
-        f'<circle cx="{x}" cy="{y}" r="{outer}" class="node-halo"/>',
-        f'<circle cx="{x}" cy="{y}" r="{core}" class="node-core"/>',
-        f'<rect x="{tx}" y="{ty}" width="{tower_w}" height="{tower_h}" rx="3" class="tower"/>',
-        f'<line x1="{tx + int(12 * scale)}" y1="{ty + int(13 * scale)}" x2="{tx + int(42 * scale)}" y2="{ty + int(13 * scale)}" class="mint-stroke"/>',
-        f'<line x1="{tx + int(12 * scale)}" y1="{ty + int(25 * scale)}" x2="{tx + int(42 * scale)}" y2="{ty + int(25 * scale)}" class="cyan-stroke"/>',
-        f'<line x1="{tx + int(12 * scale)}" y1="{ty + int(37 * scale)}" x2="{tx + int(32 * scale)}" y2="{ty + int(37 * scale)}" class="amber-stroke"/>',
-        f'<line x1="{x}" y1="{ty}" x2="{x}" y2="{antenna_top + int(5 * scale)}" class="tower-line"/>',
-        f'<circle cx="{x}" cy="{antenna_top}" r="{max(4, int(5 * scale))}" class="beacon pulse"/>',
-        f'<circle cx="{x}" cy="{antenna_top}" r="{max(9, int(12 * scale))}" class="beacon-ring pulse-ring"/>',
-        svg_text(x, y + int(42 * scale), "KTM-NP-0545", "central-title", "middle"),
-        svg_text(x, y + int(61 * scale), "NETWORK NODE", "central-subtitle", "middle"),
-        '</g>',
-    ])
-
-
-def render_style(
-    colors: dict[str, str],
-    projects: list[dict[str, Any]],
-    positions: dict[str, tuple[int, int]],
-    central: tuple[int, int],
-    mobile: bool = False,
-) -> str:
-    del projects, positions, central
-    title_size, status_size = (17, 11) if mobile else (15, 9)
-    stack_size = 11 if mobile else 10
+def _style(colors: dict[str, str]) -> str:
     return f"""
 <style>
-text{{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}}
-.outer{{fill:{colors['bg']};stroke:{colors['border']};stroke-width:1.5}}
-.grid-line{{fill:none;stroke:{colors['grid']};stroke-width:1}}
-.panel{{fill:{colors['panel']};stroke:{colors['border']};stroke-width:1.25}}
-.rule{{stroke:{colors['border']};stroke-width:1}}
-.label{{fill:{colors['mint']};font-size:13px;font-weight:700;letter-spacing:1px}}
-.identity{{fill:{colors['text']};font-size:31px;font-weight:800}}
-.identity-role{{fill:{colors['muted']};font-size:14px}}
-.header-signal{{fill:{colors['text']};font-size:13px;font-weight:700}}
-.header-muted{{fill:{colors['muted']};font-size:12px}}
-.body{{fill:{colors['text']};font-size:14px}}.body-strong{{fill:{colors['text']};font-size:16px;font-weight:700}}
-.body-muted{{fill:{colors['muted']};font-size:12px}}.signal{{fill:{colors['mint']};font-size:12px;font-weight:700}}
-.route{{fill:none;stroke:{colors['cyan']};stroke-width:1.5;stroke-dasharray:5 7;opacity:.7}}
-.packet{{fill:{colors['mint']};filter:url(#glow)}}
-.node-box{{fill:{colors['panel']};stroke-width:1.5}}.node-machine{{fill:{colors['panel_alt']};stroke:{colors['border']}}}
-.node-title{{fill:{colors['text']};font-size:{title_size}px;font-weight:700}}.node-status{{font-size:{status_size}px;font-weight:700}}
-.node-stack{{fill:{colors['muted']};font-size:{stack_size}px}}
-.mint-stroke{{stroke:{colors['mint']};fill:none}}.cyan-stroke{{stroke:{colors['cyan']};fill:none}}.amber-stroke{{stroke:{colors['amber']};fill:none}}
-.mint-fill{{fill:{colors['mint']}}}.cyan-fill{{fill:{colors['cyan']}}}.amber-fill{{fill:{colors['amber']}}}
-.mint-text{{fill:{colors['mint']}}}.cyan-text{{fill:{colors['cyan']}}}.amber-text{{fill:{colors['amber']}}}
-.node-halo{{fill:{colors['panel']};stroke:{colors['cyan']};opacity:.94}}.node-core{{fill:{colors['panel_alt']};stroke:{colors['mint']};stroke-width:2}}
-.tower{{fill:{colors['bg']};stroke:{colors['border']}}}.tower-line{{stroke:{colors['amber']};stroke-width:2}}
-.beacon{{fill:{colors['red']}}}.beacon-ring{{fill:none;stroke:{colors['red']}}}
-.central-title{{fill:{colors['cyan']};font-size:15px;font-weight:800}}.central-subtitle{{fill:{colors['muted']};font-size:10px;letter-spacing:1px}}
-.mountain-far{{fill:{colors['mountain_far']}}}.mountain-near{{fill:{colors['mountain_near']}}}
-.city{{fill:{colors['city']}}}.city-line{{stroke:{colors['city']};stroke-width:3}}.city-line.thin{{stroke-width:1.5}}
-.window{{fill:{colors['window']};opacity:.85}}.beacon-static{{fill:{colors['red']}}}
-.terminal{{fill:{colors['panel']};stroke:{colors['border']}}}.prompt{{fill:{colors['mint']};font-size:14px;font-weight:700}}
-.command{{fill:{colors['text']};font-size:14px}}.cursor{{fill:{colors['cyan']};animation:blink 1.1s steps(1) infinite}}
-.pulse{{animation:pulse 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}}
-.pulse-ring{{animation:ring 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}}
-@keyframes blink{{50%{{opacity:0}}}}@keyframes pulse{{50%{{transform:scale(1.35);opacity:.65}}}}
-@keyframes ring{{0%{{transform:scale(.45);opacity:.9}}100%{{transform:scale(1.75);opacity:0}}}}
-@media(prefers-reduced-motion:reduce){{.packet{{display:none}}.pulse,.pulse-ring,.cursor{{animation:none!important}}}}
+text{{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-serif;letter-spacing:0}}
+.mono{{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace}}
+.paper{{fill:{colors['paper']}}}.paper-alt{{fill:{colors['paper_alt']}}}
+.ink{{fill:{colors['ink']}}}.muted{{fill:{colors['muted']}}}.line{{stroke:{colors['line']}}}
+.outline{{fill:{colors['paper_alt']};stroke:{colors['line']};stroke-width:3}}
+.shadow{{fill:{colors['shadow']}}}.red{{fill:{colors['red']}}}.blue{{fill:{colors['blue']}}}
+.yellow{{fill:{colors['yellow']}}}.mint{{fill:{colors['mint']}}}.skyline{{fill:{colors['skyline']}}}
+.display{{fill:{colors['ink']};font-size:66px;font-weight:950}}
+.display-small{{fill:{colors['ink']};font-size:52px;font-weight:950}}
+.role{{fill:{colors['ink']};font-size:17px;font-weight:800}}
+.eyebrow{{fill:{colors['muted']};font-size:13px;font-weight:800}}
+.label{{fill:{colors['ink']};font-size:14px;font-weight:900}}
+.project-name{{fill:{colors['ink']};font-size:47px;font-weight:950}}
+.project-name-mobile{{fill:{colors['ink']};font-size:38px;font-weight:950}}
+.project-copy{{fill:{colors['ink']};font-size:18px;font-weight:650}}
+.project-copy-mobile{{fill:{colors['ink']};font-size:16px;font-weight:650}}
+.meta{{fill:{colors['muted']};font-size:13px;font-weight:800}}
+.status{{fill:{colors['paper']};font-size:12px;font-weight:950}}
+.number{{fill:{colors['ink']};font-size:112px;font-weight:950;opacity:.08}}
+.stat{{fill:{colors['ink']};font-size:17px;font-weight:900}}
+.tiny{{fill:{colors['muted']};font-size:11px;font-weight:800}}
+.feature{{opacity:0;visibility:hidden;animation:featureCycle 16s infinite}}
+.indicator{{opacity:.25;animation:indicatorCycle 16s infinite}}
+.scene-2,.indicator-2{{animation-delay:4s}}.scene-3,.indicator-3{{animation-delay:8s}}
+.scene-4,.indicator-4{{animation-delay:12s}}
+.scan{{transform-origin:center;animation:scan 5s linear infinite}}
+.dash{{stroke-dasharray:9 11;animation:dash 6s linear infinite}}
+.pulse{{transform-origin:center;animation:pulse 2.4s ease-out infinite}}
+.cursor{{animation:blink 1s steps(1) infinite}}
+@keyframes featureCycle{{0%,22%{{opacity:1;visibility:visible;transform:translateY(0)}}24%,98%{{opacity:0;visibility:hidden;transform:translateY(10px)}}99%,100%{{opacity:0;visibility:hidden}}}}
+@keyframes indicatorCycle{{0%,22%{{opacity:1}}24%,100%{{opacity:.25}}}}
+@keyframes scan{{to{{transform:rotate(360deg)}}}}@keyframes dash{{to{{stroke-dashoffset:-80}}}}
+@keyframes pulse{{0%{{transform:scale(.55);opacity:.9}}100%{{transform:scale(1.55);opacity:0}}}}
+@keyframes blink{{50%{{opacity:0}}}}
+@media(prefers-reduced-motion:reduce){{.feature,.indicator,.scan,.dash,.pulse,.cursor{{animation:none!important}}.feature{{opacity:0;visibility:hidden}}.scene-1{{opacity:1;visibility:visible}}.indicator{{opacity:.25}}.indicator-1{{opacity:1}}}}
 </style>
 """.strip()
 
 
-def render_desktop_svg(
-    config: dict[str, Any], telemetry: dict[str, Any], theme_name: str
-) -> str:
-    colors, identity = THEMES[theme_name], config["identity"]
-    parts = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">',
-        '<title id="title">Naitik Joshi - Kathmandu Network Node</title>',
-        '<desc id="desc">Four software projects with public repository signals connect to a Kathmandu network node above a city and mountain skyline.</desc>',
-        render_style(colors, config["projects"], DESKTOP_POSITIONS, (600, 350)),
-        '<rect x="12" y="12" width="1176" height="696" rx="4" class="outer"/>',
-        render_grid(1200, 720),
-        '<line x1="24" y1="86" x2="1176" y2="86" class="rule"/>',
-        svg_text(36, 50, identity["name"], "identity"),
-        svg_text(38, 72, identity["role"], "identity-role"),
-        svg_text(1164, 42, identity["node"], "header-signal", "end"),
-        svg_text(1164, 62, "NPT +05:45 / PUBLIC API / WEEKLY", "header-muted", "end"),
-        render_desktop_mountains(),
-        render_connections(config["projects"], DESKTOP_POSITIONS, (600, 350)),
-        render_central_node(600, 350),
-    ]
-    parts.extend(
-        render_project_node(project, telemetry, DESKTOP_POSITIONS)
-        for project in config["projects"]
+def _defs(colors: dict[str, str]) -> str:
+    return f"""
+<defs>
+  <pattern id="micro-grid" width="26" height="26" patternUnits="userSpaceOnUse">
+    <path d="M26 0H0V26" fill="none" stroke="{colors['line']}" stroke-width="1" opacity=".055"/>
+  </pattern>
+  <clipPath id="stage-clip"><rect x="486" y="103" width="674" height="418"/></clipPath>
+  <clipPath id="stage-clip-mobile"><rect x="34" y="267" width="652" height="438"/></clipPath>
+</defs>
+""".strip()
+
+
+def _signal_mark(cx: int, cy: int, accent: str, scale: float = 1.0) -> str:
+    r1, r2, r3 = 37 * scale, 54 * scale, 72 * scale
+    return f"""
+<g>
+  <circle cx="{cx}" cy="{cy}" r="{r3}" fill="none" class="line" stroke-width="2" opacity=".18"/>
+  <path d="M{cx} {cy-r3} A{r3} {r3} 0 0 1 {cx+r3} {cy}" fill="none" class="{accent} scan" stroke="currentColor" stroke-width="7"/>
+  <circle cx="{cx}" cy="{cy}" r="{r2}" fill="none" class="line dash" stroke-width="2" opacity=".55"/>
+  <circle cx="{cx}" cy="{cy}" r="{r1}" class="outline"/>
+  <path d="M{cx-15} {cy+9} L{cx-4} {cy-13} L{cx+5} {cy+2} L{cx+16} {cy-18}" fill="none" class="line" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+  <circle cx="{cx+16}" cy="{cy-18}" r="7" class="{accent}"/>
+  <circle cx="{cx+16}" cy="{cy-18}" r="12" fill="none" class="{accent} pulse" stroke="currentColor" stroke-width="3"/>
+</g>
+""".strip()
+
+
+def _project_art(project: dict[str, Any], x: int, y: int) -> str:
+    repo = project["repo"].lower()
+    accent = _accent(project)
+    if "prodtag" in repo:
+        bars = [26, 48, 70, 94, 54, 33, 78, 102, 64]
+        items = "".join(
+            f'<rect x="{x + 24 + i * 18}" y="{y + 126 - bar}" width="10" height="{bar}" class="{accent}" opacity="{.35 + i * .055:.2f}"/>'
+            for i, bar in enumerate(bars)
+        )
+        return f'<g>{items}<path d="M{x+22} {y+138}H{x+202}" class="line" stroke-width="3"/></g>'
+    if "hackathon" in repo:
+        return f"""
+<g fill="none" class="line" stroke-width="3">
+  <path d="M{x+30} {y+40}L{x+102} {y+76}L{x+54} {y+138}L{x+156} {y+122}L{x+184} {y+54}L{x+102} {y+76}"/>
+  <circle cx="{x+30}" cy="{y+40}" r="12" class="{accent}" stroke="none"/><circle cx="{x+102}" cy="{y+76}" r="17" class="blue" stroke="none"/>
+  <circle cx="{x+54}" cy="{y+138}" r="10" class="mint" stroke="none"/><circle cx="{x+156}" cy="{y+122}" r="13" class="red" stroke="none"/>
+  <circle cx="{x+184}" cy="{y+54}" r="9" class="yellow" stroke="none"/>
+</g>
+""".strip()
+    if "api-escape" in repo:
+        return f"""
+<g fill="none" class="line" stroke-width="4">
+  <rect x="{x+27}" y="{y+35}" width="58" height="44"/><rect x="{x+125}" y="{y+106}" width="58" height="44"/>
+  <path d="M{x+85} {y+57}H{x+144}V{x+106}"/><path d="M{x+125} {y+128}H{x+66}V{x+79}"/>
+  <path d="M{x+132} {y+98}L{x+144} {y+106}L{x+156} {y+98}"/><path d="M{x+78} {y+87}L{x+66} {y+79}L{x+54} {y+87}"/>
+  <circle cx="{x+144}" cy="{y+57}" r="10" class="{accent}" stroke="none"/><circle cx="{x+66}" cy="{y+128}" r="10" class="red" stroke="none"/>
+</g>
+""".strip()
+    return f"""
+<g>
+  <rect x="{x+22}" y="{y+32}" width="170" height="122" class="outline"/>
+  <rect x="{x+22}" y="{y+32}" width="170" height="25" class="{accent}"/>
+  <circle cx="{x+38}" cy="{y+45}" r="4" class="paper"/><circle cx="{x+52}" cy="{y+45}" r="4" class="paper"/>
+  <path d="M{x+47} {y+82}H{x+166}M{x+47} {y+103}H{x+142}M{x+47} {y+124}H{x+155}" class="line" stroke-width="5"/>
+  <path d="M{x+158} {y+127}l20 20m0-20l-20 20" class="red" stroke="currentColor" stroke-width="6"/>
+</g>
+""".strip()
+
+
+def _scene(project: dict[str, Any], signal: dict[str, Any], index: int, mobile: bool = False) -> str:
+    accent = _accent(project)
+    number = f"0{index}"
+    if mobile:
+        name_class, copy_class = "project-name-mobile", "project-copy-mobile"
+        name_y, status_y, copy_y = 342, 386, 441
+        line_gap, max_chars = 24, 52
+        art = _project_art(project, 430, 452)
+        meta_y = 626
+        number_x, number_y = 620, 378
+        text_x = 64
+    else:
+        name_class, copy_class = "project-name", "project-copy"
+        name_y, status_y, copy_y = 205, 250, 318
+        line_gap, max_chars = 27, 34
+        art = _project_art(project, 916, 285)
+        meta_y = 472
+        number_x, number_y = 1106, 230
+        text_x = 526
+    status_width = min(275, 26 + len(project["status"]) * 8)
+    lines = _wrap_words(project["summary"], max_chars)[:3]
+    copy = "\n".join(
+        svg_text(text_x, copy_y + line_gap * offset, line, copy_class)
+        for offset, line in enumerate(lines)
     )
-    parts.extend([
-        '<rect x="34" y="108" width="1132" height="62" rx="3" class="panel"/>',
-        '<line x1="390" y1="108" x2="390" y2="170" class="rule"/>',
-        '<line x1="810" y1="108" x2="810" y2="170" class="rule"/>',
-        svg_text(52, 132, "CURRENT BUILD", "label"),
-        svg_text(52, 158, config["current_build"], "body-strong"),
-        svg_text(142, 158, "ACTIVE", "signal"),
-        svg_text(410, 132, "LATEST PUSH", "label"),
-        svg_text(410, 158, telemetry["latest_repo"], "body-strong"),
-        svg_text(782, 158, telemetry["latest_repo_date"], "body-muted", "end"),
-        svg_text(830, 132, "PUBLIC GITHUB", "label"),
-        svg_text(
-            830,
-            158,
-            f"{telemetry['public_repos']} REPOS / {telemetry['stars']} STARS / {telemetry['followers']} FOLLOWERS",
-            "body",
-        ),
-        render_desktop_skyline(),
-        '<rect x="24" y="650" width="1152" height="43" rx="2" class="terminal"/>',
-        svg_text(42, 677, "naitik@ktm:~$", "prompt"),
-        svg_text(177, 677, identity["tagline"], "command"),
-        '<rect x="500" y="663" width="8" height="18" class="cursor"/>',
-        svg_text(1158, 677, "PYTHON / SVG / GITHUB ACTIONS", "body-muted", "end"),
-        '</svg>',
-    ])
+    stars = signal.get("stars", 0)
+    forks = signal.get("forks", 0)
+    updated = short_date(signal.get("pushed_date", "unknown"))
+    return f"""
+<g class="feature scene-{index}">
+  {svg_text(number_x, number_y, number, 'number', 'end')}
+  {svg_text(text_x, name_y, project['name'], name_class)}
+  <rect x="{text_x}" y="{status_y-19}" width="{status_width}" height="27" class="{accent}"/>
+  {svg_text(text_x+12, status_y, project['status'], 'status')}
+  {copy}
+  {svg_text(text_x, meta_y, f"{project['stack']}  /  {signal.get('language', 'Mixed')}", 'meta mono')}
+  {svg_text(text_x, meta_y+25, f"ST {stars}  /  FK {forks}  /  UPDATED {updated}", 'meta mono')}
+  {art}
+</g>
+""".strip()
+
+
+def _project_index(projects: list[dict[str, Any]], mobile: bool = False) -> str:
+    parts: list[str] = []
+    if mobile:
+        for index, project in enumerate(projects, start=1):
+            x = 50 + (index - 1) * 155
+            accent = _accent(project)
+            parts.extend([
+                f'<rect x="{x}" y="670" width="143" height="7" class="{accent} indicator indicator-{index}"/>',
+                svg_text(x, 695, f"0{index}", "tiny mono"),
+            ])
+    else:
+        for index, project in enumerate(projects, start=1):
+            y = 348 + (index - 1) * 46
+            accent = _accent(project)
+            parts.extend([
+                f'<rect x="48" y="{y-24}" width="318" height="38" class="paper-alt line" stroke-width="2"/>',
+                f'<rect x="48" y="{y-24}" width="8" height="38" class="{accent} indicator indicator-{index}"/>',
+                svg_text(70, y, f"0{index}", "label mono"),
+                svg_text(113, y, project["name"], "label"),
+                f'<rect x="340" y="{y-10}" width="8" height="8" class="{accent} indicator indicator-{index}"/>',
+            ])
     return "\n".join(parts)
 
 
-def render_mobile_svg(
-    config: dict[str, Any], telemetry: dict[str, Any], theme_name: str
-) -> str:
-    colors, identity = THEMES[theme_name], config["identity"]
-    parts = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="720" height="960" viewBox="0 0 720 960" role="img" aria-labelledby="title desc">',
-        '<title id="title">Naitik Joshi - Kathmandu Network Node mobile profile</title>',
-        '<desc id="desc">A mobile layout of four software projects connected to a Kathmandu network node.</desc>',
-        render_style(colors, config["projects"], MOBILE_POSITIONS, (360, 423), mobile=True),
-        '<rect x="10" y="10" width="700" height="940" rx="4" class="outer"/>',
-        render_grid(720, 960),
-        svg_text(30, 49, identity["name"], "identity"),
-        svg_text(31, 73, identity["role"], "identity-role"),
-        svg_text(690, 42, identity["node"], "header-signal", "end"),
-        svg_text(690, 64, "NPT +05:45", "header-muted", "end"),
-        '<line x1="22" y1="91" x2="698" y2="91" class="rule"/>',
-        '<rect x="24" y="108" width="672" height="76" rx="3" class="panel"/>',
-        svg_text(42, 133, "CURRENT BUILD", "label"),
-        svg_text(42, 161, f"{config['current_build']} / ACTIVE DEVELOPMENT", "body-strong"),
-        svg_text(678, 133, "PUBLIC SIGNAL", "label", "end"),
-        svg_text(678, 161, f"{telemetry['public_repos']} REPOS / {telemetry['stars']} STARS / {telemetry['followers']} FOLLOWERS", "body", "end"),
-        render_mobile_landscape(),
-        render_connections(
-            config["projects"], MOBILE_POSITIONS, (360, 423), node_width=258
-        ),
-        render_central_node(360, 423, .84),
-    ]
-    parts.extend(
-        render_project_node(project, telemetry, MOBILE_POSITIONS, mobile=True)
-        for project in config["projects"]
-    )
-    parts.extend([
-        '<rect x="24" y="902" width="672" height="36" rx="2" class="terminal"/>',
-        svg_text(39, 926, "naitik@ktm:~$", "prompt"),
-        svg_text(177, 926, "building useful and unusual software", "command"),
-        '<rect x="516" y="913" width="8" height="17" class="cursor"/>',
-        '</svg>',
-    ])
+def _skyline(width: int, baseline: int, mobile: bool = False) -> str:
+    if mobile:
+        buildings = [(10, 54), (74, 88), (137, 63), (203, 104), (278, 72), (352, 91), (425, 58), (491, 111), (568, 76), (636, 96)]
+        bwidth = 62
+    else:
+        buildings = [(0, 45), (66, 76), (132, 52), (198, 92), (264, 64), (330, 108), (396, 59), (462, 82), (528, 48), (594, 96), (660, 69), (726, 113), (792, 58), (858, 88), (924, 51), (990, 103), (1056, 68), (1122, 91)]
+        bwidth = 58
+    parts = ['<g class="skyline" opacity=".9">']
+    for i, (x, height) in enumerate(buildings):
+        width_now = bwidth if x + bwidth <= width else width - x
+        parts.append(f'<rect x="{x}" y="{baseline-height}" width="{width_now}" height="{height}"/>')
+        if i % 3 == 1:
+            parts.append(f'<rect x="{x+12}" y="{baseline-height+16}" width="7" height="7" class="yellow"/>')
+    if not mobile:
+        parts.extend([
+            f'<path d="M170 {baseline}V{baseline-78}L226 {baseline-121}L282 {baseline-78}V{baseline}Z"/>',
+            f'<path d="M185 {baseline-93}L226 {baseline-128}L267 {baseline-93}Z"/>',
+            f'<line x1="226" y1="{baseline-128}" x2="226" y2="{baseline-145}" class="line" stroke-width="5"/>',
+            f'<path d="M915 {baseline}Q974 {baseline-88} 1033 {baseline}Z"/>',
+            f'<rect x="970" y="{baseline-106}" width="8" height="28"/>',
+            f'<circle cx="974" cy="{baseline-112}" r="6" class="red"/>',
+        ])
+    parts.append("</g>")
     return "\n".join(parts)
 
 
-def render_svg(
-    config: dict[str, Any], telemetry: dict[str, Any], theme_name: str,
-    generated_at: Any = None,
-) -> str:
-    """Backward-compatible desktop renderer with deterministic output."""
-    del generated_at
+def render_desktop_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_name: str) -> str:
+    colors = THEMES[theme_name]
+    identity = config["identity"]
+    projects = config["projects"]
+    scenes = "\n".join(
+        _scene(project, telemetry.get("projects", {}).get(project["repo"], {}), index)
+        for index, project in enumerate(projects, start=1)
+    )
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="640" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+<title id="title">Naitik Joshi - KTM Project Broadcast</title>
+<desc id="desc">Animated profile poster broadcasting four selected software projects from Kathmandu.</desc>
+{_defs(colors)}
+{_style(colors)}
+<rect width="1200" height="640" class="paper"/><rect width="1200" height="640" fill="url(#micro-grid)"/>
+<rect x="18" y="18" width="1164" height="604" fill="none" class="line" stroke-width="3"/>
+<rect x="30" y="29" width="1140" height="46" class="paper-alt line" stroke-width="2"/>
+<rect x="30" y="29" width="248" height="46" class="red"/>
+{svg_text(49, 59, 'LIVE FROM KATHMANDU', 'label mono')}
+{svg_text(301, 59, identity['node'], 'label mono')}
+{svg_text(1148, 59, f"{telemetry['public_repos']} REPOS  /  {telemetry['stars']} STARS  /  {telemetry['followers']} FOLLOWERS", 'label mono', 'end')}
+{_skyline(1200, 597)}
+{svg_text(48, 142, 'NAITIK', 'display')}
+{svg_text(48, 207, 'JOSHI', 'display')}
+<rect x="51" y="223" width="309" height="8" class="blue"/>
+{svg_text(49, 265, identity['role'], 'role')}
+{svg_text(49, 294, identity['tagline'].upper(), 'eyebrow mono')}
+{svg_text(49, 317, 'SELECTED WORK / AUTO-CYCLING', 'tiny mono')}
+{_project_index(projects)}
+<rect x="498" y="115" width="674" height="418" class="shadow"/>
+<rect x="486" y="103" width="674" height="418" class="outline"/>
+<g clip-path="url(#stage-clip)">
+  <rect x="486" y="103" width="674" height="48" class="blue"/>
+  {svg_text(510, 134, 'PROJECT TRANSMISSION', 'status mono')}
+  {svg_text(1136, 134, 'AUTO / 16 SEC LOOP', 'status mono', 'end')}
+  <path d="M511 286H897" class="line dash" stroke-width="3" opacity=".16"/>
+  {scenes}
+</g>
+<rect x="30" y="552" width="1140" height="49" class="paper-alt line" stroke-width="2"/>
+{svg_text(52, 583, 'naitik@ktm:~$', 'label mono')}
+{svg_text(218, 583, 'broadcast --selected-work', 'role mono')}
+<rect x="450" y="567" width="10" height="19" class="mint cursor"/>
+{svg_text(1148, 583, f"LATEST / {telemetry['latest_repo']} / {telemetry['latest_repo_date']}", 'label mono', 'end')}
+</svg>
+"""
+
+
+def render_mobile_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_name: str) -> str:
+    colors = THEMES[theme_name]
+    identity = config["identity"]
+    projects = config["projects"]
+    scenes = "\n".join(
+        _scene(project, telemetry.get("projects", {}).get(project["repo"], {}), index, mobile=True)
+        for index, project in enumerate(projects, start=1)
+    )
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="720" height="960" viewBox="0 0 720 960" role="img" aria-labelledby="title desc">
+<title id="title">Naitik Joshi - KTM Project Broadcast</title>
+<desc id="desc">Mobile profile poster broadcasting four selected software projects from Kathmandu.</desc>
+{_defs(colors)}
+{_style(colors)}
+<rect width="720" height="960" class="paper"/><rect width="720" height="960" fill="url(#micro-grid)"/>
+<rect x="14" y="14" width="692" height="932" fill="none" class="line" stroke-width="3"/>
+<rect x="27" y="28" width="666" height="46" class="paper-alt line" stroke-width="2"/>
+<rect x="27" y="28" width="232" height="46" class="red"/>
+{svg_text(44, 58, 'LIVE FROM KATHMANDU', 'label mono')}
+{svg_text(674, 58, identity['node'], 'label mono', 'end')}
+{svg_text(34, 139, 'NAITIK JOSHI', 'display-small')}
+<rect x="36" y="161" width="326" height="8" class="blue"/>
+{svg_text(35, 204, identity['role'], 'role')}
+{svg_text(35, 235, identity['tagline'].upper(), 'eyebrow mono')}
+<rect x="45" y="278" width="652" height="438" class="shadow"/>
+<rect x="34" y="267" width="652" height="438" class="outline"/>
+<g clip-path="url(#stage-clip-mobile)">
+  <rect x="34" y="267" width="652" height="45" class="blue"/>
+  {svg_text(55, 296, 'PROJECT TRANSMISSION', 'status mono')}
+  {svg_text(664, 296, '16 SEC LOOP', 'status mono', 'end')}
+  {scenes}
+  {_signal_mark(548, 540, 'blue', .67)}
+  {_project_index(projects, mobile=True)}
+</g>
+<rect x="34" y="739" width="652" height="61" class="yellow line" stroke-width="3"/>
+{svg_text(54, 766, 'PUBLIC SIGNAL', 'tiny mono')}
+{svg_text(54, 787, f"{telemetry['public_repos']} REPOS / {telemetry['stars']} STARS / {telemetry['followers']} FOLLOWERS", 'label mono')}
+{svg_text(665, 787, 'NPT +05:45', 'label mono', 'end')}
+{_skyline(720, 914, mobile=True)}
+<rect x="26" y="866" width="668" height="54" class="paper-alt line" stroke-width="2"/>
+{svg_text(46, 899, 'naitik@ktm:~$', 'label mono')}
+{svg_text(674, 899, 'broadcast --work', 'label mono', 'end')}
+</svg>
+"""
+
+
+def render_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_name: str) -> str:
+    """Compatibility entry point for the desktop renderer."""
     return render_desktop_svg(config, telemetry, theme_name)
 
 
@@ -491,37 +340,13 @@ def generate(config_path: Path, output_dir: Path, offline: bool = False) -> list
     config = load_config(config_path)
     telemetry = fetch_telemetry(config, offline=offline)
     output_dir.mkdir(parents=True, exist_ok=True)
-    outputs: list[Path] = []
+    outputs: list[Path] = [write_profile_data(output_dir, config, telemetry)]
     for theme_name in THEMES:
-        variants = {
-            f"profile-{theme_name}.svg": render_desktop_svg(config, telemetry, theme_name),
-            f"profile-{theme_name}-mobile.svg": render_mobile_svg(config, telemetry, theme_name),
-        }
-        for filename, content in variants.items():
-            destination = output_dir / filename
-            destination.write_text(content, encoding="utf-8")
-            outputs.append(destination)
-            print(f"[profile] wrote {destination}")
-    data_destination = output_dir / "profile-data.json"
-    data_destination.write_text(
-        json.dumps(
-            {
-                "username": config["username"],
-                "current_build": config["current_build"],
-                "public": {
-                    key: telemetry[key]
-                    for key in (
-                        "public_repos", "followers", "stars",
-                        "latest_repo", "latest_repo_date",
-                    )
-                },
-                "projects": telemetry.get("projects", {}),
-            },
-            indent=2,
-            sort_keys=True,
-        ) + "\n",
-        encoding="utf-8",
-    )
-    outputs.append(data_destination)
-    print(f"[profile] wrote {data_destination}")
+        desktop = output_dir / f"profile-{theme_name}.svg"
+        mobile = output_dir / f"profile-{theme_name}-mobile.svg"
+        desktop.write_text(render_desktop_svg(config, telemetry, theme_name), encoding="utf-8")
+        mobile.write_text(render_mobile_svg(config, telemetry, theme_name), encoding="utf-8")
+        outputs.extend([desktop, mobile])
+        print(f"[profile] wrote {desktop}")
+        print(f"[profile] wrote {mobile}")
     return outputs
