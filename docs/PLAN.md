@@ -2,7 +2,7 @@
 
 ## Objective
 
-Replace the conventional profile README with a repository-owned, generated SVG experience that presents Naitik Joshi as a Kathmandu-based builder through a technical network map. The profile must remain truthful, readable, self-hosted, and operational without an external deployment.
+Replace the conventional profile README with a repository-owned, generated SVG experience that presents Naitik Joshi as a Kathmandu-based builder through an animated project broadcast. The profile must remain truthful, readable, self-hosted, and operational without an external deployment.
 
 ## Operating Model
 
@@ -54,21 +54,22 @@ Exit condition met: both layouts remain readable at their target widths with no 
 
 ### Phase 4 - Reusable Engine
 
-- Extract layout primitives and theme tokens into reusable modules.
-- Formalize a configuration schema.
-- Add a local preview command and starter template.
-- Package the renderer as a reusable GitHub Action.
-- Keep NaitikOS/Kathmandu Node as the reference implementation.
+- [x] Extract telemetry, validation, theme tokens, and rendering into reusable modules.
+- [x] Formalize the configuration with `profile.schema.json`.
+- [x] Add a one-command local preview and starter configuration.
+- [x] Package the renderer as a composite GitHub Action.
+- [x] Keep KTM Project Broadcast as the reference implementation.
 
 Exit condition: another user can generate a profile by changing configuration rather than renderer code.
 
 ### Phase 5 - Optional Interaction
 
-- Explore issue-driven guestbook or visitor commands.
-- Validate commands against an allowlist and prevent repeated abuse.
-- Keep interaction optional and independent from the core renderer.
+- [x] Add a GitHub Issue Form for short visitor signals.
+- [x] Publish only issue numbers explicitly listed in `signals-approved.json`.
+- [x] Escape content, limit message length, deduplicate authors, and cap the display.
+- [x] Render the channel independently from the core profile artwork.
 
-This phase is intentionally deferred. The profile must be complete without it.
+The profile remains complete when the channel is empty or disabled.
 
 ## Non-Goals
 

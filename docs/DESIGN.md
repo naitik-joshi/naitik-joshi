@@ -6,11 +6,11 @@ The subject is a Kathmandu-based developer building AI systems, developer tools,
 
 ## Visual Thesis
 
-Kathmandu is represented as infrastructure rather than tourism: a network node operating at Nepal Standard Time, set above a compact city silhouette and mountain contour. Repositories become connected services around the central node.
+Kathmandu is represented as a broadcast origin rather than a tourism motif. A bold identity block establishes the person first; one selected project then occupies the transmission stage while the remaining projects form a quiet index.
 
 ## Signature
 
-`KTM-NP-0545` is the central transmission tower. The `+05:45` timezone is both real information and the identity marker that makes the composition specific to Nepal.
+`KTM-NP-0545` is the station identifier. The `+05:45` timezone is both real information and the identity marker that makes the composition specific to Nepal. A 16-second loop gives each selected project one complete scene instead of showing four competing cards.
 
 The local review interface extends that signature into a physical-feeling build desk: hard offset shadows, a Kathmandu registration card, workshop labels, and a mint render bay. It is intentionally louder than the GitHub artwork because its job is inspection and presentation, not profile scanning.
 
@@ -18,27 +18,23 @@ The local review interface extends that signature into a physical-feeling build 
 
 ### Dark
 
-- Night: `#071419`
-- Panel: `#0D2026`
-- Border: `#28505A`
-- Signal mint: `#72E2C4`
-- Route cyan: `#59C3DA`
-- Beacon amber: `#F0B84B`
-- Alert crimson: `#DB5A57`
-- Text: `#EAF3F2`
-- Muted: `#8DA9AD`
+- Paper: `#101217`
+- Raised paper: `#171A21`
+- Ink: `#F4F0E8`
+- Signal red: `#FF5A5F`
+- Transit blue: `#3B6CFF`
+- Utility yellow: `#FFD447`
+- Signal mint: `#63E6BE`
 
 ### Light
 
-- Paper sky: `#EDF4F1`
-- Panel: `#F8FBF9`
-- Border: `#91AAA7`
-- Signal mint: `#087D70`
-- Route cyan: `#0B748B`
-- Beacon amber: `#9B6200`
-- Alert crimson: `#B33E3B`
-- Text: `#142426`
-- Muted: `#536B6D`
+- Paper: `#F5F0E7`
+- Raised paper: `#FFFCF6`
+- Ink: `#111318`
+- Signal red: `#E84A50`
+- Transit blue: `#2456E8`
+- Utility yellow: `#F3BF25`
+- Signal mint: `#26B892`
 
 ## Typography
 
@@ -54,23 +50,22 @@ The local review interface extends that signature into a physical-feeling build 
 
 ```text
 +----------------------------------------------------------+
-| IDENTITY                              NPT / PUBLIC SIGNAL |
-+-------------+----------------------------+---------------+
-| CURRENT     |                            | TELEMETRY     |
-| BUILD       |       KTM-NP-0545          | latest repo   |
-|             |      /    |     \          | stars/repos   |
-|             | projects as service nodes | generated at  |
-|             |                            |               |
-+-------------+----- mountains / city -----+---------------+
-| naitik@ktm:~$ building useful and unusual software       |
+| LIVE FROM KATHMANDU       KTM-NP-0545       PUBLIC SIGNAL |
++---------------------+------------------------------------+
+| NAITIK JOSHI        | PROJECT TRANSMISSION                |
+| role / statement    |                                    |
+| selected-work index | one project, one scene, one focus   |
+|                     | summary / visual / telemetry         |
++---------------------+------------------------------------+
+| skyline             | naitik@ktm:~$ broadcast --work      |
 +----------------------------------------------------------+
 ```
 
 ## Motion
 
-- One beacon pulse at the central node.
-- Signal packets move slowly along repository routes.
-- One terminal cursor blinks.
+- Four project scenes cycle at a readable four-second cadence.
+- The matching project index marker changes with the scene.
+- A dashed transmission line and terminal cursor provide quiet ambient motion.
 - Motion is disabled through `prefers-reduced-motion` where supported.
 - The first frame must remain complete and readable.
 - The preview can pause SVG animation after inlining the selected repository asset.
@@ -93,4 +88,4 @@ The local review interface extends that signature into a physical-feeling build 
 
 ## Self-Critique
 
-The initial terminal concept was too close to generic operations dashboards. The revision spends its visual boldness on the Kathmandu infrastructure scene and keeps the surrounding panels restrained. The skyline is meaningful context; the network routes encode actual project relationships; status labels communicate lifecycle rather than decorative telemetry.
+The initial network map behaved like a dense operations dashboard: every project competed for attention and the skyline collided with content. The broadcast revision creates a clear entrance, gives one project the stage at a time, and moves the Kathmandu skyline into a quiet footer layer. The profile remains technical without asking a first-time visitor to decode it.
