@@ -26,7 +26,8 @@ text{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-s
 .project-copy{fill:#F4F0E8;font-size:18px;font-weight:650}
 .project-copy-mobile{fill:#F4F0E8;font-size:16px;font-weight:650}
 .meta{fill:#AAA7A0;font-size:13px;font-weight:800}
-.status{fill:#101217;font-size:12px;font-weight:950}
+.status-on-dark{fill:#F4F0E8;font-size:12px;font-weight:950}
+.status-on-light{fill:#111318;font-size:12px;font-weight:950}
 .number{fill:#F4F0E8;font-size:112px;font-weight:950;opacity:.08}
 .stat{fill:#F4F0E8;font-size:17px;font-weight:900}
 .tiny{fill:#AAA7A0;font-size:11px;font-weight:800}
@@ -114,71 +115,76 @@ text{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-s
 <rect x="486" y="103" width="674" height="418" class="outline"/>
 <g clip-path="url(#stage-clip)">
   <rect x="486" y="103" width="674" height="48" class="blue"/>
-  <text x="510" y="134" class="status mono" text-anchor="start">PROJECT TRANSMISSION</text>
-  <text x="1136" y="134" class="status mono" text-anchor="end">AUTO / 16 SEC LOOP</text>
+  <text x="510" y="134" class="status-on-dark mono" text-anchor="start">PROJECT TRANSMISSION</text>
+  <text x="1136" y="134" class="status-on-dark mono" text-anchor="end">AUTO / 16 SEC LOOP</text>
   <path d="M511 286H897" class="line dash" stroke-width="3" opacity=".16"/>
   <g class="feature scene-1">
   <text x="1106" y="230" class="number" text-anchor="end">01</text>
   <text x="526" y="205" class="project-name" text-anchor="start">ProdTag</text>
   <rect x="526" y="231" width="170" height="27" class="mint"/>
-  <text x="538" y="250" class="status" text-anchor="start">ACTIVE DEVELOPMENT</text>
-  <text x="526" y="318" class="project-copy" text-anchor="start">Desktop audio cues for terminal</text>
-<text x="526" y="345" class="project-copy" text-anchor="start">commands, designed to make</text>
-<text x="526" y="372" class="project-copy" text-anchor="start">long-running development work</text>
+  <text x="538" y="250" class="status-on-light" text-anchor="start">ACTIVE DEVELOPMENT</text>
+  <text x="526" y="318" class="project-copy" text-anchor="start">Desktop audio cues that make</text>
+<text x="526" y="345" class="project-copy" text-anchor="start">long-running terminal work easier</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">to follow.</text>
   <text x="526" y="472" class="meta mono" text-anchor="start">GO + WAILS  /  Go</text>
   <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 08-27</text>
-  <g><rect x="940" y="385" width="10" height="26" class="mint" opacity="0.35"/><rect x="958" y="363" width="10" height="48" class="mint" opacity="0.40"/><rect x="976" y="341" width="10" height="70" class="mint" opacity="0.46"/><rect x="994" y="317" width="10" height="94" class="mint" opacity="0.52"/><rect x="1012" y="357" width="10" height="54" class="mint" opacity="0.57"/><rect x="1030" y="378" width="10" height="33" class="mint" opacity="0.62"/><rect x="1048" y="333" width="10" height="78" class="mint" opacity="0.68"/><rect x="1066" y="309" width="10" height="102" class="mint" opacity="0.73"/><rect x="1084" y="347" width="10" height="64" class="mint" opacity="0.79"/><path d="M938 423H1118" class="line" stroke-width="3"/></g>
+  <g><rect x="924" y="303" width="204" height="150" fill="none" class="line" stroke-width="3"/><rect x="941" y="402" width="10" height="22" class="mint" opacity="0.42"/><rect x="959" y="383" width="10" height="41" class="mint" opacity="0.47"/><rect x="977" y="358" width="10" height="66" class="mint" opacity="0.52"/><rect x="995" y="336" width="10" height="88" class="mint" opacity="0.57"/><rect x="1013" y="377" width="10" height="47" class="mint" opacity="0.62"/><rect x="1031" y="393" width="10" height="31" class="mint" opacity="0.67"/><rect x="1049" y="351" width="10" height="73" class="mint" opacity="0.72"/><rect x="1067" y="330" width="10" height="94" class="mint" opacity="0.77"/><rect x="1085" y="366" width="10" height="58" class="mint" opacity="0.82"/><path d="M939 428H1113" class="line" stroke-width="3"/></g>
 </g>
 <g class="feature scene-2">
   <text x="1106" y="230" class="number" text-anchor="end">02</text>
   <text x="526" y="205" class="project-name" text-anchor="start">Research Hub</text>
   <rect x="526" y="231" width="178" height="27" class="yellow"/>
-  <text x="538" y="250" class="status" text-anchor="start">HACKATHON PROTOTYPE</text>
+  <text x="538" y="250" class="status-on-light" text-anchor="start">HACKATHON PROTOTYPE</text>
   <text x="526" y="318" class="project-copy" text-anchor="start">An AI-assisted research workspace</text>
-<text x="526" y="345" class="project-copy" text-anchor="start">built for the Islington Hackathon,</text>
-<text x="526" y="372" class="project-copy" text-anchor="start">with researcher tools and a</text>
+<text x="526" y="345" class="project-copy" text-anchor="start">with researcher tools and a</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">focused CMS.</text>
   <text x="526" y="472" class="meta mono" text-anchor="start">NEXT + SUPABASE  /  TypeScript</text>
   <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 09-13</text>
-  <g fill="none" class="line" stroke-width="3">
-  <path d="M946 325L1018 361L970 423L1072 407L1100 339L1018 361"/>
-  <circle cx="946" cy="325" r="12" class="yellow" stroke="none"/><circle cx="1018" cy="361" r="17" class="blue" stroke="none"/>
-  <circle cx="970" cy="423" r="10" class="mint" stroke="none"/><circle cx="1072" cy="407" r="13" class="red" stroke="none"/>
-  <circle cx="1100" cy="339" r="9" class="yellow" stroke="none"/>
+  <g>
+  <rect x="924" y="303" width="204" height="150" fill="none" class="line" stroke-width="3"/>
+  <path d="M951 336L1022 367L978 424L1078 412L1100 346L1022 367" fill="none" class="line" stroke-width="3"/>
+  <circle cx="951" cy="336" r="10" class="yellow"/><circle cx="1022" cy="367" r="15" class="blue"/>
+  <circle cx="978" cy="424" r="9" class="mint"/><circle cx="1078" cy="412" r="11" class="red"/>
+  <circle cx="1100" cy="346" r="8" class="yellow"/>
 </g>
 </g>
 <g class="feature scene-3">
   <text x="1106" y="230" class="number" text-anchor="end">03</text>
   <text x="526" y="205" class="project-name" text-anchor="start">API Escape</text>
   <rect x="526" y="231" width="202" height="27" class="blue"/>
-  <text x="538" y="250" class="status" text-anchor="start">COMPLETED TEAM PROJECT</text>
-  <text x="526" y="318" class="project-copy" text-anchor="start">A containerized API learning</text>
+  <text x="538" y="250" class="status-on-dark" text-anchor="start">COMPLETED TEAM PROJECT</text>
+  <text x="526" y="318" class="project-copy" text-anchor="start">A containerized FastAPI learning</text>
 <text x="526" y="345" class="project-copy" text-anchor="start">platform with Groq-assisted</text>
-<text x="526" y="372" class="project-copy" text-anchor="start">workflows, built and presented as</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">guidance.</text>
   <text x="526" y="472" class="meta mono" text-anchor="start">FASTAPI + DOCKER  /  Python</text>
   <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 08-24</text>
-  <g fill="none" class="line" stroke-width="4">
-  <rect x="943" y="320" width="58" height="44"/><rect x="1041" y="391" width="58" height="44"/>
-  <path d="M1001 342H1060V1022"/><path d="M1041 413H982V995"/>
-  <path d="M1048 383L1060 391L1072 383"/><path d="M994 372L982 364L970 372"/>
-  <circle cx="1060" cy="342" r="10" class="blue" stroke="none"/><circle cx="982" cy="413" r="10" class="red" stroke="none"/>
+  <g>
+  <rect x="924" y="303" width="204" height="150" fill="none" class="line" stroke-width="3"/>
+  <rect x="943" y="331" width="52" height="38" fill="none" class="line" stroke-width="3"/>
+  <rect x="1057" y="331" width="52" height="38" fill="none" class="line" stroke-width="3"/>
+  <rect x="1000" y="396" width="52" height="38" fill="none" class="line" stroke-width="3"/>
+  <path d="M995 350H1057M1083 369V388H1026V396" fill="none" class="line" stroke-width="3"/>
+  <circle cx="1026" cy="350" r="7" class="blue"/><circle cx="1083" cy="388" r="7" class="yellow"/>
+  <circle cx="1026" cy="415" r="7" class="red"/>
 </g>
 </g>
 <g class="feature scene-4">
   <text x="1106" y="230" class="number" text-anchor="end">04</text>
   <text x="526" y="205" class="project-name" text-anchor="start">Tab Unloader</text>
   <rect x="526" y="231" width="74" height="27" class="mint"/>
-  <text x="538" y="250" class="status" text-anchor="start">STABLE</text>
-  <text x="526" y="318" class="project-copy" text-anchor="start">A focused browser utility for</text>
-<text x="526" y="345" class="project-copy" text-anchor="start">unloading inactive tabs and</text>
-<text x="526" y="372" class="project-copy" text-anchor="start">reclaiming memory without losing</text>
+  <text x="538" y="250" class="status-on-light" text-anchor="start">STABLE</text>
+  <text x="526" y="318" class="project-copy" text-anchor="start">A browser utility for unloading</text>
+<text x="526" y="345" class="project-copy" text-anchor="start">inactive tabs and reclaiming</text>
+<text x="526" y="372" class="project-copy" text-anchor="start">memory without losing the session.</text>
   <text x="526" y="472" class="meta mono" text-anchor="start">CHROMIUM EXTENSION  /  JavaScript</text>
   <text x="526" y="497" class="meta mono" text-anchor="start">ST 0  /  FK 0  /  UPDATED 05-22</text>
   <g>
-  <rect x="938" y="317" width="170" height="122" class="outline"/>
-  <rect x="938" y="317" width="170" height="25" class="mint"/>
-  <circle cx="954" cy="330" r="4" class="paper"/><circle cx="968" cy="330" r="4" class="paper"/>
-  <path d="M963 367H1082M963 388H1058M963 409H1071" class="line" stroke-width="5"/>
-  <path d="M1074 412l20 20m0-20l-20 20" class="red" stroke="currentColor" stroke-width="6"/>
+  <rect x="924" y="303" width="204" height="150" fill="none" class="line" stroke-width="3"/>
+  <rect x="940" y="322" width="172" height="112" fill="none" class="line" stroke-width="3"/>
+  <rect x="940" y="322" width="172" height="24" class="mint"/>
+  <circle cx="955" cy="334" r="4" class="paper"/><circle cx="968" cy="334" r="4" class="paper"/>
+  <path d="M961 371H1088M961 392H1065M961 413H1077" class="line" stroke-width="5"/>
+  <path d="M1079 402l17 17m0-17l-17 17" fill="none" stroke="#FF5A5F" stroke-width="6"/>
 </g>
 </g>
 </g>

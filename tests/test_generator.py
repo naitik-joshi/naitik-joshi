@@ -54,6 +54,8 @@ class ProfileGeneratorTests(unittest.TestCase):
                     "profile-light.svg",
                     "profile-dark-mobile.svg",
                     "profile-light-mobile.svg",
+                    "quote-dark.svg",
+                    "quote-light.svg",
                 },
             )
             for path in outputs:
@@ -63,9 +65,13 @@ class ProfileGeneratorTests(unittest.TestCase):
                     self.assertEqual(len(data["projects"]), 4)
                     continue
                 root = ET.parse(path).getroot()
-                expected_viewbox = (
-                    "0 0 720 960" if "mobile" in path.name else "0 0 1200 640"
-                )
+                if path.name.startswith("quote-"):
+                    self.assertEqual(root.attrib["viewBox"], "0 0 1200 176")
+                    content = path.read_text(encoding="utf-8")
+                    self.assertIn("OPERATING PRINCIPLE", content)
+                    self.assertIn("FORGOT TO FORBID", content)
+                    continue
+                expected_viewbox = "0 0 720 960" if "mobile" in path.name else "0 0 1200 640"
                 self.assertEqual(root.attrib["viewBox"], expected_viewbox)
                 content = path.read_text(encoding="utf-8")
                 self.assertIn("KTM-NP-0545", content)

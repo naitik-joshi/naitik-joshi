@@ -15,7 +15,7 @@
       "repo": "ProdTag",
       "status": "ACTIVE DEVELOPMENT",
       "stack": "GO + WAILS",
-      "summary": "Desktop audio cues for terminal commands, designed to make long-running development work easier to follow.",
+      "summary": "Desktop audio cues that make long-running terminal work easier to follow.",
       "position": "northwest",
       "accent": "mint"
     },
@@ -24,7 +24,7 @@
       "repo": "hackathon-neutron",
       "status": "HACKATHON PROTOTYPE",
       "stack": "NEXT + SUPABASE",
-      "summary": "An AI-assisted research workspace built for the Islington Hackathon, with researcher tools and a focused CMS.",
+      "summary": "An AI-assisted research workspace with researcher tools and a focused CMS.",
       "position": "southwest",
       "accent": "amber"
     },
@@ -33,7 +33,7 @@
       "repo": "api-escape-platform",
       "status": "COMPLETED TEAM PROJECT",
       "stack": "FASTAPI + DOCKER",
-      "summary": "A containerized API learning platform with Groq-assisted workflows, built and presented as a summer team project.",
+      "summary": "A containerized FastAPI learning platform with Groq-assisted guidance.",
       "position": "northeast",
       "accent": "cyan"
     },
@@ -42,7 +42,7 @@
       "repo": "Tab-Unloader",
       "status": "STABLE",
       "stack": "CHROMIUM EXTENSION",
-      "summary": "A focused browser utility for unloading inactive tabs and reclaiming memory without losing the session.",
+      "summary": "A browser utility for unloading inactive tabs and reclaiming memory without losing the session.",
       "position": "southeast",
       "accent": "mint"
     }

@@ -60,7 +60,8 @@ text{{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-
 .project-copy{{fill:{colors['ink']};font-size:18px;font-weight:650}}
 .project-copy-mobile{{fill:{colors['ink']};font-size:16px;font-weight:650}}
 .meta{{fill:{colors['muted']};font-size:13px;font-weight:800}}
-.status{{fill:{colors['paper']};font-size:12px;font-weight:950}}
+.status-on-dark{{fill:#F4F0E8;font-size:12px;font-weight:950}}
+.status-on-light{{fill:#111318;font-size:12px;font-weight:950}}
 .number{{fill:{colors['ink']};font-size:112px;font-weight:950;opacity:.08}}
 .stat{{fill:{colors['ink']};font-size:17px;font-weight:900}}
 .tiny{{fill:{colors['muted']};font-size:11px;font-weight:800}}
@@ -94,56 +95,50 @@ def _defs(colors: dict[str, str]) -> str:
 """.strip()
 
 
-def _signal_mark(cx: int, cy: int, accent: str, scale: float = 1.0) -> str:
-    r1, r2, r3 = 37 * scale, 54 * scale, 72 * scale
-    return f"""
-<g>
-  <circle cx="{cx}" cy="{cy}" r="{r3}" fill="none" class="line" stroke-width="2" opacity=".18"/>
-  <path d="M{cx} {cy-r3} A{r3} {r3} 0 0 1 {cx+r3} {cy}" fill="none" class="{accent} scan" stroke="currentColor" stroke-width="7"/>
-  <circle cx="{cx}" cy="{cy}" r="{r2}" fill="none" class="line dash" stroke-width="2" opacity=".55"/>
-  <circle cx="{cx}" cy="{cy}" r="{r1}" class="outline"/>
-  <path d="M{cx-15} {cy+9} L{cx-4} {cy-13} L{cx+5} {cy+2} L{cx+16} {cy-18}" fill="none" class="line" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
-  <circle cx="{cx+16}" cy="{cy-18}" r="7" class="{accent}"/>
-  <circle cx="{cx+16}" cy="{cy-18}" r="12" fill="none" class="{accent} pulse" stroke="currentColor" stroke-width="3"/>
-</g>
-""".strip()
-
-
 def _project_art(project: dict[str, Any], x: int, y: int) -> str:
     repo = project["repo"].lower()
     accent = _accent(project)
+    frame = (
+        f'<rect x="{x+8}" y="{y+18}" width="204" height="150" '
+        'fill="none" class="line" stroke-width="3"/>'
+    )
     if "prodtag" in repo:
-        bars = [26, 48, 70, 94, 54, 33, 78, 102, 64]
+        bars = [22, 41, 66, 88, 47, 31, 73, 94, 58]
         items = "".join(
-            f'<rect x="{x + 24 + i * 18}" y="{y + 126 - bar}" width="10" height="{bar}" class="{accent}" opacity="{.35 + i * .055:.2f}"/>'
+            f'<rect x="{x + 25 + i * 18}" y="{y + 139 - bar}" width="10" height="{bar}" class="{accent}" opacity="{.42 + i * .05:.2f}"/>'
             for i, bar in enumerate(bars)
         )
-        return f'<g>{items}<path d="M{x+22} {y+138}H{x+202}" class="line" stroke-width="3"/></g>'
+        return f'<g>{frame}{items}<path d="M{x+23} {y+143}H{x+197}" class="line" stroke-width="3"/></g>'
     if "hackathon" in repo:
         return f"""
-<g fill="none" class="line" stroke-width="3">
-  <path d="M{x+30} {y+40}L{x+102} {y+76}L{x+54} {y+138}L{x+156} {y+122}L{x+184} {y+54}L{x+102} {y+76}"/>
-  <circle cx="{x+30}" cy="{y+40}" r="12" class="{accent}" stroke="none"/><circle cx="{x+102}" cy="{y+76}" r="17" class="blue" stroke="none"/>
-  <circle cx="{x+54}" cy="{y+138}" r="10" class="mint" stroke="none"/><circle cx="{x+156}" cy="{y+122}" r="13" class="red" stroke="none"/>
-  <circle cx="{x+184}" cy="{y+54}" r="9" class="yellow" stroke="none"/>
+<g>
+  {frame}
+  <path d="M{x+35} {y+51}L{x+106} {y+82}L{x+62} {y+139}L{x+162} {y+127}L{x+184} {y+61}L{x+106} {y+82}" fill="none" class="line" stroke-width="3"/>
+  <circle cx="{x+35}" cy="{y+51}" r="10" class="{accent}"/><circle cx="{x+106}" cy="{y+82}" r="15" class="blue"/>
+  <circle cx="{x+62}" cy="{y+139}" r="9" class="mint"/><circle cx="{x+162}" cy="{y+127}" r="11" class="red"/>
+  <circle cx="{x+184}" cy="{y+61}" r="8" class="yellow"/>
 </g>
 """.strip()
     if "api-escape" in repo:
         return f"""
-<g fill="none" class="line" stroke-width="4">
-  <rect x="{x+27}" y="{y+35}" width="58" height="44"/><rect x="{x+125}" y="{y+106}" width="58" height="44"/>
-  <path d="M{x+85} {y+57}H{x+144}V{x+106}"/><path d="M{x+125} {y+128}H{x+66}V{x+79}"/>
-  <path d="M{x+132} {y+98}L{x+144} {y+106}L{x+156} {y+98}"/><path d="M{x+78} {y+87}L{x+66} {y+79}L{x+54} {y+87}"/>
-  <circle cx="{x+144}" cy="{y+57}" r="10" class="{accent}" stroke="none"/><circle cx="{x+66}" cy="{y+128}" r="10" class="red" stroke="none"/>
+<g>
+  {frame}
+  <rect x="{x+27}" y="{y+46}" width="52" height="38" fill="none" class="line" stroke-width="3"/>
+  <rect x="{x+141}" y="{y+46}" width="52" height="38" fill="none" class="line" stroke-width="3"/>
+  <rect x="{x+84}" y="{y+111}" width="52" height="38" fill="none" class="line" stroke-width="3"/>
+  <path d="M{x+79} {y+65}H{x+141}M{x+167} {y+84}V{y+103}H{x+110}V{y+111}" fill="none" class="line" stroke-width="3"/>
+  <circle cx="{x+110}" cy="{y+65}" r="7" class="{accent}"/><circle cx="{x+167}" cy="{y+103}" r="7" class="yellow"/>
+  <circle cx="{x+110}" cy="{y+130}" r="7" class="red"/>
 </g>
 """.strip()
     return f"""
 <g>
-  <rect x="{x+22}" y="{y+32}" width="170" height="122" class="outline"/>
-  <rect x="{x+22}" y="{y+32}" width="170" height="25" class="{accent}"/>
-  <circle cx="{x+38}" cy="{y+45}" r="4" class="paper"/><circle cx="{x+52}" cy="{y+45}" r="4" class="paper"/>
-  <path d="M{x+47} {y+82}H{x+166}M{x+47} {y+103}H{x+142}M{x+47} {y+124}H{x+155}" class="line" stroke-width="5"/>
-  <path d="M{x+158} {y+127}l20 20m0-20l-20 20" class="red" stroke="currentColor" stroke-width="6"/>
+  {frame}
+  <rect x="{x+24}" y="{y+37}" width="172" height="112" fill="none" class="line" stroke-width="3"/>
+  <rect x="{x+24}" y="{y+37}" width="172" height="24" class="{accent}"/>
+  <circle cx="{x+39}" cy="{y+49}" r="4" class="paper"/><circle cx="{x+52}" cy="{y+49}" r="4" class="paper"/>
+  <path d="M{x+45} {y+86}H{x+172}M{x+45} {y+107}H{x+149}M{x+45} {y+128}H{x+161}" class="line" stroke-width="5"/>
+  <path d="M{x+163} {y+117}l17 17m0-17l-17 17" fill="none" stroke="#FF5A5F" stroke-width="6"/>
 </g>
 """.strip()
 
@@ -168,6 +163,7 @@ def _scene(project: dict[str, Any], signal: dict[str, Any], index: int, mobile: 
         number_x, number_y = 1106, 230
         text_x = 526
     status_width = min(275, 26 + len(project["status"]) * 8)
+    status_class = "status-on-dark" if accent in {"blue", "red"} else "status-on-light"
     lines = _wrap_words(project["summary"], max_chars)[:3]
     copy = "\n".join(
         svg_text(text_x, copy_y + line_gap * offset, line, copy_class)
@@ -181,7 +177,7 @@ def _scene(project: dict[str, Any], signal: dict[str, Any], index: int, mobile: 
   {svg_text(number_x, number_y, number, 'number', 'end')}
   {svg_text(text_x, name_y, project['name'], name_class)}
   <rect x="{text_x}" y="{status_y-19}" width="{status_width}" height="27" class="{accent}"/>
-  {svg_text(text_x+12, status_y, project['status'], 'status')}
+  {svg_text(text_x+12, status_y, project['status'], status_class)}
   {copy}
   {svg_text(text_x, meta_y, f"{project['stack']}  /  {signal.get('language', 'Mixed')}", 'meta mono')}
   {svg_text(text_x, meta_y+25, f"ST {stars}  /  FK {forks}  /  UPDATED {updated}", 'meta mono')}
@@ -272,8 +268,8 @@ def render_desktop_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_
 <rect x="486" y="103" width="674" height="418" class="outline"/>
 <g clip-path="url(#stage-clip)">
   <rect x="486" y="103" width="674" height="48" class="blue"/>
-  {svg_text(510, 134, 'PROJECT TRANSMISSION', 'status mono')}
-  {svg_text(1136, 134, 'AUTO / 16 SEC LOOP', 'status mono', 'end')}
+  {svg_text(510, 134, 'PROJECT TRANSMISSION', 'status-on-dark mono')}
+  {svg_text(1136, 134, 'AUTO / 16 SEC LOOP', 'status-on-dark mono', 'end')}
   <path d="M511 286H897" class="line dash" stroke-width="3" opacity=".16"/>
   {scenes}
 </g>
@@ -313,8 +309,8 @@ def render_mobile_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_n
 <rect x="34" y="267" width="652" height="438" class="outline"/>
 <g clip-path="url(#stage-clip-mobile)">
   <rect x="34" y="267" width="652" height="45" class="blue"/>
-  {svg_text(55, 296, 'PROJECT TRANSMISSION', 'status mono')}
-  {svg_text(664, 296, '16 SEC LOOP', 'status mono', 'end')}
+  {svg_text(55, 296, 'PROJECT TRANSMISSION', 'status-on-dark mono')}
+  {svg_text(664, 296, '16 SEC LOOP', 'status-on-dark mono', 'end')}
   {scenes}
   {_project_index(projects, mobile=True)}
 </g>
@@ -335,6 +331,30 @@ def render_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_name: st
     return render_desktop_svg(config, telemetry, theme_name)
 
 
+def render_quote_svg(theme_name: str) -> str:
+    colors = THEMES[theme_name]
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="176" viewBox="0 0 1200 176" role="img" aria-labelledby="title desc">
+<title id="title">Naitik Joshi operating principle</title>
+<desc id="desc">If the platform says it cannot be done, I look for the part it forgot to forbid.</desc>
+<style>
+text{{font-family:'Arial Narrow','Helvetica Neue',Arial,sans-serif;letter-spacing:0}}
+.mono{{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace}}
+.quote{{fill:{colors['ink']};font-size:28px;font-weight:900}}
+.label{{fill:{colors['ink']};font-size:12px;font-weight:900}}
+</style>
+<rect width="1200" height="176" fill="{colors['paper']}"/>
+<rect x="12" y="12" width="1176" height="152" fill="{colors['paper_alt']}" stroke="{colors['line']}" stroke-width="3"/>
+<rect x="28" y="28" width="150" height="120" fill="{colors['red']}"/>
+<text x="103" y="120" fill="#111318" font-family="Georgia,serif" font-size="126" font-weight="900" text-anchor="middle">&quot;</text>
+<text x="211" y="58" class="label mono">OPERATING PRINCIPLE / KTM 05:45</text>
+<text x="211" y="100" class="quote">IF THE PLATFORM SAYS IT CAN'T BE DONE,</text>
+<text x="211" y="136" class="quote">I LOOK FOR THE PART IT FORGOT TO FORBID.</text>
+<rect x="1118" y="28" width="42" height="42" fill="{colors['blue']}"/>
+<rect x="1139" y="49" width="21" height="99" fill="{colors['yellow']}"/>
+</svg>
+"""
+
+
 def generate(config_path: Path, output_dir: Path, offline: bool = False) -> list[Path]:
     config = load_config(config_path)
     telemetry = fetch_telemetry(config, offline=offline)
@@ -345,7 +365,10 @@ def generate(config_path: Path, output_dir: Path, offline: bool = False) -> list
         mobile = output_dir / f"profile-{theme_name}-mobile.svg"
         desktop.write_text(render_desktop_svg(config, telemetry, theme_name), encoding="utf-8")
         mobile.write_text(render_mobile_svg(config, telemetry, theme_name), encoding="utf-8")
-        outputs.extend([desktop, mobile])
+        quote = output_dir / f"quote-{theme_name}.svg"
+        quote.write_text(render_quote_svg(theme_name), encoding="utf-8")
+        outputs.extend([desktop, mobile, quote])
         print(f"[profile] wrote {desktop}")
         print(f"[profile] wrote {mobile}")
+        print(f"[profile] wrote {quote}")
     return outputs

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="176" viewBox="0 0 1200 176" role="img" aria-labelledby="title desc">
+<title id="title">Naitik Joshi operating principle</title>
+<desc id="desc">If the platform says it cannot be done, I look for the part it forgot to forbid.</desc>
+<style>
+text{font-family:'Arial Narrow','Helvetica Neue',Arial,sans-serif;letter-spacing:0}
+.mono{font-family:'SFMono-Regular',Consolas,'Liberation Mono',monospace}
+.quote{fill:#111318;font-size:28px;font-weight:900}
+.label{fill:#111318;font-size:12px;font-weight:900}
+</style>
+<rect width="1200" height="176" fill="#F5F0E7"/>
+<rect x="12" y="12" width="1176" height="152" fill="#FFFCF6" stroke="#111318" stroke-width="3"/>
+<rect x="28" y="28" width="150" height="120" fill="#E84A50"/>
+<text x="103" y="120" fill="#111318" font-family="Georgia,serif" font-size="126" font-weight="900" text-anchor="middle">&quot;</text>
+<text x="211" y="58" class="label mono">OPERATING PRINCIPLE / KTM 05:45</text>
+<text x="211" y="100" class="quote">IF THE PLATFORM SAYS IT CAN'T BE DONE,</text>
+<text x="211" y="136" class="quote">I LOOK FOR THE PART IT FORGOT TO FORBID.</text>
+<rect x="1118" y="28" width="42" height="42" fill="#2456E8"/>
+<rect x="1139" y="49" width="21" height="99" fill="#F3BF25"/>
+</svg>

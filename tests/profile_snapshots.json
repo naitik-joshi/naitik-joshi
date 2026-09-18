@@ -1,7 +1,9 @@
 {
-  "profile-data.json": "006bce35c20bf93cf6fde9710b5f1bc422e852aa7c62e67a1492c830da5ba99d",
-  "profile-dark-mobile.svg": "bab7f828da7f70a6de874c7ee8cb73a42c436a2d85a121a9cac3e7a265f11364",
-  "profile-dark.svg": "2884a67c1d76f6f964cedecda57e61ca3af14226b2809432e937ccfe1b86168d",
-  "profile-light-mobile.svg": "621025cade1484f25497ef40fded369a2131a8e0ae819b610a9b4b0f22fedf56",
-  "profile-light.svg": "d5da977ab62bef250db70e5c0937c8eef116c37e411016bb9082cc329e14ba8b"
+  "profile-data.json": "20b8fb2fd6b22a71c17fbbaf11b5e3b094f89b03fec9ea035928da59f18527ae",
+  "profile-dark-mobile.svg": "7564560e50d9268882a1364fa72925b1c0f17bd9adc04730ee0a2928a9430559",
+  "profile-dark.svg": "9df374587bf876aafb1f6061eb049602281f645947d17bd84aa890283d0135f9",
+  "profile-light-mobile.svg": "f844f17305464f811ae41f57414d5a348345b9edc8b3167979eded5d3f019c4e",
+  "profile-light.svg": "f411ceb2526254944f2256c99ad17acdd318c1cef07e6864e3daa21d613893a3",
+  "quote-dark.svg": "8db77e36ae11008ad354d991d39b957f993ac05beef3618796738dd607e62187",
+  "quote-light.svg": "3a439460ccfd1c33a1f8b54e920c03ab593ab5ed21e95734b5e9bd6184800ba8"
 }
