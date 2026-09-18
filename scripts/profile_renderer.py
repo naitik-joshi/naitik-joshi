@@ -316,7 +316,6 @@ def render_mobile_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_n
   {svg_text(55, 296, 'PROJECT TRANSMISSION', 'status mono')}
   {svg_text(664, 296, '16 SEC LOOP', 'status mono', 'end')}
   {scenes}
-  {_signal_mark(548, 540, 'blue', .67)}
   {_project_index(projects, mobile=True)}
 </g>
 <rect x="34" y="739" width="652" height="61" class="yellow line" stroke-width="3"/>

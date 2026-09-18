@@ -125,15 +125,6 @@ text{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-s
   <path d="M588 579l20 20m0-20l-20 20" class="red" stroke="currentColor" stroke-width="6"/>
 </g>
 </g>
-  <g>
-  <circle cx="548" cy="540" r="48.24" fill="none" class="line" stroke-width="2" opacity=".18"/>
-  <path d="M548 491.76 A48.24 48.24 0 0 1 596.24 540" fill="none" class="blue scan" stroke="currentColor" stroke-width="7"/>
-  <circle cx="548" cy="540" r="36.18" fill="none" class="line dash" stroke-width="2" opacity=".55"/>
-  <circle cx="548" cy="540" r="24.790000000000003" class="outline"/>
-  <path d="M533 549 L544 527 L553 542 L564 522" fill="none" class="line" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
-  <circle cx="564" cy="522" r="7" class="blue"/>
-  <circle cx="564" cy="522" r="12" fill="none" class="blue pulse" stroke="currentColor" stroke-width="3"/>
-</g>
   <rect x="50" y="670" width="143" height="7" class="mint indicator indicator-1"/>
 <text x="50" y="695" class="tiny mono" text-anchor="start">01</text>
 <rect x="205" y="670" width="143" height="7" class="yellow indicator indicator-2"/>
