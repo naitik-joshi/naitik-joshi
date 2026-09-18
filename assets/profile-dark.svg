@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+<title id="title">Naitik Joshi - Kathmandu Network Node</title>
+<desc id="desc">Four software projects with public repository signals connect to a Kathmandu network node above a city and mountain skyline.</desc>
+<style>
+text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.outer{fill:#071419;stroke:#315D66;stroke-width:1.5}
+.grid-line{fill:none;stroke:#173139;stroke-width:1}
+.panel{fill:#0D2026;stroke:#315D66;stroke-width:1.25}
+.rule{stroke:#315D66;stroke-width:1}
+.label{fill:#72E2C4;font-size:13px;font-weight:700;letter-spacing:1px}
+.identity{fill:#EAF3F2;font-size:31px;font-weight:800}
+.identity-role{fill:#8DA9AD;font-size:14px}
+.header-signal{fill:#EAF3F2;font-size:13px;font-weight:700}
+.header-muted{fill:#8DA9AD;font-size:12px}
+.body{fill:#EAF3F2;font-size:14px}.body-strong{fill:#EAF3F2;font-size:16px;font-weight:700}
+.body-muted{fill:#8DA9AD;font-size:12px}.signal{fill:#72E2C4;font-size:12px;font-weight:700}
+.route{fill:none;stroke:#59C3DA;stroke-width:1.5;stroke-dasharray:5 7;opacity:.7}
+.packet{fill:#72E2C4;filter:url(#glow)}
+.node-box{fill:#0D2026;stroke-width:1.5}.node-machine{fill:#102A31;stroke:#315D66}
+.node-title{fill:#EAF3F2;font-size:15px;font-weight:700}.node-status{font-size:9px;font-weight:700}
+.node-stack{fill:#8DA9AD;font-size:10px}
+.mint-stroke{stroke:#72E2C4;fill:none}.cyan-stroke{stroke:#59C3DA;fill:none}.amber-stroke{stroke:#F0B84B;fill:none}
+.mint-fill{fill:#72E2C4}.cyan-fill{fill:#59C3DA}.amber-fill{fill:#F0B84B}
+.mint-text{fill:#72E2C4}.cyan-text{fill:#59C3DA}.amber-text{fill:#F0B84B}
+.node-halo{fill:#0D2026;stroke:#59C3DA;opacity:.94}.node-core{fill:#102A31;stroke:#72E2C4;stroke-width:2}
+.tower{fill:#071419;stroke:#315D66}.tower-line{stroke:#F0B84B;stroke-width:2}
+.beacon{fill:#DB5A57}.beacon-ring{fill:none;stroke:#DB5A57}
+.central-title{fill:#59C3DA;font-size:15px;font-weight:800}.central-subtitle{fill:#8DA9AD;font-size:10px;letter-spacing:1px}
+.mountain-far{fill:#102A32}.mountain-near{fill:#17363D}
+.city{fill:#091217}.city-line{stroke:#091217;stroke-width:3}.city-line.thin{stroke-width:1.5}
+.window{fill:#F0B84B;opacity:.85}.beacon-static{fill:#DB5A57}
+.terminal{fill:#0D2026;stroke:#315D66}.prompt{fill:#72E2C4;font-size:14px;font-weight:700}
+.command{fill:#EAF3F2;font-size:14px}.cursor{fill:#59C3DA;animation:blink 1.1s steps(1) infinite}
+.pulse{animation:pulse 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.pulse-ring{animation:ring 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes blink{50%{opacity:0}}@keyframes pulse{50%{transform:scale(1.35);opacity:.65}}
+@keyframes ring{0%{transform:scale(.45);opacity:.9}100%{transform:scale(1.75);opacity:0}}
+@media(prefers-reduced-motion:reduce){.packet{display:none}.pulse,.pulse-ring,.cursor{animation:none!important}}
+</style>
+<rect x="12" y="12" width="1176" height="696" rx="4" class="outer"/>
+<defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter><pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M 28 0 L 0 0 0 28" class="grid-line"/></pattern></defs><rect width="1200" height="720" fill="url(#grid)" opacity=".28"/>
+<line x1="24" y1="86" x2="1176" y2="86" class="rule"/>
+<text x="36" y="50" class="identity" text-anchor="start">Naitik Joshi</text>
+<text x="38" y="72" class="identity-role" text-anchor="start">DEVELOPER / BUILDER / AI STUDENT</text>
+<text x="1164" y="42" class="header-signal" text-anchor="end">KTM-NP-0545</text>
+<text x="1164" y="62" class="header-muted" text-anchor="end">NPT +05:45 / PUBLIC API / WEEKLY</text>
+<path class="mountain-far" d="M18 530 L84 458 L124 491 L183 421 L237 480 L304 404 L368 480 L432 432 L493 486 L553 408 L615 478 L680 428 L744 488 L814 405 L873 469 L934 427 L998 484 L1063 415 L1122 476 L1182 433 L1182 634 L18 634 Z"/>
+<path class="mountain-near" d="M18 569 L96 510 L148 552 L220 479 L286 555 L351 508 L425 563 L509 489 L582 557 L653 515 L726 566 L805 488 L877 552 L945 506 L1014 563 L1090 499 L1182 556 L1182 634 L18 634 Z"/>
+<g class="routes">
+<path id="route-1" d="M 600 350 C 495 350, 495 235, 390 235" class="route"/>
+<circle r="4" class="packet packet-1"><animateMotion dur="6.5s" begin="0.00s" repeatCount="indefinite"><mpath href="#route-1"/></animateMotion></circle>
+<path id="route-2" d="M 600 350 C 495 350, 495 455, 390 455" class="route"/>
+<circle r="4" class="packet packet-2"><animateMotion dur="7.2s" begin="0.65s" repeatCount="indefinite"><mpath href="#route-2"/></animateMotion></circle>
+<path id="route-3" d="M 600 350 C 705 350, 705 235, 810 235" class="route"/>
+<circle r="4" class="packet packet-3"><animateMotion dur="7.9s" begin="1.30s" repeatCount="indefinite"><mpath href="#route-3"/></animateMotion></circle>
+<path id="route-4" d="M 600 350 C 705 350, 705 455, 810 455" class="route"/>
+<circle r="4" class="packet packet-4"><animateMotion dur="8.6s" begin="1.95s" repeatCount="indefinite"><mpath href="#route-4"/></animateMotion></circle>
+</g>
+<g class="central-node">
+<circle cx="600" cy="350" r="72" class="node-halo"/>
+<circle cx="600" cy="350" r="55" class="node-core"/>
+<rect x="573" y="326" width="54" height="48" rx="3" class="tower"/>
+<line x1="585" y1="339" x2="615" y2="339" class="mint-stroke"/>
+<line x1="585" y1="351" x2="615" y2="351" class="cyan-stroke"/>
+<line x1="585" y1="363" x2="605" y2="363" class="amber-stroke"/>
+<line x1="600" y1="326" x2="600" y2="302" class="tower-line"/>
+<circle cx="600" cy="297" r="5" class="beacon pulse"/>
+<circle cx="600" cy="297" r="12" class="beacon-ring pulse-ring"/>
+<text x="600" y="392" class="central-title" text-anchor="middle">KTM-NP-0545</text>
+<text x="600" y="411" class="central-subtitle" text-anchor="middle">NETWORK NODE</text>
+</g>
+<g class="project-node" aria-label="ProdTag">
+<rect x="283" y="189" width="214" height="92" rx="3" class="node-box mint-stroke"/>
+<rect x="297" y="203" width="28" height="32" rx="2" class="node-machine"/>
+<line x1="303" y1="212" x2="319" y2="212" class="mint-stroke"/>
+<line x1="303" y1="221" x2="319" y2="221" class="mint-stroke"/>
+<circle cx="305" cy="230" r="2" class="mint-fill"/>
+<text x="335" y="215" class="node-title" text-anchor="start">ProdTag</text>
+<text x="335" y="236" class="node-status mint-text" text-anchor="start">ACTIVE DEVELOPMENT</text>
+<text x="297" y="263" class="node-stack" text-anchor="start">GO + WAILS / UPDATED 08-27</text>
+</g>
+<g class="project-node" aria-label="Research Hub">
+<rect x="283" y="409" width="214" height="92" rx="3" class="node-box amber-stroke"/>
+<rect x="297" y="423" width="28" height="32" rx="2" class="node-machine"/>
+<line x1="303" y1="432" x2="319" y2="432" class="amber-stroke"/>
+<line x1="303" y1="441" x2="319" y2="441" class="amber-stroke"/>
+<circle cx="305" cy="450" r="2" class="amber-fill"/>
+<text x="335" y="435" class="node-title" text-anchor="start">Research Hub</text>
+<text x="335" y="456" class="node-status amber-text" text-anchor="start">HACKATHON PROTOTYPE</text>
+<text x="297" y="483" class="node-stack" text-anchor="start">NEXT + SUPABASE / UPDATED 09-13</text>
+</g>
+<g class="project-node" aria-label="API Escape">
+<rect x="703" y="189" width="214" height="92" rx="3" class="node-box cyan-stroke"/>
+<rect x="717" y="203" width="28" height="32" rx="2" class="node-machine"/>
+<line x1="723" y1="212" x2="739" y2="212" class="cyan-stroke"/>
+<line x1="723" y1="221" x2="739" y2="221" class="cyan-stroke"/>
+<circle cx="725" cy="230" r="2" class="cyan-fill"/>
+<text x="755" y="215" class="node-title" text-anchor="start">API Escape</text>
+<text x="755" y="236" class="node-status cyan-text" text-anchor="start">COMPLETED TEAM PROJECT</text>
+<text x="717" y="263" class="node-stack" text-anchor="start">FASTAPI + DOCKER / UPDATED 08-24</text>
+</g>
+<g class="project-node" aria-label="Tab Unloader">
+<rect x="703" y="409" width="214" height="92" rx="3" class="node-box mint-stroke"/>
+<rect x="717" y="423" width="28" height="32" rx="2" class="node-machine"/>
+<line x1="723" y1="432" x2="739" y2="432" class="mint-stroke"/>
+<line x1="723" y1="441" x2="739" y2="441" class="mint-stroke"/>
+<circle cx="725" cy="450" r="2" class="mint-fill"/>
+<text x="755" y="435" class="node-title" text-anchor="start">Tab Unloader</text>
+<text x="755" y="456" class="node-status mint-text" text-anchor="start">STABLE</text>
+<text x="717" y="483" class="node-stack" text-anchor="start">CHROMIUM EXTENSION / UPDATED 05-22</text>
+</g>
+<rect x="34" y="108" width="1132" height="62" rx="3" class="panel"/>
+<line x1="390" y1="108" x2="390" y2="170" class="rule"/>
+<line x1="810" y1="108" x2="810" y2="170" class="rule"/>
+<text x="52" y="132" class="label" text-anchor="start">CURRENT BUILD</text>
+<text x="52" y="158" class="body-strong" text-anchor="start">ProdTag</text>
+<text x="142" y="158" class="signal" text-anchor="start">ACTIVE</text>
+<text x="410" y="132" class="label" text-anchor="start">LATEST PUSH</text>
+<text x="410" y="158" class="body-strong" text-anchor="start">hackathon-neutron</text>
+<text x="782" y="158" class="body-muted" text-anchor="end">2026-09-13</text>
+<text x="830" y="132" class="label" text-anchor="start">PUBLIC GITHUB</text>
+<text x="830" y="158" class="body" text-anchor="start">17 REPOS / 2 STARS / 6 FOLLOWERS</text>
+<g class="city">
+<rect x="22" y="579" width="54" height="55"/>
+<rect x="32" y="593" width="5" height="5" class="window"/>
+<rect x="48" y="607" width="5" height="5" class="window"/>
+<rect x="82" y="552" width="45" height="82"/>
+<rect x="134" y="589" width="64" height="45"/>
+<rect x="144" y="603" width="5" height="5" class="window"/>
+<rect x="160" y="617" width="5" height="5" class="window"/>
+<rect x="205" y="560" width="52" height="74"/>
+<rect x="215" y="574" width="5" height="5" class="window"/>
+<rect x="231" y="588" width="5" height="5" class="window"/>
+<rect x="264" y="583" width="67" height="51"/>
+<rect x="338" y="545" width="54" height="89"/>
+<rect x="348" y="559" width="5" height="5" class="window"/>
+<rect x="364" y="573" width="5" height="5" class="window"/>
+<rect x="399" y="572" width="70" height="62"/>
+<rect x="409" y="586" width="5" height="5" class="window"/>
+<rect x="425" y="600" width="5" height="5" class="window"/>
+<rect x="477" y="554" width="42" height="80"/>
+<rect x="527" y="585" width="58" height="49"/>
+<rect x="537" y="599" width="5" height="5" class="window"/>
+<rect x="553" y="613" width="5" height="5" class="window"/>
+<rect x="594" y="556" width="62" height="78"/>
+<rect x="604" y="570" width="5" height="5" class="window"/>
+<rect x="620" y="584" width="5" height="5" class="window"/>
+<rect x="664" y="578" width="70" height="56"/>
+<rect x="742" y="547" width="48" height="87"/>
+<rect x="752" y="561" width="5" height="5" class="window"/>
+<rect x="768" y="575" width="5" height="5" class="window"/>
+<rect x="798" y="572" width="69" height="62"/>
+<rect x="808" y="586" width="5" height="5" class="window"/>
+<rect x="824" y="600" width="5" height="5" class="window"/>
+<rect x="875" y="555" width="58" height="79"/>
+<rect x="941" y="584" width="65" height="50"/>
+<rect x="951" y="598" width="5" height="5" class="window"/>
+<rect x="967" y="612" width="5" height="5" class="window"/>
+<rect x="1014" y="552" width="51" height="82"/>
+<rect x="1024" y="566" width="5" height="5" class="window"/>
+<rect x="1040" y="580" width="5" height="5" class="window"/>
+<rect x="1072" y="579" width="52" height="55"/>
+<rect x="1131" y="561" width="47" height="73"/>
+<rect x="1141" y="575" width="5" height="5" class="window"/>
+<rect x="1157" y="589" width="5" height="5" class="window"/>
+<rect x="173" y="531" width="88" height="103"/>
+<polygon points="160,551 217,515 274,551"/>
+<polygon points="174,525 217,495 260,525"/>
+<line x1="217" y1="495" x2="217" y2="476" class="city-line"/>
+<rect x="354" y="529" width="22" height="15" rx="2"/>
+<line x1="358" y1="529" x2="358" y2="522" class="city-line thin"/>
+<line x1="372" y1="529" x2="372" y2="522" class="city-line thin"/>
+<rect x="914" y="580" width="124" height="54"/>
+<path d="M930 580 Q976 520 1022 580 Z"/>
+<rect x="972" y="531" width="8" height="39"/>
+<circle cx="976" cy="523" r="5" class="beacon-static"/>
+</g>
+<rect x="24" y="650" width="1152" height="43" rx="2" class="terminal"/>
+<text x="42" y="677" class="prompt" text-anchor="start">naitik@ktm:~$</text>
+<text x="177" y="677" class="command" text-anchor="start">building useful and unusual software</text>
+<rect x="500" y="663" width="8" height="18" class="cursor"/>
+<text x="1158" y="677" class="body-muted" text-anchor="end">PYTHON / SVG / GITHUB ACTIONS</text>
+</svg>

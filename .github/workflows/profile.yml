@@ -1,0 +1,49 @@
+name: Generate profile artwork
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 3 * * 1"
+      timezone: "Asia/Kathmandu"
+  push:
+    branches: [main]
+    paths:
+      - "profile.json"
+      - "scripts/generate_profile.py"
+      - "scripts/profile_renderer.py"
+      - ".github/workflows/profile.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Generate light and dark assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/generate_profile.py
+
+      - name: Run generator tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Commit changed assets
+        run: |
+          if git diff --quiet -- assets/; then
+            echo "Profile artwork is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/profile-dark.svg assets/profile-light.svg \
+            assets/profile-dark-mobile.svg assets/profile-light-mobile.svg \
+            assets/profile-data.json
+          git commit -m "chore: refresh profile artwork [skip ci]"
+          git push
