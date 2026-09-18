@@ -2,7 +2,7 @@
 
 ## Subject and Job
 
-The subject is a Kathmandu-based developer building AI systems, developer tools, research platforms, and practical web applications. The profile's single job is to create a memorable first impression while directing visitors toward the pinned repositories below it.
+The subject is a Kathmandu-based developer building AI systems, developer tools, research platforms, and practical web applications. The profile's single job is to create a memorable first impression, prove inventive technical thinking, and then hand project discovery back to the pinned repositories below it.
 
 ## Visual Thesis
 
@@ -11,6 +11,8 @@ Kathmandu is represented as a broadcast origin rather than a tourism motif. A bo
 ## Signature
 
 `KTM-NP-0545` is the station identifier. The `+05:45` timezone is both real information and the identity marker that makes the composition specific to Nepal. A 16-second loop gives each selected project one complete scene instead of showing four competing cards.
+
+`KTM//NIGHTSHIFT` is the signature interaction. It turns GitHub's limitation into the medium: a Python compiler pre-renders every legal first-person state, and Markdown links become movement controls. The repository contains the complete possibility space instead of relying on a deployed game runtime.
 
 The local review interface extends that signature into a physical-feeling build desk: hard offset shadows, a Kathmandu registration card, workshop labels, and a mint render bay. It is intentionally louder than the GitHub artwork because its job is inspection and presentation, not profile scanning.
 
@@ -85,7 +87,9 @@ The local review interface extends that signature into a physical-feeling build 
 - No claims of production operation unless a project is actually deployed.
 - No generic technology badge wall.
 - No duplicate biography or contact section.
+- No guestbook or interaction whose consequence is unclear to a visitor.
+- Pinned repositories own detailed project discovery; the README keeps one concise biography, one quote, one interactive signature, and one technology summary.
 
 ## Self-Critique
 
-The initial network map behaved like a dense operations dashboard: every project competed for attention and the skyline collided with content. The broadcast revision creates a clear entrance, gives one project the stage at a time, and moves the Kathmandu skyline into a quiet footer layer. The profile remains technical without asking a first-time visitor to decode it.
+The initial network map behaved like a dense operations dashboard: every project competed for attention and the skyline collided with content. The broadcast revision creates a clear entrance, gives one project the stage at a time, and moves the Kathmandu skyline into a quiet footer layer. The guestbook and duplicate work sections were removed because they diluted the profile's strongest idea. Nightshift now carries the experimental weight while the surrounding content remains calm and useful.

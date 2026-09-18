@@ -2,7 +2,7 @@
 
 ## Objective
 
-Replace the conventional profile README with a repository-owned, generated SVG experience that presents Naitik Joshi as a Kathmandu-based builder through an animated project broadcast. The profile must remain truthful, readable, self-hosted, and operational without an external deployment.
+Replace the conventional profile README with a repository-owned experience that presents Naitik Joshi as a Kathmandu-based builder through an animated project broadcast and a playable first-person level. The profile must remain truthful, readable, self-hosted, and operational without an external deployment.
 
 ## Operating Model
 
@@ -11,6 +11,7 @@ Replace the conventional profile README with a repository-owned, generated SVG e
 3. GitHub Actions regenerates the assets on configuration changes, manual dispatch, and a weekly schedule.
 4. Generated assets are committed into this repository and embedded by `README.md`.
 5. If GitHub data cannot be reached, generation succeeds using the last configured fallback values.
+6. `scripts/generate_nightshift.py` compiles an authored map into a complete set of linked SVG and Markdown game states.
 
 No server, database, Vercel project, VPS, or external statistics service is required.
 
@@ -62,14 +63,26 @@ Exit condition met: both layouts remain readable at their target widths with no 
 
 Exit condition: another user can generate a profile by changing configuration rather than renderer code.
 
-### Phase 5 - Optional Interaction
+### Phase 5 - Profile Focus
 
-- [x] Add a GitHub Issue Form for short visitor signals.
-- [x] Publish only issue numbers explicitly listed in `signals-approved.json`.
-- [x] Escape content, limit message length, deduplicate authors, and cap the display.
-- [x] Render the channel independently from the core profile artwork.
+- [x] Remove the visitor guestbook and its unclear call to action.
+- [x] Remove the duplicate work catalogue and capability matrix from the README.
+- [x] Repair project-art boundaries, copy length, and status-label contrast.
+- [x] Add a theme-aware operating-principle quote after the biography.
 
-The profile remains complete when the channel is empty or disabled.
+Exit condition met: the profile has a clear reading order and leaves repository discovery to GitHub's pinned-project interface.
+
+### Phase 6 - KTM//NIGHTSHIFT
+
+- [x] Build an original grid map with a reachable `05:45` uplink.
+- [x] Implement a dependency-free Python raycaster.
+- [x] Compile every walkable cell and cardinal heading into an SVG viewport and Markdown state.
+- [x] Connect all states with ordinary relative links for turning and movement.
+- [x] Add a completion transmission, restart route, and profile return route.
+- [x] Verify the complete graph, deterministic rendering, XML validity, and representative visual states.
+- [x] Add an Actions workflow that recompiles changed states from the authored map.
+
+Exit condition met locally: 71 walkable cells compile into 284 playable states, and the uplink is reachable in 46 movement steps.
 
 ## Non-Goals
 
@@ -78,6 +91,7 @@ The profile remains complete when the channel is empty or disabled.
 - Per-second clocks or per-visitor rendering.
 - A hosted editor in the initial version.
 - Private-repository data in generated public assets.
+- Realtime combat, keyboard capture, or JavaScript execution inside GitHub Markdown.
 
 ## Release Safety
 
