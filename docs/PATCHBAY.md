@@ -88,7 +88,18 @@ python3 scripts/generate_patchbay_preview.py assets
 - CSV export neutralizes formula-like string prefixes. It is still the user's responsibility to inspect data before importing it into another tool.
 - Refreshing discards the current patch. Export it to keep work. Reduced-motion preferences disable decorative waveform animation and shorten run stepping.
 
-## Next, Only If Useful
+## UX Polish - 2026-09-19
+
+- Profile terminal cursor now advances with its text instead of overlapping it at a hard-coded coordinate.
+- Mobile profile titles and decorative numbers clear the panel heading; summary wrapping reserves a separate illustration column, and yellow telemetry text has dark contrast in both themes.
+- Outcome-named presets and an example gallery show concrete before/after data.
+- The pausable walkthrough uses the current patch, follows its evaluated order, and provides previous/next/restart/direct-step controls without replacing user input.
+- Nodes show real data previews instead of idle decorative waveforms. CSV and record arrays have table/raw views with bounded previews.
+- Laptop inspector spacing is tighter. Phone walkthroughs bring the inspector above the circuit; mobile controls stay available while scrolling.
+- New tests cover CSV preview parsing, malformed data fallback, table bounds, walkthrough progression, and profile cursor/title layout contracts.
+- Verification: 16 JavaScript tests and 14 Python tests pass; production build succeeds. Browser checks cover 1366 px laptop and 390 px phone layouts, example loading, pause/next/jump controls, editing that cancels playback, and fresh output. No application console errors observed. The repeat dependency audit was unavailable because npm's advisory endpoint returned HTTP 503 maintenance; the earlier release audit is not a new audit of this iteration.
+
+## Future Work
 
 1. Add browser-worker execution and CSV import for larger datasets.
 2. Add a schema inspector and JSON diff module, with fixtures and error tests.

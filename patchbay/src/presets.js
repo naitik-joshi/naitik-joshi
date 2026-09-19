@@ -43,21 +43,21 @@ function patch(name, ops) {
   };
 }
 export const PRESETS = {
-  manifest: patch("Project manifest", [
+  manifest: patch("JSON to spreadsheet", [
     ["source", example],
     ["parse"],
     ["pick", "name, language, status"],
     ["csv"],
     ["output"],
   ]),
-  filter: patch("Find the Java projects", [
+  filter: patch("Filter JSON records", [
     ["source", example],
     ["parse"],
     ["filter", "language=Java"],
     ["stringify"],
     ["output"],
   ]),
-  decode: patch("A message from Kathmandu", [
+  decode: patch("Base64 to readable text", [
     [
       "source",
       "S2F0aG1hbmR1IC8gMDU6NDUKTWFrZSBpdCB3b3JrLiBNYWtlIGl0IHdlaXJkLg==",
@@ -66,7 +66,7 @@ export const PRESETS = {
     ["trim"],
     ["output"],
   ]),
-  clean: patch("Clean a noisy list", [
+  clean: patch("Remove duplicate lines", [
     ["source", "  build\nship\n  learn\nbuild\nlearn\n  repeat  "],
     ["trim"],
     ["unique"],

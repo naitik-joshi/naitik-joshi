@@ -211,6 +211,7 @@ input {
   margin-left: 9px;
 }
 .workbench {
+  position: relative;
   flex: 1;
   min-height: 0;
   display: grid;
@@ -784,8 +785,8 @@ input {
     display: flex;
     position: absolute;
     left: 0;
-    top: 142px;
-    bottom: 36px;
+    top: 0;
+    bottom: 0;
     width: 210px;
     z-index: 10;
     box-shadow: 12px 0 24px #0006;
@@ -885,7 +886,7 @@ input {
     font-size: 8px;
   }
   .shelf-open .library {
-    top: 174px;
+    top: 0;
     bottom: auto;
     height: 540px;
   }

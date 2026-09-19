@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ReactFlow,
@@ -23,16 +23,15 @@ import {
   Check,
   CircleAlert,
   ArrowUpRight,
-  Braces,
-  FileInput,
-  FileOutput,
-  Scissors,
-  SlidersHorizontal,
   X,
   PanelLeft,
-  Expand,
   Github,
   Zap,
+  Pause,
+  SkipBack,
+  SkipForward,
+  RotateCcw,
+  BookOpen,
 } from "lucide-react";
 import {
   MODULES,
@@ -43,6 +42,9 @@ import {
   validatePatch,
 } from "./engine.js";
 import { PRESETS, getPreset } from "./presets.js";
+import { summarize, advanceTour } from "./presentation.js";
+import ResultPreview from "./ResultPreview.jsx";
+import Examples from "./Examples.jsx";
 import "@xyflow/react/dist/style.css";
 import "@fontsource/barlow-condensed/latin-700.css";
 import "@fontsource/barlow-condensed/latin-800.css";
@@ -52,6 +54,7 @@ import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-500.css";
 import "@fontsource/inter/latin-600.css";
 import "./style.css";
+import "./onboarding.css";
 
 function ModuleNode({ data, selected }) {
   const meta = MODULES[data.op],
@@ -87,16 +90,28 @@ function ModuleNode({ data, selected }) {
             ? "LOCAL PAYLOAD"
             : data.param || meta.format.toUpperCase()}
         </div>
-        <div className="waveform" aria-hidden="true">
-          {[18, 29, 16, 39, 25, 48, 36, 20, 42, 31, 18, 26, 44, 34, 16, 24].map(
-            (h, i) => (
+        {data.active ? (
+          <div className="waveform" aria-hidden="true">
+            {[
+              18, 29, 16, 39, 25, 48, 36, 20, 42, 31, 18, 26, 44, 34, 16, 24,
+            ].map((h, i) => (
               <b
                 key={i}
                 style={{ height: h / 2, animationDelay: `${i * 35}ms` }}
               />
-            ),
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <pre className="module-preview">
+            {result?.error
+              ? result.error
+              : result
+                ? summarize(result.value)
+                : data.op === "source"
+                  ? summarize(data.param)
+                  : "\u2014"}
+          </pre>
+        )}
       </div>
       <div className="module-foot">
         <span>{status}</span>
@@ -158,6 +173,8 @@ function App() {
     [shelf, setShelf] = useState(false),
     [tab, setTab] = useState("result"),
     [history, setHistory] = useState({ past: [], future: [] });
+  const [tour, setTour] = useState(null),
+    [examples, setExamples] = useState(false);
   const flow = useRef(null),
     epoch = useRef(0),
     noticeTimer = useRef(null),
@@ -166,12 +183,58 @@ function App() {
   const chosen = graph.nodes.find((n) => n.id === selected),
     result = execution.results[selected],
     meta = chosen ? MODULES[chosen.data.op] : null;
+  const inputNode = graph.nodes.find(
+    (n) => n.id === graph.edges.find((e) => e.target === selected)?.source,
+  );
+  const resultFormat =
+    chosen?.data.op === "output" ? inputNode?.data.op : chosen?.data.op;
+  const orderedIds =
+    tour?.order ??
+    (execution.order.length ? execution.order : graph.nodes.map((n) => n.id));
+  useEffect(() => {
+    if (!tour) return;
+    setSelected(tour.order[tour.index]);
+    setTab("result");
+    setActive(tour.playing ? tour.order[tour.index] : null);
+    if (!tour.playing) return;
+    const timer = setTimeout(
+      () => setTour((t) => (t ? advanceTour(t) : null)),
+      2600,
+    );
+    return () => clearTimeout(timer);
+  }, [tour]);
+  useEffect(
+    () => () => {
+      epoch.current++;
+      clearTimeout(noticeTimer.current);
+    },
+    [],
+  );
+  function inspect(id) {
+    setTour(null);
+    setActive(null);
+    setSelected(id);
+  }
+  function startTour() {
+    if (!graph.nodes.length) return;
+    epoch.current++;
+    setRunning(false);
+    setElapsed(null);
+    const calculated = evaluate(graph.nodes, graph.edges);
+    setExecution(calculated);
+    setTour({
+      order: calculated.order,
+      index: 0,
+      playing: !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    });
+  }
   function notify(message) {
     setNotice(message);
     clearTimeout(noticeTimer.current);
     noticeTimer.current = setTimeout(() => setNotice(""), 4500);
   }
   function invalidate() {
+    setTour(null);
     epoch.current++;
     setRunning(false);
     setActive(null);
@@ -221,7 +284,6 @@ function App() {
       return;
     }
     const id = crypto.randomUUID();
-    const last = graph.nodes.at(-1);
     const position = flow.current?.screenToFlowPosition({
       x: window.innerWidth * 0.46,
       y: window.innerHeight * 0.45,
@@ -308,6 +370,7 @@ function App() {
     const next = getPreset(key);
     change(next);
     setPreset(key);
+    setExecution(evaluate(next.nodes, next.edges));
     setSelected(next.nodes.at(-1).id);
     setTab("result");
     setShelf(false);
@@ -317,6 +380,7 @@ function App() {
     );
   }
   function run() {
+    setTour(null);
     if (!graph.nodes.length) {
       notify("Add an Input module to begin.");
       return;
@@ -402,7 +466,8 @@ function App() {
     ...e,
     type: "smoothstep",
     animated:
-      running &&
+      (running ||
+        (tour?.playing && tour.order.indexOf(e.source) < tour.index)) &&
       Boolean(execution.results[e.source]) &&
       !execution.results[e.source]?.error,
     style: {
@@ -424,10 +489,21 @@ function App() {
             <Cable size={22} />
           </span>
           <span>
-            KTM <em>//</em> PATCHBAY<small>NAITIK JOSHI / EXPERIMENT 02</small>
+            KTM <em>//</em> PATCHBAY
+            <small>NAITIK JOSHI / JSON + TEXT LAB</small>
           </span>
         </a>
         <div className="top-actions">
+          <button
+            className="examples-button"
+            onClick={() => {
+              setTour((t) => (t ? { ...t, playing: false } : null));
+              setExamples(true);
+            }}
+          >
+            <BookOpen size={16} />
+            Examples
+          </button>
           <span className="local-status">
             <i />
             LOCAL PROCESSING
@@ -456,7 +532,9 @@ function App() {
             value={preset}
             onChange={(e) => loadPreset(e.target.value)}
           >
-            <option value="custom" disabled>Custom patch</option>
+            <option value="custom" disabled>
+              Custom patch
+            </option>
             {Object.entries(PRESETS).map(([key, p]) => (
               <option key={key} value={key}>
                 {p.name}
@@ -506,7 +584,97 @@ function App() {
           {running ? "RUNNING" : "RUN PATCH"}
         </button>
       </nav>
-      <main className={`workbench ${shelf ? "shelf-open" : ""}`}>
+      <section className="walkthrough" aria-label="Data walkthrough">
+        <div className="walkthrough-heading">
+          <span>{tour ? "WALKTHROUGH" : "DATA FLOW"}</span>
+          <strong>
+            {preset === "custom" ? "Custom patch" : PRESETS[preset].name}
+          </strong>
+        </div>
+        <nav className="flow-steps" aria-label="Transformation steps">
+          {orderedIds.map((id, i) => {
+            const n = graph.nodes.find((n) => n.id === id);
+            return (
+              n && (
+                <button
+                  key={id}
+                  className={selected === id ? "current" : ""}
+                  aria-current={selected === id ? "step" : undefined}
+                  onClick={() =>
+                    tour
+                      ? setTour({ ...tour, index: i, playing: false })
+                      : inspect(id)
+                  }
+                >
+                  <span>{String(i + 1).padStart(2, "0")}</span>
+                  {MODULES[n.data.op].name}
+                </button>
+              )
+            );
+          })}
+        </nav>
+        <div className="walkthrough-controls">
+          {tour ? (
+            <>
+              <IconButton label="Restart walkthrough" onClick={startTour}>
+                <RotateCcw size={16} />
+              </IconButton>
+              <IconButton
+                label="Previous step"
+                disabled={tour.index === 0}
+                onClick={() =>
+                  setTour({ ...advanceTour(tour, -1), playing: false })
+                }
+              >
+                <SkipBack size={16} />
+              </IconButton>
+              <IconButton
+                label={tour.playing ? "Pause walkthrough" : "Play walkthrough"}
+                onClick={() =>
+                  setTour({
+                    ...tour,
+                    index:
+                      tour.index === tour.order.length - 1 ? 0 : tour.index,
+                    playing: !tour.playing,
+                  })
+                }
+              >
+                {tour.playing ? <Pause size={16} /> : <Play size={16} />}
+              </IconButton>
+              <IconButton
+                label="Next step"
+                disabled={tour.index === tour.order.length - 1}
+                onClick={() =>
+                  setTour({ ...advanceTour(tour), playing: false })
+                }
+              >
+                <SkipForward size={16} />
+              </IconButton>
+              <IconButton
+                label="End walkthrough"
+                onClick={() => {
+                  setTour(null);
+                  setActive(null);
+                }}
+              >
+                <X size={16} />
+              </IconButton>
+            </>
+          ) : (
+            <button
+              className="walkthrough-start"
+              disabled={!graph.nodes.length}
+              onClick={startTour}
+            >
+              <Play size={14} />
+              Play walkthrough
+            </button>
+          )}
+        </div>
+      </section>
+      <main
+        className={`workbench ${shelf ? "shelf-open" : ""} ${tour ? "walkthrough-active" : ""}`}
+      >
         <aside className="library" aria-label="Module library">
           <div className="section-heading">
             <span>MODULE LIBRARY</span>
@@ -563,8 +731,8 @@ function App() {
             isValidConnection={(c) =>
               canConnect(graph.nodes, graph.edges, c.source, c.target)
             }
-            onNodeClick={(_, node) => setSelected(node.id)}
-            onPaneClick={() => setSelected(null)}
+            onNodeClick={(_, node) => inspect(node.id)}
+            onPaneClick={() => inspect(null)}
             onInit={(instance) => (flow.current = instance)}
             onNodeDragStart={() =>
               (dragStart.current = exportPatch(graph.nodes, graph.edges))
@@ -603,9 +771,17 @@ function App() {
         <aside className="inspector" aria-label="Module inspector">
           <div className="section-heading">
             <span>INSPECTOR</span>
-            <select aria-label="Inspect module" value={selected ?? ""} onChange={e=>setSelected(e.target.value || null)}>
+            <select
+              aria-label="Inspect module"
+              value={selected ?? ""}
+              onChange={(e) => inspect(e.target.value || null)}
+            >
               <option value="">Select module</option>
-              {graph.nodes.map((n,i)=><option key={n.id} value={n.id}>{i+1}. {MODULES[n.data.op].name}</option>)}
+              {graph.nodes.map((n, i) => (
+                <option key={n.id} value={n.id}>
+                  {i + 1}. {MODULES[n.data.op].name}
+                </option>
+              ))}
             </select>
           </div>
           {chosen ? (
@@ -729,14 +905,11 @@ function App() {
                             : `${new TextEncoder().encode(asText(result.value)).length} BYTES`}
                         </span>
                       </div>
-                      <pre data-testid="result">
-                        {asText(result.value).slice(0, 80000)}
-                      </pre>
-                      {asText(result.value).length > 80000 && (
-                        <p className="clipped-note">
-                          Preview truncated. Download for the full result.
-                        </p>
-                      )}
+                      <ResultPreview
+                        key={selected}
+                        value={result.value}
+                        format={resultFormat}
+                      />
                     </>
                   )}
                 </div>
@@ -800,6 +973,15 @@ function App() {
           BUILT BY NAITIK <ArrowUpRight size={12} />
         </a>
       </footer>
+      {examples && (
+        <Examples
+          onClose={() => setExamples(false)}
+          onLoad={(key) => {
+            loadPreset(key);
+            setExamples(false);
+          }}
+        />
+      )}
       {notice && (
         <div className="toast" role="status">
           {notice}
