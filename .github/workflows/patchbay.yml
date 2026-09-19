@@ -1,0 +1,55 @@
+name: Test and publish Patchbay
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'patchbay/**'
+      - '.github/workflows/patchbay.yml'
+  pull_request:
+    paths:
+      - 'patchbay/**'
+      - '.github/workflows/patchbay.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: patchbay-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: patchbay/package-lock.json
+      - run: npm ci
+        working-directory: patchbay
+      - run: npm test
+        working-directory: patchbay
+      - run: npm run build
+        working-directory: patchbay
+      - uses: actions/upload-pages-artifact@v4
+        if: github.event_name != 'pull_request'
+        with:
+          path: patchbay/dist
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment
