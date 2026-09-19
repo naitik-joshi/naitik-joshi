@@ -30,25 +30,12 @@
   <img alt="If the platform says it cannot be done, I look for the part it forgot to forbid." src="./assets/quote-dark.svg" width="100%">
 </picture>
 
-## KTM//NIGHTSHIFT
-
-<div align="center">
-
-<a href="./game/play/x01-y01-E.md"><img src="./game/frames/x01-y01-E.svg" alt="Enter KTM Nightshift, a GitHub-native first-person maze" width="100%"></a>
-
-<h3><a href="./game/play/x01-y01-E.md">ENTER THE 05:45 RELAY</a></h3>
-
-<a href="./game/play/x01-y01-N.md"><strong>A / TURN LEFT</strong></a>
-&nbsp;&nbsp;&nbsp;
-<a href="./game/play/x02-y01-E.md"><strong>W / STEP FORWARD</strong></a>
-&nbsp;&nbsp;&nbsp;
-<a href="./game/play/x01-y01-S.md"><strong>D / TURN RIGHT</strong></a>
-
-<br><br>
-
-<sub>A playable first-person level compiled into 284 SVG frames and Markdown links. No JavaScript. No server. Click the viewport or controls to move.</sub>
-
-</div>
+<a href="https://naitik-joshi.github.io/naitik-joshi/">
+  <picture>
+    <source media="(max-width: 600px)" srcset="./assets/patchbay-preview-mobile.svg">
+    <img src="./assets/patchbay-preview.svg" alt="Open KTM Patchbay: an interactive, browser-local JSON and text circuit lab on GitHub Pages" width="100%">
+  </picture>
+</a>
 
 ## Tech Stack
 

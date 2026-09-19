@@ -2,7 +2,7 @@
 
 ## Objective
 
-Replace the conventional profile README with a repository-owned experience that presents Naitik Joshi as a Kathmandu-based builder through an animated project broadcast and a playable first-person level. The profile must remain truthful, readable, self-hosted, and operational without an external deployment.
+Present Naitik Joshi through an animated project broadcast and a compact entry to a useful browser-local data workbench. Keep the profile truthful, readable, repository-owned, and independent of a separate backend or hosting account. See [Patchbay](PATCHBAY.md) for the current implementation and research.
 
 ## Operating Model
 
@@ -11,7 +11,7 @@ Replace the conventional profile README with a repository-owned experience that 
 3. GitHub Actions regenerates the assets on configuration changes, manual dispatch, and a weekly schedule.
 4. Generated assets are committed into this repository and embedded by `README.md`.
 5. If GitHub data cannot be reached, generation succeeds using the last configured fallback values.
-6. `scripts/generate_nightshift.py` compiles an authored map into a complete set of linked SVG and Markdown game states.
+6. `scripts/generate_patchbay_preview.py` renders the compact linked preview; GitHub Actions builds `patchbay/` and publishes it to GitHub Pages.
 
 No server, database, Vercel project, VPS, or external statistics service is required.
 
@@ -72,7 +72,7 @@ Exit condition: another user can generate a profile by changing configuration ra
 
 Exit condition met: the profile has a clear reading order and leaves repository discovery to GitHub's pinned-project interface.
 
-### Phase 6 - KTM//NIGHTSHIFT
+### Phase 6 - KTM//NIGHTSHIFT (Retired)
 
 - [x] Build an original grid map with a reachable `05:45` uplink.
 - [x] Implement a dependency-free Python raycaster.
@@ -84,12 +84,18 @@ Exit condition met: the profile has a clear reading order and leaves repository 
 
 Exit condition met locally: 71 walkable cells compile into 284 playable states, and the uplink is reachable in 46 movement steps.
 
+Retired after user testing: clever Markdown mechanics did not translate into a satisfying playable experience. Source is preserved in Git history at `6b0ff26`.
+
+### Phase 7 - KTM//PATCHBAY
+
+Replace the game with a compact animated teaser and a genuinely interactive, useful tool on GitHub Pages. Current phases, research, constraints, and verification are tracked in [PATCHBAY.md](PATCHBAY.md).
+
 ## Non-Goals
 
 - A live production-monitoring dashboard.
 - Fabricated CI, deployment, uptime, or AI-agent activity.
 - Per-second clocks or per-visitor rendering.
-- A hosted editor in the initial version.
+- A separately hosted backend or paid third-party runtime.
 - Private-repository data in generated public assets.
 - Realtime combat, keyboard capture, or JavaScript execution inside GitHub Markdown.
 
