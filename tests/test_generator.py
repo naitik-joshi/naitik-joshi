@@ -14,9 +14,31 @@ SPEC = importlib.util.spec_from_file_location(
 GENERATOR = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 SPEC.loader.exec_module(GENERATOR)
+import profile_renderer
 
 
 class ProfileGeneratorTests(unittest.TestCase):
+    def test_mobile_titles_clear_header_and_copy_stays_in_column(self):
+        config = GENERATOR.load_config(ROOT / "profile.json")
+        telemetry = GENERATOR.fetch_telemetry(config, offline=True)
+        root = ET.fromstring(profile_renderer.render_mobile_svg(config, telemetry, "dark"))
+        ns = {"svg": "http://www.w3.org/2000/svg"}
+        for title in root.findall(".//svg:text[@class='project-name-mobile']", ns):
+            self.assertGreaterEqual(int(title.attrib["y"]), 360)
+        for project in config["projects"]:
+            self.assertEqual(" ".join(profile_renderer._wrap_words(project["summary"], 36)[:3]), project["summary"])
+        self.assertEqual(len(root.findall(".//svg:text[@class='label mono on-yellow']", ns)), 2)
+
+    def test_terminal_cursor_flows_after_command(self):
+        config = GENERATOR.load_config(ROOT / "profile.json")
+        telemetry = GENERATOR.fetch_telemetry(config, offline=True)
+        root = ET.fromstring(GENERATOR.render_svg(config, telemetry, "dark"))
+        command = root.find(".//*[@id='terminal-command']")
+        self.assertEqual(command.text, "broadcast --selected-work")
+        cursor = command.find("{http://www.w3.org/2000/svg}tspan")
+        self.assertEqual(cursor.attrib["dx"], "12")
+        self.assertNotIn("x", cursor.attrib)
+
     def test_public_schema_describes_profile_contract(self):
         schema = json.loads(
             (ROOT / "profile.schema.json").read_text(encoding="utf-8")

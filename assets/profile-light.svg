@@ -28,6 +28,7 @@ text{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-s
 .meta{fill:#5E6066;font-size:13px;font-weight:800}
 .status-on-dark{fill:#F4F0E8;font-size:12px;font-weight:950}
 .status-on-light{fill:#111318;font-size:12px;font-weight:950}
+text.on-yellow{fill:#111318}
 .number{fill:#111318;font-size:112px;font-weight:950;opacity:.08}
 .stat{fill:#111318;font-size:17px;font-weight:900}
 .tiny{fill:#5E6066;font-size:11px;font-weight:800}
@@ -190,7 +191,6 @@ text{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-s
 </g>
 <rect x="30" y="552" width="1140" height="49" class="paper-alt line" stroke-width="2"/>
 <text x="52" y="583" class="label mono" text-anchor="start">naitik@ktm:~$</text>
-<text x="218" y="583" class="role mono" text-anchor="start">broadcast --selected-work</text>
-<rect x="450" y="567" width="10" height="19" class="mint cursor"/>
+<text x="218" y="583" class="role mono" id="terminal-command">broadcast --selected-work<tspan dx="12" class="mint cursor">&#x258C;</tspan></text>
 <text x="1148" y="583" class="label mono" text-anchor="end">LATEST / hackathon-neutron / 2026-09-13</text>
 </svg>

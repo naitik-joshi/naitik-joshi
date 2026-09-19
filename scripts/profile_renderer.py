@@ -62,6 +62,7 @@ text{{font-family:'Arial Narrow','Roboto Condensed','Helvetica Neue',Arial,sans-
 .meta{{fill:{colors['muted']};font-size:13px;font-weight:800}}
 .status-on-dark{{fill:#F4F0E8;font-size:12px;font-weight:950}}
 .status-on-light{{fill:#111318;font-size:12px;font-weight:950}}
+text.on-yellow{{fill:#111318}}
 .number{{fill:{colors['ink']};font-size:112px;font-weight:950;opacity:.08}}
 .stat{{fill:{colors['ink']};font-size:17px;font-weight:900}}
 .tiny{{fill:{colors['muted']};font-size:11px;font-weight:800}}
@@ -148,11 +149,11 @@ def _scene(project: dict[str, Any], signal: dict[str, Any], index: int, mobile: 
     number = f"0{index}"
     if mobile:
         name_class, copy_class = "project-name-mobile", "project-copy-mobile"
-        name_y, status_y, copy_y = 342, 386, 441
-        line_gap, max_chars = 24, 52
+        name_y, status_y, copy_y = 365, 411, 456
+        line_gap, max_chars = 24, 36
         art = _project_art(project, 430, 452)
         meta_y = 626
-        number_x, number_y = 620, 378
+        number_x, number_y = 620, 432
         text_x = 64
     else:
         name_class, copy_class = "project-name", "project-copy"
@@ -275,8 +276,7 @@ def render_desktop_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_
 </g>
 <rect x="30" y="552" width="1140" height="49" class="paper-alt line" stroke-width="2"/>
 {svg_text(52, 583, 'naitik@ktm:~$', 'label mono')}
-{svg_text(218, 583, 'broadcast --selected-work', 'role mono')}
-<rect x="450" y="567" width="10" height="19" class="mint cursor"/>
+<text x="218" y="583" class="role mono" id="terminal-command">broadcast --selected-work<tspan dx="12" class="mint cursor">&#x258C;</tspan></text>
 {svg_text(1148, 583, f"LATEST / {telemetry['latest_repo']} / {telemetry['latest_repo_date']}", 'label mono', 'end')}
 </svg>
 """
@@ -315,9 +315,9 @@ def render_mobile_svg(config: dict[str, Any], telemetry: dict[str, Any], theme_n
   {_project_index(projects, mobile=True)}
 </g>
 <rect x="34" y="739" width="652" height="61" class="yellow line" stroke-width="3"/>
-{svg_text(54, 766, 'PUBLIC SIGNAL', 'tiny mono')}
-{svg_text(54, 787, f"{telemetry['public_repos']} REPOS / {telemetry['stars']} STARS / {telemetry['followers']} FOLLOWERS", 'label mono')}
-{svg_text(665, 787, 'NPT +05:45', 'label mono', 'end')}
+{svg_text(54, 766, 'PUBLIC SIGNAL', 'tiny mono on-yellow')}
+{svg_text(54, 787, f"{telemetry['public_repos']} REPOS / {telemetry['stars']} STARS / {telemetry['followers']} FOLLOWERS", 'label mono on-yellow')}
+{svg_text(665, 787, 'NPT +05:45', 'label mono on-yellow', 'end')}
 {_skyline(720, 914, mobile=True)}
 <rect x="26" y="866" width="668" height="54" class="paper-alt line" stroke-width="2"/>
 {svg_text(46, 899, 'naitik@ktm:~$', 'label mono')}
