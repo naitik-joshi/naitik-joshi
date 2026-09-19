@@ -43,7 +43,17 @@ References informing the implementation:
 - [x] Verify desktop and mobile editing, result generation, and invalid-input recovery in the browser.
 - [x] Add unit tests for transforms, validation, CSV escaping, Unicode, error propagation, and growth limits.
 - [x] Replace the maze with responsive animated README previews.
-- [ ] Verify the deployed GitHub Pages build and profile preview after publishing.
+- [x] Verify the deployed GitHub Pages build and profile preview after publishing.
+
+## Release Verification - 2026-09-19
+
+- 11 transformation/graph tests and 12 Python profile/preview tests pass.
+- Production build succeeds; production dependency audit reports no known vulnerabilities.
+- [GitHub Actions deployment](https://github.com/naitik-joshi/naitik-joshi/actions/runs/35432812531) completed successfully.
+- Actual GitHub profile renders the responsive SVG preview and links to the working Pages application.
+- Browser checks cover desktop composition, 390 px mobile layout without horizontal overflow, mobile source editing, CSV output, Java-record filtering, Base64 decoding, invalid JSON feedback, reconnection, and undo recovery.
+- A fresh browser tab on the deployed app executes the manifest with no console errors or warnings.
+- Import/export serialization and validation are unit-tested; native file picker/download behavior has not received a full cross-browser matrix.
 
 ## Operating Model
 
